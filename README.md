@@ -1,6 +1,6 @@
 # scheduler
 
-# Environment setup
+# Environment Setup
 1. Open your terminal.
 2. Type "mkdir xxxxxxx" to create a folder (pick a name you like).
 3. Type "cd xxxxxxx" to direct to your folder.
