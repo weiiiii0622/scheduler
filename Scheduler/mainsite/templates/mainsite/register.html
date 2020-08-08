@@ -14,7 +14,7 @@
   <div>
     <form method="POST">
       {% csrf_token %}
-      {{ form }}
+      {{ form.as_p }}
       <input type="submit" value="Sign Up">
     </form>
     <div class="border-top pt-3">
