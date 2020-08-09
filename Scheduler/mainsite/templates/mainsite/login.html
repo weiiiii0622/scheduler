@@ -11,15 +11,15 @@
 <body>
   
   <div>
-    <h1>Register</h1>
+    <h1>Login</h1>
     <form method="POST">
       {% csrf_token %}
       {{ form.as_p }}
-      <input type="submit" value="Sign Up">
+      <input type="submit" value="Log In">
     </form>
     <div class="border-top pt-3">
       <small class="text-muted">
-        Already have an account? <a class="ml-2" href="{% url 'mainsite-login' %}">Sign In</a>
+        Need an account? <a class="ml-2" href="{% url 'mainsite-register' %}">Sign Up</a>
       </small>
     </div>
 
