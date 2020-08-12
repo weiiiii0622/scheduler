@@ -25,7 +25,7 @@ SECRET_KEY = '8(2fj%$-1ixykw4s&h8qhvfwt)dne3cfma=y8u#%44-@synl@a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['172.20.10.3', '127.0.0.1']
 
 AUTH_USER_MODEL = 'mainsite.User'
 
@@ -120,4 +120,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_REDIRECT_URL = 'mainsite-home'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'django.innoserve@gmail.com'
+EMAIL_HOST_PASSWORD = 'admin12345admin'
+
+'''ADMIN_EMAIL = "django.innoserve@gmail.com"
+SUPPORT_EMAIL = "sdjango.innoserve@gmail.com"
+DEFAULT_FROM_EMAIL = ADMIN_EMAIL
+SERVER_EMAIL = ADMIN_EMAIL'''
 
