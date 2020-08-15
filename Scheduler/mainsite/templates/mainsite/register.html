@@ -1,29 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% extends "mainsite/home.html" %}
+{% block content %}
+<div>
+  <h1>Register</h1>
 
-  <title>Scheduler</title>
-</head>
-<body>
-  
-  <div>
-    <h1>Register</h1>
-    <form method="POST">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <input type="submit" value="Sign Up">
-    </form>
-    <div class="border-top pt-3">
-      <small class="text-muted">
-        Already have an account? <a class="ml-2" href="{% url 'mainsite-login' %}">Sign In</a>
-      </small>
-    </div>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Sign Up">
+  </form>
 
+  <div class="border-top pt-3">
+    <small class="text-muted">
+      Already have an account? <a class="ml-2" href="{% url 'mainsite-login' %}">Sign In</a>
+    </small>
   </div>
 
-</body>
-</html>
+</div>
+{% endblock content %}
