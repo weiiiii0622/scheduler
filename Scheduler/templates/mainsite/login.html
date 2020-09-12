@@ -1,0 +1,21 @@
+{% extends "mainsite/home.html" %}
+{% block content %}
+<div>
+  <h1>Login</h1>
+  <form method="POST" ml-10>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Log In">
+  </form>
+  <div class="border-top pt-3">
+    <small class="text-muted">
+      Need an account? <a class="ml-2" href="{% url 'mainsite-register' %}">Sign Up</a>
+    </small>
+  </div>
+  <div>
+    <small class="text-muted">
+      Forget your password? <a class="ml-2" href="{% url 'password_reset' %}">Reset Password</a>
+    </small>
+  </div>
+</div>
+{% endblock content %}
