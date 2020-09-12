@@ -19,6 +19,9 @@
           
           {% if user.is_authenticated %}
           <li class="nav-item">
+            <a class="nav-link" href="{% url 'weekschedule-home' %}">Week Schedule</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="{% url 'mainsite-logout' %}">Logout</a>
           </li>
           {% else %}
