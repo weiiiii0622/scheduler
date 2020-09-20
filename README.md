@@ -12,4 +12,4 @@
 1. Add "Scheduler" into your folder.
 2. With terminal, switch your directory to "Scheduler". (remember to activate your virtual environment)
 3. Type " python3 manage.py runserver " to start the server.
-4. Enter, and enjoy! aaa
+4. Enter, and enjoy!
