@@ -27,7 +27,7 @@ def learning(request):
     
     str_Labels = str(Labels)
     # print(str_Labels)
-    return render(request, 'learning.html', {
+    return render(request, 'Grades/grades.html', {
         'roll': roll,
         'chart_data': dict(chart_data),
         'str_Labels':str_Labels,

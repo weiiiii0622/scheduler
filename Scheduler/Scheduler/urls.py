@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from Grades.views import learning
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('mainsite.urls')),
     path('', include('WeekSchedule.urls')),
+    path('grades/',include('Grades.urls')),
 ]
