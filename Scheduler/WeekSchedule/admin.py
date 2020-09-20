@@ -5,20 +5,20 @@ from .models import Event
 
 class EventAdmin(admin.ModelAdmin):
 	
-    list_display = ('subject', 'description', 'start_time', 'clock', 'status')
+    list_display = ('subject', 'description', 'start_time', 'end_time', 'clock', 'status')
     list_filter = ('subject', 'status')
     
     
     fieldsets = (
         (None, {'fields': ('subject', 'description')}),
-        ('Event info', {'fields': ('start_time', 'clock', 'status',)}),
+        ('Event info', {'fields': ('start_time', 'end_time', 'clock', 'status',)}),
     )
 
 
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('subject', 'description', 'start_time', 'clock', 'status'),
+            'fields': ('subject', 'description', 'start_time', 'end_time', 'clock', 'status'),
         }),
     )
     

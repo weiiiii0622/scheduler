@@ -22,14 +22,26 @@
         </div>
         <div class="modal-body">
 
-          {{ form.as_p }}
+          {{ form.as_p }}      
+          
+          {% if form_error %}
+            <script>
+              $('#create_event').modal("show");
+            </script>
+          {% endif %}
+
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Save</button>
         </div>
       </div>
     </div>
+
   </div>
 </form>
+
+
+
+
 
 {% endblock content %}

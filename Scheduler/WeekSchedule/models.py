@@ -13,6 +13,7 @@ class Event(models.Model):
 	subject = models.CharField(max_length=20)
 	description = models.TextField(max_length=100)
 	start_time = models.DateTimeField()
+	end_time = models.DateTimeField()
 	clock = models.IntegerField()
 	status = models.TextField(choices=STATUS)
 
