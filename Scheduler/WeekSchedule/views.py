@@ -25,6 +25,7 @@ def create_event(request):
 			end_time = end_time,
 
 		)
+
 		return redirect('weekschedule-home')
 	
 	form_error = True
