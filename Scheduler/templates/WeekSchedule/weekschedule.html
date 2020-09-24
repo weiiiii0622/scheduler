@@ -1,14 +1,17 @@
 {% extends "mainsite/home.html" %}
+{% load static %}
 {% block content %}
 
+<link rel="stylesheet" href="{% static '/css/weekschedule.css' %}">
 
-
+  <!-- add event button -->
   <div class="float-right mt-2">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create_event_modal">
       Add Event
     </button>
   </div>
 
+  <!-- add event form -->
   <div class="modal fade" id="create_event_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
@@ -19,7 +22,6 @@
           </button>
         </div>
         <div class="modal-body">
-
           <form action="#" method="POST" id="event_create_form" data-url="{% url 'weekschedule-home' %}">
             {% csrf_token %}
               <div class="form-group "> 
@@ -45,9 +47,37 @@
         </div>
       </div>
     </div>
-
   </div>
 
+
+  <!-- week calendar -->
+
+  <div class="slider">
+    <div class="slider-items">
+      <div class="item active">
+        <div class="flex-container">
+          <div class="round-button"></div>
+          <div class="round-button"></div>
+          <div class="round-button"></div>
+          <div class="round-button"></div>
+          <div class="round-button"></div>
+          <div class="round-button"></div>
+          <div class="round-button"></div>
+        </div>
+      </div>
+      <div class="item">
+
+      </div>
+      <div class="item">
+
+      </div>
+    </div>
+
+    <!-- slider controls -->
+    <div class="left-slide"> < </div>
+    <div class="right-slide"> > </div>
+    
+  </div>
 
 
 
