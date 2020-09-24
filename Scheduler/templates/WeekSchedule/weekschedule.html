@@ -1,17 +1,15 @@
 {% extends "mainsite/home.html" %}
 {% block content %}
 
-<form method="POST">
 
-  {% csrf_token %}
 
   <div class="float-right mt-2">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create_event">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create_event_modal">
       Add Event
     </button>
   </div>
 
-  <div class="modal fade" id="create_event" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="create_event_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
@@ -22,27 +20,33 @@
         </div>
         <div class="modal-body">
 
-          {{ form.as_p }}      
-          
-          {% if form_error %}
-            <script>
-              $('#create_event').modal("show");
-            </script>
-          {% endif %}
-
-
-          
-
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Save</button>
+          <form action="#" method="POST" id="event_event_form" data-url="{% url 'weekschedule-home' %}">
+            {% csrf_token %}
+              <div class="form-group "> 
+                  <label> Subject </label> 
+                  {{ form.subject }} 
+              </div> 
+              <div class="form-group"> 
+                  <label> Description </label> 
+                  {{ form.description }} 
+              </div> 
+              <div class="form-group"> 
+                  <label> Start Time </label> 
+                  {{ form.start_time }} 
+              </div> 
+              <div class="form-group"> 
+                  <label> Clock </label> 
+                  {{ form.clock }} 
+              </div> 
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="event_submit_button">Save</button>
+              </div>
+          </form>
         </div>
       </div>
     </div>
 
   </div>
-</form>
-
 
 
 
