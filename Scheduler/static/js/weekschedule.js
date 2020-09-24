@@ -1,6 +1,4 @@
-console.log("abc")
-
-$("form#event_event_form").submit(function(e){
+$("form#event_create_form").submit(function(e){
   e.preventDefault();
 
   var subject = $(this)[0][1].value
@@ -11,11 +9,10 @@ $("form#event_event_form").submit(function(e){
   var csrf_token = $('input[name="csrfmiddlewaretoken"]').val()
   
   console.log("Start");
-  console.log(subject);
   
   $.ajax({
     type: 'POST',
-    url: $("form#event_event_form").data('url'),
+    url: $("form#event_create_form").data('url'),
     data: {
       'subject': subject,
       'description': description,
@@ -23,10 +20,10 @@ $("form#event_event_form").submit(function(e){
       'clock': clock,
       'csrfmiddlewaretoken': csrf_token,
     },
-    datatype: 'json',
     success: function(response){
       console.log("Success");
-      $("#event_create_form")[0].trigger('reset');
+      $("form#event_create_form")[0].reset();
+      $('#create_event_modal').modal('hide')
     },
     error: function(response){
       console.log("Failed");
