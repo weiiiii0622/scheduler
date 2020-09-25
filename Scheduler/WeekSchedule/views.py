@@ -45,7 +45,8 @@ def EventPage(request):
 			
 			return JsonResponse(data, status = 200)	
 		else:
-			return JsonResponse({}, status = 400)
+			print("HIi")
+			return JsonResponse({}, status = 200)
 
 	return render(request, 'weekschedule/weekschedule.html', {'form': form,})
 	
