@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import create_event
+from .views import EventPage, EventAJAX
 
 urlpatterns = [
-    path('weekschedule/', create_event, name='weekschedule-home'),
+    path('weekschedule/', EventPage, name='weekschedule-home'),
+    path('weekschedule/calendarAJAX', EventAJAX, name='weekschedule-calendarAJAX'),
 ]

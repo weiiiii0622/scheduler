@@ -122,6 +122,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
+
+
 
 LOGIN_REDIRECT_URL = 'mainsite-home'
 
@@ -132,8 +138,5 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'django.innoserve@gmail.com'
 EMAIL_HOST_PASSWORD = 'admin12345admin'
 
-'''ADMIN_EMAIL = "django.innoserve@gmail.com"
-SUPPORT_EMAIL = "sdjango.innoserve@gmail.com"
-DEFAULT_FROM_EMAIL = ADMIN_EMAIL
-SERVER_EMAIL = ADMIN_EMAIL'''
+
 
