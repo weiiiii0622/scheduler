@@ -72,6 +72,7 @@ $("form#event_create_form").submit(function(e){
         console.log(response.target_event.subject);
       },
       error: function(response){
+        $('#event-table').empty();
         console.log("Failed");
       }
 
