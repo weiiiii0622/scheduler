@@ -2,6 +2,7 @@
 {% block content %}
 <!DOCTYPE html>
 
+<!--head-->
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
@@ -17,102 +18,130 @@
             .box{width:70%; float:left;}
             .zone{width:100%; height:100%;}
         </style>
-<script>
-        var grades = {};
-        var linechart;
-        {% for s, g in chart_data.items %}
-        grades[{{ s }}] = {{ g|safe }};
-        {% endfor %}
-//linechart
-    var linesData = {
-            labels:{{ str_Labels|safe }},
-            datasets:[
-                {
-                    label:"成績曲線",
-                    fillColor:"rgba(220,220,220,0.5)",
-                    strokeColor:"rgba(220,220,220,0.8)",
-                    highlightFill:"rgba(220,220,220,0.75)",
-                    highlightStroke:"rgba(220,220,220,1)",
-                    data: grades[0]
-                }
-            ]
-        };
-    window.onload = function(){
-        var ctx = document.getElementById("chart-area").getContext("2d");
-        linechart = new Chart(ctx, {
-            type: 'line',
-            data:linesData,
-            //animationEasing : "easeOutQuart",
-        });
-    };
-
-    function displayGradesOf(subject) {
-        linechart.data.datasets[0].data = grades[subject];
-        linechart.update();
-    }
-    </script>
     </head>
 
-    
+<!--form-->
+    <!-- <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+    </form> -->
+
+<!--chart-->
+    <script>
+        var grades = {};
+        var scopes = {};
+        var linechart;
+        {% for s1, g in chart_subject.items %}
+        grades[{{ s1 }}] = {{ g|safe }};
+        {% endfor %}
+        //{% for s2, t in chart_test.items %}
+        //tests[{{ s2}}] = {{ t|safe }}
+        //{% endfor %}
+        
+//linechart data
+        var linesData = {
+                labels:{{ str_Labels|safe }},
+                datasets:[
+                    {
+                        label:{{ str_Labels|safe }},
+                        fillColor:"rgba(220,220,220,0.5)",
+                        strokeColor:"rgba(220,220,220,0.8)",
+                        highlightFill:"rgba(220,220,220,0.75)",
+                        highlightStroke:"rgba(220,220,220,1)",
+                        data: grades[0],
+                    }
+                ]
+            };
+
+//canvas
+        window.onload = function(){
+            var ctx = document.getElementById("chart-area").getContext("2d");
+            linechart = new Chart(ctx, {
+                type: 'line',
+                data:linesData,
+                //animationEasing : "easeOutQuart", 
+            });
+        };
+
+//chart functions
+        function displayGradesOf(subject) {
+            linechart.data.datasets[0].data = grades[subject];
+            linechart.update();
+        }
+        //function displayScopesOf(tests){
+          //  linechart.data.datasets[0].data = tests[subject];
+            //linechart.update();
+        //}
+    </script>
+
+<!--body-->
     <body>
+
 <!--jumbotron-->
         <div class="jumbotron bg-faded">
             <div class="container">
                 <h1 class="text-center">GRADES</h1>
             </div>
         </div>
+
+<!--create button-->
+        <a class="btn btn-primary" href="#" role="button" onclick="location.href='/gradeform'">create</a>
+
+
 <!--選科目-->
         <div class="row">
-            <div class="nav flex-column nav-tabs col-2 text-center" id="subject" role="tablist" aria-orientation="vertical">
-                <a class="nav-link activate" id="x1" data-toggle="pill" href="javascript:void(0);" onclick="displayGradesOf(1);" role="tab" aria-controls="國文" aria-selected="true">國文</a>
-                <a class="nav-link" id="數學" data-toggle="pill" href="javascript:void(0);" onclick="displayGradesOf(2);" role="tab" aria-controls="數學" aria-selected="false">數學</a>
-                <a class="nav-link" id="英文" data-toggle="pill" href="javascript:void(0);" onclick="displayGradesOf(3);" role="tab" aria-controls="英文" aria-selected="false">英文</a>
-                <a class="nav-link" id="物理" data-toggle="pill" href="javascript:void(0);" onclick="displayGradesOf(4);" role="tab" aria-controls="物理" aria-selected="false">物理</a>
-                <a class="nav-link" id="化學" data-toggle="pill" href="javascript:void(0);" onclick="displayGradesOf(5);" role="tab" aria-controls="化學" aria-selected="false">化學</a>
-                <a class="nav-link" id="生物" data-toggle="pill" href="javascript:void(0);" onclick="displayGradesOf(6);" role="tab" aria-controls="生物" aria-selected="false">生物</a>
-                <a class="nav-link" id="地科" data-toggle="pill" href="javascript:void(0);" onclick="displayGradesOf(7);" role="tab" aria-controls="地科" aria-selected="false">地科</a>
-                <a class="nav-link" id="地理" data-toggle="pill" href="javascript:void(0);" onclick="displayGradesOf(8);" role="tab" aria-controls="地理" aria-selected="false">地理</a>
-                <a class="nav-link" id="歷史" data-toggle="pill" href="javascript:void(0);" onclick="displayGradesOf(9);" role="tab" aria-controls="歷史" aria-selected="false">歷史</a>
-                <a class="nav-link" id="公民" data-toggle="pill" href="javascript:void(0);" onclick="displayGradesOf(0);" role="tab" aria-controls="公民" aria-selected="false">公民</a>
-            </div>
-            <div class="tab-content" id="subject">
-                <div class="tab-pane show activate" id="國文" role="tabpanel" aria-labelledby="sub1-tab">{%if l.subject</div>
-                <div class="tab-pane" id="數學" role="tabpanel" aria-labelledby="sub2-tab"></div>
-                <div class="tab-pane" id="英文" role="tabpanel" aria-labelledby="sub3-tab"></div>
-                <div class="tab-pane" id="物理" role="tabpanel" aria-labelledby="sub4-tab"></div>
-                <div class="tab-pane" id="化學" role="tabpanel" aria-labelledby="sub5-tab"></div>
-                <div class="tab-pane" id="生物" role="tabpanel" aria-labelledby="sub6-tab"></div>
-                <div class="tab-pane" id="地科" role="tabpanel" aria-labelledby="sub7-tab"></div>
-                <div class="tab-pane" id="地理" role="tabpanel" aria-labelledby="sub8-tab"></div>
-                <div class="tab-pane" id="歷史" role="tabpanel" aria-labelledby="sub9-tab"></div>
-                <div class="tab-pane" id="公民" role="tabpanel" aria-labelledby="sub0-tab"></div>
-            </div>        
-<!--linechart-->
-            <div class="box col-10">
+            <div class="col-1"></div>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="choose-subject" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">subjects</button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(1);">Chinese</a>
+                  <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(2);">Math</a>
+                  <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(3);">English</a>
+                  <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(4);">Physics</a>
+                  <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(5);">Chemistry</a>
+                  <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(6);">Biology</a>
+                  <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(7);">Earth Science</a>
+                  <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(8);">Geogrophy</a>
+                  <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(9);">History</a>
+                  <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(0);">Civics</a>
+                </div>
+              </div>
+        </div>
+            
+<!--test(範圍)-->
+    <div class="row">
+        <nav class="nav flex-column">
+            <a class="nav-link active" href="#">{{ </a>
+            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </nav>
+
+<!--chart-->     
+        <div class="row justify-content-center">
+            <div class="box col-9.5">
                 <canvas id="chart-area" class="zone"></canvas>
             </div>
         </div>
-
-        
-
+    </div>
 
 <!--表格-->
         <table class="table">
             <thead class="thead-light">
                 <div class="row">
                     <tr>
-                        <th scope = "col"></th>
-                        <th scope = "col">時間</th>
-                        <th scope = "col">類型</th>
-                        <th scope = "col">範圍</th>
-                        <th scope = "col">分數</th>
+                        <th scope = "col-1"></th>
+                        <th scope = "col-2">時間</th>
+                        <th scope = "col-3">類型</th>
+                        <th scope = "col-3">範圍</th>
+                        <th scope = "col-3">分數</th>
                     </tr>
                  </div>
             </thead>
             <tbody>
-                {%for l in roll%}
+                {%for l in roll %}
                     <tr>
-                        <td scope = "row" >{{ l }}</td>
+                        <td scope = "row" >{{ forloop.counter0 }}</td>
                         <td>{{ l.date }}</td>
                         <td>{{ l.test }}</td>
                         <td>{{ l.scope }}</td>
@@ -121,7 +150,6 @@
                 {%endfor%}
             </tbody>
         </table>
-<!--頁尾-->
     </body>
 </html>
 {% endblock content %}

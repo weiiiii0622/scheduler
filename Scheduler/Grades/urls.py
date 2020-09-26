@@ -15,7 +15,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.http import HttpResponse
-from .views import learning
+from .views import learning ,create ,form_choices
 
 #def Learning(request):
     # return HttpResponse("I'm homepage")
@@ -23,4 +23,5 @@ from .views import learning
 
 urlpatterns = [
     url(r'^grades/$', learning),
+    url(r'^gradeform/$',form_choices)
 ]

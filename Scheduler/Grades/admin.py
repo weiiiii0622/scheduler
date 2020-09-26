@@ -3,3 +3,7 @@ from .models import Link
 # Register your models here.
 
 admin.site.register(Link)
+
+
+# Register your models here.
+
