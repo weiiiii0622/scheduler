@@ -4,11 +4,11 @@ from django.db import models
 
 class Event(models.Model):
 	STATUS = [
-		('1', 'Done'),
-		('2', '1/3 left'),
-		('3', 'Just started'),
-		('4', 'Failed'),
-		('5', 'Waiting')
+		('Done', 'Done'),
+		('1/3 left', '1/3 left'),
+		('Just started', 'Just started'),
+		('Failed', 'Failed'),
+		('Waiting', 'Waiting')
 	]
 	
 	subject = models.CharField(max_length=20)
@@ -16,7 +16,7 @@ class Event(models.Model):
 	start_time = models.DateTimeField()
 	end_time = models.DateTimeField()
 	clock = models.IntegerField()
-	status = models.TextField(choices=STATUS, default='5')
+	status = models.TextField(choices=STATUS, default='Waiting')
 
 	def __str__(self):
 		return self.subject

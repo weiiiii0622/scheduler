@@ -50,7 +50,30 @@ def EventPage(request):
 
 	return render(request, 'weekschedule/weekschedule.html', {'form': form,})
 	
+def EventAJAX(request):
 
+	if request.is_ajax() and request.method == 'GET':
+		year = int(request.GET.get('year'))
+		month = int(request.GET.get('month'))
+		date = int(request.GET.get('date'))
+
+		target_date = datetime.datetime(year, month, date)
+		target = Event.objects.filter(start_time__contains = target_date.date())
+		
+		print(target)
+		target_event = {
+			'subject': target[0].subject,
+			'description': target[0].description,
+			'start_time':target[0].start_time,
+			'end_time': target[0].end_time,
+			'status': target[0].status,
+		}
+
+		data = {
+			'target_event': target_event,
+		}
+
+	return JsonResponse(data, status = 200)
 
 
 

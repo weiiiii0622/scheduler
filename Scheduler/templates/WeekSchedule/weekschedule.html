@@ -50,7 +50,7 @@
 
   <!-- week calendar -->
 
-  <div class="swiper-container">
+  <div class="swiper-container" id="weekschedule-swiper" data-url="{% url 'weekschedule-calendarAJAX' %}">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
         
@@ -97,6 +97,13 @@
     </div>
   </div>
 
+
+  <!-- event table -->
+  <div class="overflow-auto">
+    <table id='event-table'>
+      
+    </table>
+  </div>
 
 
 {% endblock content %}

@@ -33,8 +33,61 @@ $("form#event_create_form").submit(function(e){
   });
 });
 
-// calendar
 
+// calendar event AJAX
+{
+  $('.flex-container').on('click', 'div.round-button', function (e) {
+    e.preventDefault();
+    console.log(e);
+
+    let year = new Date().getFullYear();
+    let month = $(this).text().split('/')[0];
+    let date = $(this).text().split('/')[1];
+    
+
+    $.ajax({
+      type: 'GET',
+      url: $("div#weekschedule-swiper").data('url'),
+      data: {
+        'year': year,
+        'month': month,
+        'date': date,
+      },
+      success: function(response){
+        $('#event-table').empty();
+        $('#event-table').append(`
+          <tr>
+            <th>Time</th>
+            <th>Subject</th> 
+            <th>Status</th>
+          </tr>
+        `);
+        $('#event-table').append(`
+          <tr>
+            <th>${response.target_event.start_time}<br>~<br>${response.target_event.end_time}</th>
+            <th>${response.target_event.subject}<br>${response.target_event.description}</th> 
+            <th>${response.target_event.status}</th>
+          </tr>
+        `);
+        console.log(response.target_event.subject);
+      },
+      error: function(response){
+        console.log("Failed");
+      }
+
+    });
+
+
+
+  });
+  
+  
+  
+  // $('.flex-container').on('click', 'div.round-button', function () {
+  //   console.log("Clicked");
+  // });
+
+}
 
 
 // calendar slide initialize
@@ -108,6 +161,12 @@ $("form#event_create_form").submit(function(e){
   
 
 }
+
+
+
+
+
+
 
 
 
