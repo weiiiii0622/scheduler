@@ -1,5 +1,4 @@
 
-
 // add event AJAX
 $("form#event_create_form").submit(function(e){
   e.preventDefault();
@@ -34,63 +33,82 @@ $("form#event_create_form").submit(function(e){
   });
 });
 
+// calendar
 
-// calendar slide
+
+
+// calendar slide initialize
 {
   Date.prototype.addDays = function(days) {
     this.setDate(this.getDate() + days);
     return this;
   }
 
-  var today = new Date();
+  const today = new Date();
+  var today_forward = new Date();
+  var today_backward = new Date();
+  
+  var current_sunday = new Date(today.setDate(today.getDate() - today.getDay()));
+  var prev_sunday = new Date(today.setDate(current_sunday.getDate() - 7));
+  var next_sunday = new Date(today.setDate(current_sunday.getDate() + 7));
+  var next_next_sunday = new Date(today.setDate(current_sunday.getDate() + 14));
+  var prev_prev_sunday = new Date(today.setDate(today.getDate() - today.getDay() - 28));
 
   var swiper = new Swiper('.swiper-container', {
     initialSlide: 1,
   });
 
   swiper.on('reachEnd', function(){
-    swiper.appendSlide(`<div class="swiper-slide"><div class="flex-container"><div class="round-button">${today.getMonth()+1}/${today.getDate()}</div><div class="round-button">${today.addDays(+1).getMonth()+1}/${today.getDate()}</div><div class="round-button">${today.addDays(+1).getMonth()+1}/${today.getDate()}</div><div class="round-button">${today.addDays(+1).getMonth()+1}/${today.getDate()}</div><div class="round-button">${today.addDays(+1).getMonth()+1}/${today.getDate()}</div><div class="round-button">${today.addDays(+1).getMonth()+1}/${today.getDate()}</div><div class="round-button">${today.addDays(+1).getMonth()+1}/${today.getDate()}</div></div></div>`);
+    swiper.appendSlide(
+      `<div class="swiper-slide">
+
+        <div class="flex-container">
+        <div class="round-button 0">${next_next_sunday.getMonth()+1}/${next_next_sunday.getDate()}</div>
+        <div class="round-button 1">${next_next_sunday.getMonth()+1}/${next_next_sunday.getDate()+1}</div>
+        <div class="round-button 2">${next_next_sunday.getMonth()+1}/${next_next_sunday.getDate()+2}</div>
+        <div class="round-button 3">${next_next_sunday.getMonth()+1}/${next_next_sunday.getDate()+3}</div>
+        <div class="round-button 4">${next_next_sunday.getMonth()+1}/${next_next_sunday.getDate()+4}</div>
+        <div class="round-button 5">${next_next_sunday.getMonth()+1}/${next_next_sunday.getDate()+5}</div>
+        <div class="round-button 6">${next_next_sunday.getMonth()+1}/${next_next_sunday.getDate()+6}</div>
+        </div>
+
+  </div>`);
+    next_next_sunday.setDate(next_next_sunday.getDate() + 7);
   });
+
   swiper.on('reachBeginning', function(){
-    swiper.prependSlide(`<div class="swiper-slide"><div class="flex-container"><div class="round-button">${today.addDays(-7).getMonth()+1}/${today.getDate()}</div><div class="round-button">${today.addDays(-6).getMonth()+1}/${today.getDate()}</div><div class="round-button">${today.getMonth(-5)+1}/${today.getDate()}</div><div class="round-button">${today.getMonth(-4)+1}/${today.getDate()}</div><div class="round-button">${today.getMonth(-3)+1}/${today.getDate()}</div><div class="round-button">${today.getMonth(-2)+1}/${today.getDate()}</div><div class="round-button">${today.getMonth(-1)+1}/${today.getDate()}</div></div></div>`);
+    swiper.prependSlide(
+      `<div class="swiper-slide">
+
+        <div class="flex-container">
+          <div class="round-button 0">${prev_prev_sunday.getMonth()+1}/${prev_prev_sunday.getDate()}</div>
+          <div class="round-button 1">${prev_prev_sunday.getMonth()+1}/${prev_prev_sunday.getDate()+1}</div>
+          <div class="round-button 2">${prev_prev_sunday.getMonth()+1}/${prev_prev_sunday.getDate()+2}</div>
+          <div class="round-button 3">${prev_prev_sunday.getMonth()+1}/${prev_prev_sunday.getDate()+3}</div>
+          <div class="round-button 4">${prev_prev_sunday.getMonth()+1}/${prev_prev_sunday.getDate()+4}</div>
+          <div class="round-button 5">${prev_prev_sunday.getMonth()+1}/${prev_prev_sunday.getDate()+5}</div>
+          <div class="round-button 6">${prev_prev_sunday.getMonth()+1}/${prev_prev_sunday.getDate()+6}</div>
+        </div>
+
+  </div>`);
+  prev_prev_sunday.setDate(prev_prev_sunday.getDate() - 7);
+  swiper.slideTo(1, 0, false);
+  myswiper.slidePrev();
   });
+
+  for (let i = 0; i < 7; i++) {
+    $(`div.flex-container.0 > div.round-button.${prev_sunday.getDay()}`).text(`${prev_sunday.getMonth()+1}/${prev_sunday.getDate()}`);
+    prev_sunday.setDate(prev_sunday.getDate() + 1);
+    $(`div.flex-container.1 > div.round-button.${current_sunday.getDay()}`).text(`${current_sunday.getMonth()+1}/${current_sunday.getDate()}`);
+    current_sunday.setDate(current_sunday.getDate() + 1);
+    $(`div.flex-container.2 > div.round-button.${next_sunday.getDay()}`).text(`${next_sunday.getMonth()+1}/${next_sunday.getDate()}`);
+    next_sunday.setDate(next_sunday.getDate() + 1);
+  }
+
+  
+
 }
 
-// {
-//   var current_slide = $('.flex-container.active');
-//   let slide_list = $('.flex-container');
-//   let index = 0;
 
-
-//   $(current_slide).on('swipeleft', swipeleftHandler);
-//   $(current_slide).on('swiperight', swiperightHandler)
-
-//   function swipeleftHandler( event ){
-//     console.log("left")
-//     let next_slide = current_slide.next();
-//     console.log(next_slide);
-//     next_slide.addClass('active');
-//     current_slide.removeClass('active');
-//     $(current_slide).off('swipeleft', swipeleftHandler);
-//     $(current_slide).off('swiperight', swiperightHandler);
-//     current_slide = next_slide;
-//     $(current_slide).on('swipeleft', swipeleftHandler);
-//     $(current_slide).on('swiperight', swiperightHandler);
-//   }
-
-//   function swiperightHandler( event ){
-//     console.log("right")
-//     let prev_slide = current_slide.prev();
-//     console.log(prev_slide);
-//     prev_slide.addClass('active');
-//     current_slide.removeClass('active');
-//     $(current_slide).off('swipeleft', swipeleftHandler);
-//     $(current_slide).off('swiperight', swiperightHandler);
-//     current_slide = prev_slide;
-//     $(current_slide).on('swipeleft', swipeleftHandler);
-//     $(current_slide).on('swiperight', swiperightHandler);
-//   }
-
-// }
 
 
