@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
+from django.core import serializers
 
 from .forms import EventForm
 from .models import Event
@@ -59,28 +60,22 @@ def EventAJAX(request):
 
 		target_date = datetime.datetime(year, month, date)
 		targets = Event.objects.filter(start_time__contains = target_date.date())
-		
-		
-
-		# target_event = {
-		# 	'subject': target[0].subject,
-		# 	'description': target[0].description,
-		# 	'start_time':target[0].start_time,
-		# 	'end_time': target[0].end_time,
-		# 	'status': target[0].status,
-		# }
 
 		data = {
-			'targets': list(targets),
+			'targets': serializers.serialize("json", targets),
 		}
 
 		if list(targets) == []:
-			return JsonResponse({}, status = 400)
+			return JsonResponse(data, status = 400)
 		else:
 			return JsonResponse(data, status = 200)
 
 
+def TodayPage(request):
+	today = datetime.datetime.now()
+	events = Event.objects.filter(start_time__contains = today.date())
 
+	return render(request, 'WeekSchedule/today.html', {'events': events, })
 
 
 

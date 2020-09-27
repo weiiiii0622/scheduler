@@ -1,0 +1,19 @@
+{% extends "mainsite/home.html" %}
+{% block content %}
+
+  <!-- Swiper -->
+  <div class="swiper-container" id="today-swiper">
+    <div class="swiper-wrapper">
+      {% for event in events %}
+      <div class="swiper-slide" id="today-slide">
+        <div class="div">event.subject</div>
+      </div>
+    </div>
+    <!-- Add Arrows -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+
+
+
+{% endblock content %}

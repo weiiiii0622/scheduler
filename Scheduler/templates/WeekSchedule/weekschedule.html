@@ -1,6 +1,7 @@
 {% extends "mainsite/home.html" %}
 {% block content %}
-
+  
+  
 
   <!-- add event button -->
     <div class="float-right mt-2">
@@ -50,9 +51,9 @@
 
   <!-- week calendar -->
 
-  <div class="swiper-container" id="weekschedule-swiper" data-url="{% url 'weekschedule-calendarAJAX' %}">
+  <div class="swiper-container " id="weekschedule-swiper" data-url="{% url 'weekschedule-calendarAJAX' %}">
     <div class="swiper-wrapper">
-      <div class="swiper-slide">
+      <div class="swiper-slide" id="weekschedule-slide">
         
         <div class="flex-container 0">
           <div class="round-button 0">1</div>
@@ -66,7 +67,7 @@
 
       </div>
 
-      <div class="swiper-slide">
+      <div class="swiper-slide" id="weekschedule-slide">
 
         <div class="flex-container 1">
           <div class="round-button 0">1</div>
@@ -80,7 +81,7 @@
 
       </div>
 
-      <div class="swiper-slide ">
+      <div class="swiper-slide " id="weekschedule-slide">
 
         <div class="flex-container 2">
           <div class="round-button 0">1</div>
@@ -105,5 +106,5 @@
     </table>
   </div>
 
-
+  
 {% endblock content %}

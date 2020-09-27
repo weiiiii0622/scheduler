@@ -1,0 +1,197 @@
+
+// add event AJAX
+$("form#event_create_form").submit(function(e){
+  e.preventDefault();
+
+  var subject = $(this)[0][1].value
+  var description = $(this)[0][2].value
+  var start_time = $(this)[0][3].value
+  var clock = Number($(this)[0][4].value)
+  
+  var csrf_token = $('input[name="csrfmiddlewaretoken"]').val()
+  
+  console.log("Start");
+
+  $.ajax({
+    type: 'POST',
+    url: $("form#event_create_form").data('url'),
+    data: {
+      'subject': subject,
+      'description': description,
+      'start_time': start_time,
+      'clock': clock,
+      'csrfmiddlewaretoken': csrf_token,
+    },
+    success: function(response){
+      console.log("Success");
+      $("form#event_create_form")[0].reset();
+      $('#create_event_modal').modal('hide')
+    },
+    error: function(response){
+      console.log("Failed");
+    }
+  });
+});
+
+
+// calendar event AJAX
+{
+  $('.flex-container').on('click', 'div.round-button', function (e) {
+    e.preventDefault();
+
+    let year = new Date().getFullYear();
+    let month = $(this).text().split('/')[0];
+    let date = $(this).text().split('/')[1];
+    
+
+    $.ajax({
+      type: 'GET',
+      url: $("div#weekschedule-swiper").data('url'),
+      data: {
+        'year': year,
+        'month': month,
+        'date': date,
+      },
+      success: function(response){
+        console.log("Success");
+        console.log(JSON.parse(response.targets)[0].fields.subject);
+        var events = JSON.parse(response.targets);
+        $('#event-table').empty();
+        $('#event-table').append(`
+          <tr>
+            <th>Time</th>
+            <th>Subject</th> 
+            <th>Status</th>
+          </tr>
+        `);
+          
+        events.forEach(element => {
+          $('#event-table').append(`
+          <tr>
+            <th>${element.fields.start_time}<br>~<br>${element.fields.end_time}</th>
+            <th>${element.fields.subject}<br>${element.fields.description}</th> 
+            <th>${element.fields.status}</th>
+          </tr>
+        `);
+        });
+
+      },
+      error: function(response){
+        $('#event-table').empty();
+        console.log("Failed");
+      }
+
+    });
+
+
+
+  });
+}
+
+
+// calendar slider
+{
+  Date.prototype.addDays = function(days) {
+    this.setDate(this.getDate() + days);
+    return this;
+  }
+
+  let today = new Date();
+
+  var current_sunday = new Date(today.setDate(today.getDate() - today.getDay()));
+  today = new Date();
+
+  var prev_sunday = new Date(today.setDate(current_sunday.getDate() - 7));
+  today = new Date();
+
+  var next_sunday = new Date(today.setDate(current_sunday.getDate() + 7));
+  today = new Date();
+
+  var WeekScheduleswiper = new Swiper('#weekschedule-swiper', {
+    initialSlide: 1,
+  });
+
+  WeekScheduleswiper.on('reachEnd', function(){
+    let sun = new Date(next_sunday.setDate(next_sunday.getDate()));
+    let mon = new Date(next_sunday.setDate(next_sunday.getDate()+1));
+    let tue = new Date(next_sunday.setDate(next_sunday.getDate()+1));
+    let wed = new Date(next_sunday.setDate(next_sunday.getDate()+1));
+    let thu = new Date(next_sunday.setDate(next_sunday.getDate()+1));
+    let fri = new Date(next_sunday.setDate(next_sunday.getDate()+1));
+    let sat = new Date(next_sunday.setDate(next_sunday.getDate()+1));
+
+    WeekScheduleswiper.appendSlide(
+      `<div class="swiper-slide" id="weekschedule-slide">
+
+        <div class="flex-container">
+          <div class="round-button 0">${sun.getMonth()+1}/${sun.getDate()}</div>
+          <div class="round-button 1">${mon.getMonth()+1}/${mon.getDate()}</div>
+          <div class="round-button 2">${tue.getMonth()+1}/${tue.getDate()}</div>
+          <div class="round-button 3">${wed.getMonth()+1}/${wed.getDate()}</div>
+          <div class="round-button 4">${thu.getMonth()+1}/${thu.getDate()}</div>
+          <div class="round-button 5">${fri.getMonth()+1}/${fri.getDate()}</div>
+          <div class="round-button 6">${sat.getMonth()+1}/${sat.getDate()}</div>
+        </div>
+  </div>`);
+    next_sunday.setDate(next_sunday.getDate() + 1);
+  });
+
+  WeekScheduleswiper.on('reachBeginning', function(){
+    prev_sunday = new Date(today.setDate(today.getDate() - today.getDay() - 7));
+
+    let sat = new Date(prev_sunday.setDate(prev_sunday.getDate()-1));
+    let fri = new Date(prev_sunday.setDate(prev_sunday.getDate()-1));
+    let thu = new Date(prev_sunday.setDate(prev_sunday.getDate()-1));
+    let wed = new Date(prev_sunday.setDate(prev_sunday.getDate()-1));
+    let tue = new Date(prev_sunday.setDate(prev_sunday.getDate()-1));
+    let mon = new Date(prev_sunday.setDate(prev_sunday.getDate()-1));
+    let sun = new Date(prev_sunday.setDate(prev_sunday.getDate()-1));
+    
+    WeekScheduleswiper.prependSlide(
+      `<div class="swiper-slide" id="weekschedule-slide">
+
+        <div class="flex-container">
+          <div class="round-button 0">${sun.getMonth()+1}/${sun.getDate()}</div>
+          <div class="round-button 1">${mon.getMonth()+1}/${mon.getDate()}</div>
+          <div class="round-button 2">${tue.getMonth()+1}/${tue.getDate()}</div>
+          <div class="round-button 3">${wed.getMonth()+1}/${wed.getDate()}</div>
+          <div class="round-button 4">${thu.getMonth()+1}/${thu.getDate()}</div>
+          <div class="round-button 5">${fri.getMonth()+1}/${fri.getDate()}</div>
+          <div class="round-button 6">${sat.getMonth()+1}/${sat.getDate()}</div>
+        </div>
+  </div>`);
+  
+  WeekScheduleswiper.slideTo(1, 0, false);
+  myswiper.slidePrev();
+  });
+
+  for (let i = 0; i < 7; i++) {
+    $(`div.flex-container.0 > div.round-button.${prev_sunday.getDay()}`).text(`${prev_sunday.getMonth()+1}/${prev_sunday.getDate()}`);
+    prev_sunday.setDate(prev_sunday.getDate() + 1);
+    $(`div.flex-container.1 > div.round-button.${current_sunday.getDay()}`).text(`${current_sunday.getMonth()+1}/${current_sunday.getDate()}`);
+    current_sunday.setDate(current_sunday.getDate() + 1);
+    $(`div.flex-container.2 > div.round-button.${next_sunday.getDay()}`).text(`${next_sunday.getMonth()+1}/${next_sunday.getDate()}`);
+    next_sunday.setDate(next_sunday.getDate() + 1);
+  }
+}
+
+// todaypage event swiper
+
+
+var TodayEventswiper = new Swiper('#today-swiper', {
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+});
+
+
+
+
+
+
+
+
+
+
+
