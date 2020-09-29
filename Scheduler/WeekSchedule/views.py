@@ -76,8 +76,12 @@ def EventAJAX(request):
 
 def TodayPage(request):
 	today = datetime.datetime.now()
-	events = Event.objects.filter(start_time__contains = today.date())
-	print(get_user(request).email)
+	target_user = get_user(request)
+	
+	events = Event.objects.filter(user = target_user)
+	print(today)
+	print(events)
+
 	return render(request, 'WeekSchedule/today.html', {'events': events, })
 
 
