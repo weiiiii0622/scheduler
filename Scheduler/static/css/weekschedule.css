@@ -86,6 +86,9 @@ th {
 
 /* today */
 
+#time {
+  text-align: center;
+}
 
 #today-swiper {
   width: 75%;

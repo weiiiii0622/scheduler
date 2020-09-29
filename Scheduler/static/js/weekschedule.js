@@ -1,5 +1,28 @@
+// tomato clock
+{
+$('#tomato_clock_button').on('click', function(){
+  let tomato_clock = setInterval(TomatoClock,1000);
+  let timeleft = 5;
+  function TomatoClock() {
+  
+    let min = Math.floor(timeleft / 60);
+    let sec = timeleft % 60;
+
+    $('#time').text(('0'+min).slice(-2)+':'+('0'+sec).slice(-2));
+    timeleft--;
+    
+    if (timeleft < 0) {
+      clearInterval(tomato_clock);
+      $('#time').empty();
+      window.confirm("Take A Break!");
+    }
+  }
+});
+}
+
 
 // add event AJAX
+{
 $("form#event_create_form").submit(function(e){
   e.preventDefault();
 
@@ -32,7 +55,7 @@ $("form#event_create_form").submit(function(e){
     }
   });
 });
-
+}
 
 // calendar event AJAX
 {
@@ -176,15 +199,14 @@ $("form#event_create_form").submit(function(e){
 }
 
 // todaypage event swiper
-
-
+{
 var TodayEventswiper = new Swiper('#today-swiper', {
   navigation: {
     nextEl: '.swiper-button-next',
     prevEl: '.swiper-button-prev',
   },
 });
-
+}
 
 
 
