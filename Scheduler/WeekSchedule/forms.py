@@ -9,7 +9,7 @@ class EventForm(ModelForm):
             'start_time': DateInput(attrs={'type': 'datetime-local', 'placeholder': "yyyy-mm-dd", 'onChange': ''}, format='%Y-%m-%dT%H:%M'),
             'clock': NumberInput(attrs={'type': 'number'}),
         }
-        exclude = ['status', 'end_time']
+        exclude = ['user', 'status', 'end_time']
 
     def __init__(self, *args, **kwargs):
         super(EventForm, self).__init__(*args, **kwargs)

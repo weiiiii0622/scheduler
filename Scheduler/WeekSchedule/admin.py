@@ -5,12 +5,12 @@ from .models import Event
 
 class EventAdmin(admin.ModelAdmin):
 	
-    list_display = ('subject', 'description', 'start_time', 'end_time', 'clock', 'status')
-    list_filter = ('subject', 'status')
+    list_display = ('user', 'subject', 'description', 'start_time', 'end_time', 'clock', 'status')
+    list_filter = ('user', 'subject', 'status')
     
     
     fieldsets = (
-        (None, {'fields': ('subject', 'description')}),
+        (None, {'fields': ('user', 'subject', 'description')}),
         ('Event info', {'fields': ('start_time', 'end_time', 'clock', 'status',)}),
     )
 
@@ -18,12 +18,12 @@ class EventAdmin(admin.ModelAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('subject', 'description', 'start_time', 'end_time', 'clock', 'status'),
+            'fields': ('user', 'subject', 'description', 'start_time', 'end_time', 'clock', 'status'),
         }),
     )
     
-    search_fields = ('subject', 'description')
-    ordering = ('subject',)
+    search_fields = ('user', 'subject', 'description')
+    ordering = ('user', 'subject',)
     filter_horizontal = ()
 
 admin.site.register(Event, EventAdmin)

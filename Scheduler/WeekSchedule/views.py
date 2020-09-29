@@ -26,6 +26,7 @@ def EventPage(request):
 			end_time = start_time + datetime.timedelta(minutes = minute)
 			
 			NewEvent = Event.objects.get_or_create(
+				user = request.user,
 				subject = subject,
 				description = description,
 				start_time = start_time,
@@ -59,8 +60,9 @@ def EventAJAX(request):
 		month = int(request.GET.get('month'))
 		date = int(request.GET.get('date'))
 
+		target_user = get_user(request)
 		target_date = datetime.datetime(year, month, date)
-		targets = Event.objects.filter(start_time__contains = target_date.date())
+		targets = Event.objects.filter(user = target_user, start_time__contains = target_date.date())
 
 		data = {
 			'targets': serializers.serialize("json", targets),
