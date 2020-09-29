@@ -78,9 +78,7 @@ def TodayPage(request):
 	today = datetime.datetime.now()
 	target_user = get_user(request)
 	
-	events = Event.objects.filter(user = target_user)
-	print(today)
-	print(events)
+	events = Event.objects.filter(user = target_user, start_time__contains = today.date())
 
 	return render(request, 'WeekSchedule/today.html', {'events': events, })
 
