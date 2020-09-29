@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.core import serializers
+from django.contrib.auth import get_user
 
 from .forms import EventForm
 from .models import Event
@@ -74,7 +75,7 @@ def EventAJAX(request):
 def TodayPage(request):
 	today = datetime.datetime.now()
 	events = Event.objects.filter(start_time__contains = today.date())
-
+	print(get_user(request).email)
 	return render(request, 'WeekSchedule/today.html', {'events': events, })
 
 

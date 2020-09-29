@@ -56,8 +56,8 @@ $("form#event_create_form").submit(function(e){
         console.log("Success");
         console.log(JSON.parse(response.targets)[0].fields.subject);
         var events = JSON.parse(response.targets);
-        $('#event-table').empty();
-        $('#event-table').append(`
+        $('#event_table').empty();
+        $('#event_table').append(`
           <tr>
             <th>Time</th>
             <th>Subject</th> 
@@ -66,7 +66,7 @@ $("form#event_create_form").submit(function(e){
         `);
           
         events.forEach(element => {
-          $('#event-table').append(`
+          $('#event_table').append(`
           <tr>
             <th>${element.fields.start_time}<br>~<br>${element.fields.end_time}</th>
             <th>${element.fields.subject}<br>${element.fields.description}</th> 
@@ -77,7 +77,7 @@ $("form#event_create_form").submit(function(e){
 
       },
       error: function(response){
-        $('#event-table').empty();
+        $('#event_table').empty();
         console.log("Failed");
       }
 

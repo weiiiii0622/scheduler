@@ -3,12 +3,6 @@
   
   
 
-  <!-- add event button -->
-    <div class="float-right mt-2">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create_event_modal">
-      Add Event
-    </button>
-  </div>
 
   <!-- add event form -->
   <div class="modal fade" id="create_event_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -101,10 +95,19 @@
 
   <!-- event table -->
   <div class="overflow-auto">
-    <table id='event-table'>
+    <table id='event_table'>
       
     </table>
   </div>
+
+  <!-- add event button -->
+  <div id="button_div">
+    <button type="button" class="btn btn-primary" id = "add_event_button" data-toggle="modal" data-target="#create_event_modal">
+      Add Event
+    </button>
+  </div>
+  
+
 
   
 {% endblock content %}

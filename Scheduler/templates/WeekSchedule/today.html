@@ -6,8 +6,16 @@
     <div class="swiper-wrapper">
       {% for event in events %}
       <div class="swiper-slide" id="today-slide">
-        <div class="div">event.subject</div>
+        <div class="div time">
+          {{ event.start_time|time:"H:i" }} ~ {{ event.end_time|time:"H:i" }}
+        </div>
+        <div class="div subject">
+          <h2>{{ event.subject }}</h2>
+          <br>
+          <h4>{{ event.description }}</h4>
+        </div>
       </div>
+      {% endfor %}
     </div>
     <!-- Add Arrows -->
     <div class="swiper-button-next"></div>
