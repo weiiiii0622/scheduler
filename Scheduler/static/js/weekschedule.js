@@ -1,20 +1,72 @@
 // tomato clock
 {
 $('#tomato_clock_button').on('click', function(){
+  TodayEventswiper.slideTo(0);
   let tomato_clock = setInterval(TomatoClock,1000);
-  let timeleft = 5;
+  let timeleft = 20+1+1;
+  let clocktime = 10  //sec
+  let resttime = 10;  //sec
   function TomatoClock() {
   
-    let min = Math.floor(timeleft / 60);
-    let sec = timeleft % 60;
+    let min = Math.floor(clocktime / 60);
+    let sec = clocktime % 60;
+    let percent = Math.floor(((10-clocktime)/10)*100);
+    let rest_min = Math.floor(resttime / 60);
+    let rest_sec = resttime % 60;
 
-    $('#time').text(('0'+min).slice(-2)+':'+('0'+sec).slice(-2));
-    timeleft--;
-    
-    if (timeleft < 0) {
+    if(clocktime >= 0){
+      $('#time').text(percent+'%'+'/'+('0'+min).slice(-2)+':'+('0'+sec).slice(-2));
+      clocktime--;
+      timeleft--;
+    }
+    else{
+      $('#time').text(('0'+rest_min).slice(-2)+':'+('0'+rest_sec).slice(-2));
+      resttime--;
+      timeleft--;
+    }
+
+    if(percent == 20){
+      document.getElementById("tomato_clock_image").src = "/static/image/20%.png";
+    }
+    else if(percent == 40){
+      document.getElementById("tomato_clock_image").src = "/static/image/40%.png";
+    }
+    else if(percent == 60){
+      document.getElementById("tomato_clock_image").src = "/static/image/60%.png";
+    }
+    else if(percent == 80){
+      document.getElementById("tomato_clock_image").src = "/static/image/80%.png";
+    }
+    else if(percent == 100){
+      document.getElementById("tomato_clock_image").src = "/static/image/100%.png";
+    }
+    else if (timeleft < 0) {
       clearInterval(tomato_clock);
       $('#time').empty();
-      window.confirm("Take A Break!");
+      // window.confirm("Take A Break!");
+
+      // clock completed AJAX
+      let target_event= document.getElementsByClassName("swiper-slide-active")[0].id;
+
+      $.ajax({
+        type: 'GET',
+        url: $("div#tomato_clock").data('url'),
+        data: {
+          'target_event_id': target_event,
+          'status': 'Done',
+        },
+        success: function(response){
+          TodayEventswiper.slideNext();
+          TodayEventswiper.removeSlide(0);
+          console.log("Success");
+        },
+        error: function(response){
+          console.log("Failed");
+        }
+      });
+
+
+
     }
   }
 });

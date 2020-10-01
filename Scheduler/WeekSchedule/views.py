@@ -78,9 +78,17 @@ def TodayPage(request):
 	today = datetime.datetime.now()
 	target_user = get_user(request)
 	
-	events = Event.objects.filter(user = target_user, start_time__contains = today.date())
+	events = Event.objects.filter(user = target_user, start_time__contains = today.date()).exclude(status = "Done")
 
 	return render(request, 'WeekSchedule/today.html', {'events': events, })
 
 
+def UpdateClockStatusAJAX(request):
+	if request.is_ajax() and request.method == 'GET':
+		target_event_id = int(request.GET.get('target_event_id'))
+		status = str(request.GET.get('status'))
+		target_event = Event.objects.filter(id = target_event_id)
 
+		target_event.update(status = status)
+
+		return JsonResponse({}, status = 200)
