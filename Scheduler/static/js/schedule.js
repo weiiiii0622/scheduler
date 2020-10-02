@@ -111,7 +111,7 @@ $("form#event_create_form").submit(function(e){
 
 // calendar event AJAX
 {
-  $('.flex-container').on('click', 'div.round-button', function (e) {
+  $('.swiper-container').on('click', 'div.round-button', function (e) {
     e.preventDefault();
 
     let year = new Date().getFullYear();
@@ -249,6 +249,7 @@ $("form#event_create_form").submit(function(e){
     next_sunday.setDate(next_sunday.getDate() + 1);
   }
 }
+
 
 // todaypage event swiper
 {
