@@ -6,17 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
-  <link rel="stylesheet" href="{% static '/css/schedule.css' %}">
+  <link rel="stylesheet" href="{% static '/css/weekschedule.css' %}">
   <style>
     body {
-      background-color: rgb(248, 239, 210);
+      background-color: rgb(42, 24, 8);
     }
   </style>
   <title>Scheduler</title>
 </head>
 <body>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+    <nav class="navbar navbar-expand-lg navbar-dark">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerMainPage" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -27,14 +27,24 @@
           
           {% if user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'weekschedule-home' %}">Week Schedule</a>
+            <a class="nav-link" href="{% url 'weekschedule-today' %}">Today</a>
           </li>
           <li class="nav-item">
+<<<<<<< HEAD
             <a class="nav-link" href="{% url 'grades' %}">Grades</a>
+=======
+            <a class="nav-link" href="{% url 'weekschedule-home' %}">Week Schedule</a>
+>>>>>>> 3e0d2be9754dcb7dd35ca1b0a80c3d946738a8e9
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'mainsite-logout' %}">Logout</a>
           </li>
+<<<<<<< HEAD
+=======
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'mainsite-logout' %}">Logout</a>
+          </li>
+>>>>>>> 3e0d2be9754dcb7dd35ca1b0a80c3d946738a8e9
           
           {% else %}
           <li class="nav-item">

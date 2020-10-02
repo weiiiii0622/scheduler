@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
+from django.core import serializers
+from django.contrib.auth import get_user
 
 from .forms import EventForm
 from .models import Event
@@ -24,6 +26,7 @@ def EventPage(request):
 			end_time = start_time + datetime.timedelta(minutes = minute)
 			
 			NewEvent = Event.objects.get_or_create(
+				user = request.user,
 				subject = subject,
 				description = description,
 				start_time = start_time,
@@ -57,30 +60,35 @@ def EventAJAX(request):
 		month = int(request.GET.get('month'))
 		date = int(request.GET.get('date'))
 
+		target_user = get_user(request)
 		target_date = datetime.datetime(year, month, date)
-		targets = Event.objects.filter(start_time__contains = target_date.date())
-		
-		
-
-		# target_event = {
-		# 	'subject': target[0].subject,
-		# 	'description': target[0].description,
-		# 	'start_time':target[0].start_time,
-		# 	'end_time': target[0].end_time,
-		# 	'status': target[0].status,
-		# }
+		targets = Event.objects.filter(user = target_user, start_time__contains = target_date.date())
 
 		data = {
-			'targets': list(targets),
+			'targets': serializers.serialize("json", targets),
 		}
 
 		if list(targets) == []:
-			return JsonResponse({}, status = 400)
+			return JsonResponse(data, status = 400)
 		else:
 			return JsonResponse(data, status = 200)
 
 
+def TodayPage(request):
+	today = datetime.datetime.now()
+	target_user = get_user(request)
+	
+	events = Event.objects.filter(user = target_user, start_time__contains = today.date()).exclude(status = "Done")
+
+	return render(request, 'WeekSchedule/today.html', {'events': events, })
 
 
+def UpdateClockStatusAJAX(request):
+	if request.is_ajax() and request.method == 'GET':
+		target_event_id = int(request.GET.get('target_event_id'))
+		status = str(request.GET.get('status'))
+		target_event = Event.objects.filter(id = target_event_id)
 
+		target_event.update(status = status)
 
+		return JsonResponse({}, status = 200)

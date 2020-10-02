@@ -1,0 +1,44 @@
+{% extends "mainsite/home.html" %}
+{% block content %}
+  <div id="tomato_clock" data-url="{% url 'today-clockAJAX' %}">
+    
+    <div class="container" id="tomato_clock_container">
+      <div id='time'></div>
+      <img id="tomato_clock_image" src="/static/image/20%.png">
+    </div>
+
+    <div class="container" id="tomato_clock_button_container">
+      <button id="tomato_clock_button">
+        Start
+      </button>
+      
+    </div>
+  </div>
+  <!-- Swiper -->
+  <div class="swiper-container" id="today-swiper">
+    <div class="swiper-wrapper">
+      {% for event in events %}
+      <div class="swiper-slide today-slide" id="{{ event.id }}">
+        <div class="div time">
+          {{ event.start_time|time:"H:i" }} ~ {{ event.end_time|time:"H:i" }}
+        </div>
+        <div class="div subject">
+          <h2>{{ event.subject }}</h2>
+          <br>
+          <h4>{{ event.description }}</h4>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <!-- Add Arrows -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+
+
+  <script>
+    window.onbeforeunload = function () {
+      return "Are you sure you want to leave?\n Your Clock Status will be set as failure";
+    };
+  </script>
+{% endblock content %}

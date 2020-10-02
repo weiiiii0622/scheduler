@@ -1,13 +1,8 @@
 {% extends "mainsite/home.html" %}
 {% block content %}
+  
+  
 
-
-  <!-- add event button -->
-    <div class="float-right mt-2">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create_event_modal">
-      Add Event
-    </button>
-  </div>
 
   <!-- add event form -->
   <div class="modal fade" id="create_event_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -50,9 +45,9 @@
 
   <!-- week calendar -->
 
-  <div class="swiper-container" id="weekschedule-swiper" data-url="{% url 'weekschedule-calendarAJAX' %}">
+  <div class="swiper-container " id="weekschedule-swiper" data-url="{% url 'weekschedule-calendarAJAX' %}">
     <div class="swiper-wrapper">
-      <div class="swiper-slide">
+      <div class="swiper-slide" id="weekschedule-slide">
         
         <div class="flex-container 0">
           <div class="round-button 0">1</div>
@@ -66,7 +61,7 @@
 
       </div>
 
-      <div class="swiper-slide">
+      <div class="swiper-slide" id="weekschedule-slide">
 
         <div class="flex-container 1">
           <div class="round-button 0">1</div>
@@ -80,7 +75,7 @@
 
       </div>
 
-      <div class="swiper-slide ">
+      <div class="swiper-slide " id="weekschedule-slide">
 
         <div class="flex-container 2">
           <div class="round-button 0">1</div>
@@ -100,10 +95,19 @@
 
   <!-- event table -->
   <div class="overflow-auto">
-    <table id='event-table'>
+    <table id='event_table'>
       
     </table>
   </div>
 
+  <!-- add event button -->
+  <div id="button_div">
+    <button type="button" class="btn btn-primary" id = "add_event_button" data-toggle="modal" data-target="#create_event_modal">
+      Add Event
+    </button>
+  </div>
+  
 
+
+  
 {% endblock content %}
