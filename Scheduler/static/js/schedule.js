@@ -118,6 +118,7 @@ $("form#event_create_form").submit(function(e){
     let month = $(this).text().split('/')[0];
     let date = $(this).text().split('/')[1];
     
+    console.log(year, month, date);
 
     $.ajax({
       type: 'GET',
@@ -174,13 +175,14 @@ $("form#event_create_form").submit(function(e){
   let today = new Date();
 
   var current_sunday = new Date(today.setDate(today.getDate() - today.getDay()));
-  today = new Date();
 
-  var prev_sunday = new Date(today.setDate(current_sunday.getDate() - 7));
-  today = new Date();
 
-  var next_sunday = new Date(today.setDate(current_sunday.getDate() + 7));
-  today = new Date();
+  var prev_sunday = new Date(current_sunday.addDays(-7));
+  current_sunday = new Date(today.setDate(today.getDate() - today.getDay()));
+
+  var next_sunday = new Date(current_sunday.addDays(+7));
+  current_sunday = new Date(today.setDate(today.getDate() - today.getDay()));
+  console.log(next_sunday, current_sunday, prev_sunday);
 
   var WeekScheduleswiper = new Swiper('#weekschedule-swiper', {
     initialSlide: 1,
@@ -208,7 +210,7 @@ $("form#event_create_form").submit(function(e){
           <div class="round-button 6">${sat.getMonth()+1}/${sat.getDate()}</div>
         </div>
   </div>`);
-    next_sunday.setDate(next_sunday.getDate() + 1);
+    // next_sunday.setDate(next_sunday.getDate() + 1);
   });
 
   WeekScheduleswiper.on('reachBeginning', function(){

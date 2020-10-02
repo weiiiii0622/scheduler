@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'mainsite',
     'WeekSchedule',
     'Grades',
+    'QuizBank',
 ]
 
 MIDDLEWARE = [
