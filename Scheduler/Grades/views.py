@@ -3,31 +3,34 @@ from datetime import datetime
 from django.shortcuts import render ,redirect
 from .models import Link
 from .forms import LinkModelForm ,GradesChoicesForm
+from mainsite.models import User
+from django.http import JsonResponse
+import json
 
 
-def create(request):
-    form = LinkModelForm()
-    if request.method == "POST":
-        form = LinkModelForm(request.POST or None)
-        if form.is_valid():
+# def create(request):
+#     form = LinkModelForm()
+#     if request.method == "POST":
+#         form = LinkModelForm(request.POST or None)
+#         if form.is_valid():
 
-            date = form.cleaned_data['date']
-            test = form.cleaned_data['test']
-            scope = form.cleaned_data['scope']
-            grade = form.cleaned_data['grade']
+#             date = form.cleaned_data['date']
+#             test = form.cleaned_data['test']
+#             scope = form.cleaned_data['scope']
+#             grade = form.cleaned_data['grade']
 
-            #form.save()
-            Link.objects.get_or_create(
-                date = date,
-                test = test,
-                scope = scope,
-                grade = grade,
-            )
-        return redirect("/Grades")
-    context = {
-        'form': form
-    }
-    return render(request, 'Grades/grades_form.html', context)
+#             form.save()
+#             Link.objects.get_or_create(
+#                 date = date,
+#                 test = test,
+#                 scope = scope,
+#                 grade = grade,
+#             )
+#         return redirect("/Grades")
+#     context = {
+#         'form': form
+#     }
+#     return render(request, 'Grades/grades_form.html', context)
 #{'form':form}
 
 def form_choices(request):
@@ -52,6 +55,22 @@ def form_choices(request):
     #         )
     #     return redirect("/Grades")  
     return render(request,'Grades/grades_form.html',context)
+
+# def get_current_user(request):
+#     current_user = request.account
+#     return current_user
+
+
+def GradesAJAX(request):
+    
+	if request.is_ajax() and request.method == 'GET':
+		test_type = request.GET.get('test_type')
+		
+		return JsonResponse({})
+	current_user = request.user
+	user = User.objects.filter(account=current_user)
+	user.update(grades_test_option=JsonResponse())
+	return render(request,'Grades/grades_form.html')
 
 def learning(request):
     roll = Link.objects.all()

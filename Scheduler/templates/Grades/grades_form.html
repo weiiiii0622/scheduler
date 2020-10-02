@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -41,20 +42,49 @@
       </nav>
     </div>  
 
-  <form action="" method="POST">
+<!--Mywidget-->
+<!-- <button onclick="prompt_test()" id="prompt_input">新增類型</button> -->
+
+  <form action="" method="GET" id="grades_form">
       {% csrf_token %}
       {{ form.as_p }}
-      <button onclick="prompt_test()">+</button>
-      <p id="scope"></p>
-      <input type="submit" value="submit">
   </form>
+  
+  <input type="submit" value="submit">
   <script>
     function prompt_test() {
+    
       var test = prompt("考試類型：");
-      if (test != null) {
-        document.getElementById("scope").innerHTML =;
-      }
+      // e.preventDefault();
+  
+      $.ajax({
+        type: 'GET',
+        url: '/grades_ajax',
+        data: {
+          'test_type': test,
+        },
+        success: function(response){
+          var select = document.getElementById('id_create_option');
+          var option = document.createElement('option');
+
+          // create text node to add to option element (opt)
+          option.appendChild( document.createTextNode(test));
+
+          // set value property of opt
+          option.value = (test )
+
+          // add opt to end of select box (sel)
+          select.appendChild(option); 
+          
+        },
+        error: function(response){
+        console.log("Failed");
+        }
+      });
     }
+    
   </script>
+  
+
 </body>
 </html>

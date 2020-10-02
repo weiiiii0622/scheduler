@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+import json
 
 # Create your models here.
 class UserManager(BaseUserManager):
@@ -35,6 +36,7 @@ class User(AbstractBaseUser):
     date = models.DateTimeField(default=timezone.now)
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    grades_test_option = models.CharField(max_length=100,default=0)
 
     USERNAME_FIELD = 'account'
     REQUIRED_FIELDS = ['password', 'email']
@@ -53,5 +55,10 @@ class User(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.is_admin
+    
+    def set_grades_test_option(self, x):
+        self.grades_test_option = json.dumps(x)
 
+    def get_grades_test_option(self):
+        return json.loads(self.grades_test_option)
 

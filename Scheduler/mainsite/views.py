@@ -45,5 +45,5 @@ def User_logout(request):
     return redirect("/login/")
 
 def Grades(request):
-    return render(request,'Grades/grades.html')
+    return render(request,"Grades/grades.html")
 
