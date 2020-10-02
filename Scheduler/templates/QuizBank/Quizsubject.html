@@ -1,0 +1,17 @@
+{% extends "mainsite/home.html" %}
+{% block content %}
+
+{% for x in year %}
+<div class="containter">
+  <div class="subject">
+
+    <a href="{% url 'quizbank-test' year=">
+      {{ x }}
+    </a>
+    
+  </div>
+</div>
+
+
+{% endfor %}
+{% endblock content %}
