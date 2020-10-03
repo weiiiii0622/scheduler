@@ -10,6 +10,7 @@ def Home(request):
 def Subject(request, id):
 	print(id)
 	year = Quiz.objects.filter(subject = id).values('year').distinct()
+	print(year)
 	# year = [x[0]['year'] for x in year]
 	# print(year)
 	return render(request, 'QuizBank/Quizsubject.html', {'year': year})
