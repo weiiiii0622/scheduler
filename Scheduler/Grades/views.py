@@ -56,20 +56,17 @@ def form_choices(request):
     #     return redirect("/Grades")  
     return render(request,'Grades/grades_form.html',context)
 
-# def get_current_user(request):
-#     current_user = request.account
-#     return current_user
 
 
 def GradesAJAX(request):
     
-	if request.is_ajax() and request.method == 'GET':
-		test_type = request.GET.get('test_type')
+	if request.is_ajax() and request.method == 'POST':
+		test_type = request.POST.get('test_type')
 		
 		return JsonResponse({})
 	current_user = request.user
 	user = User.objects.filter(account=current_user)
-	user.update(grades_test_option=JsonResponse())
+	user.update(grades_test_option=JsonResponse(test_type))
 	return render(request,'Grades/grades_form.html')
 
 def learning(request):
