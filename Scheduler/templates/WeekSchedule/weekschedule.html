@@ -20,19 +20,36 @@
               <div class="form-group "> 
                   <label> Subject </label> 
                   {{ form.subject }} 
+                  <div class="error" id="subject_error">
+                    
+                  </div>
+                  
               </div> 
               <div class="form-group"> 
                   <label> Description </label> 
                   {{ form.description }} 
+                  <div class="error" id="description_error">
+                    
+                  </div>
+                  
               </div> 
               <div class="form-group"> 
                   <label> Start Time </label> 
-                  {{ form.start_time }} 
+                  {{ form.start_time }}
+                  <div class="error" id="start_time_error">
+                    
+                  </div>
+                   
               </div> 
               <div class="form-group"> 
-                  <label> Clock </label> 
-                  {{ form.clock }} 
+                  <label> Clock </label>
+                  {{ form.clock }}  
+                  <div class="error" id="clock_error">
+                    
+                  </div>
+                  
               </div> 
+              
               <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" id="event_submit_button">Save</button>
               </div>
