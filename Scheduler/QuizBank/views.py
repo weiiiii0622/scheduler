@@ -4,17 +4,14 @@ from .models import Quiz
 
 def Home(request):
 	subject = Quiz.objects.values('subject').distinct()
-	print(subject)
+
 	return render(request, 'QuizBank/Quizhome.html', {'subject': subject})
 
 def Subject(request, id):
-	print(id)
 	year = Quiz.objects.filter(subject = id).values('year').distinct()
-	print(year)
-	# year = [x[0]['year'] for x in year]
-	# print(year)
-	return render(request, 'QuizBank/Quizsubject.html', {'year': year})
 
-def TestPage(request):
+	return render(request, 'QuizBank/Quizsubject.html', {'year': year, 'id': id})
 
-	return
+def TestPage(request, id, year):
+	
+	return render(request, 'QuizBank/Quizexam.html', {})
