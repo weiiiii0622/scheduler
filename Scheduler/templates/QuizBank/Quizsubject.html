@@ -1,17 +1,54 @@
 {% extends "mainsite/home.html" %}
 {% block content %}
 
-{% for x in year %}
-<div class="containter">
-  <div class="subject">
 
-    <a href="{% url 'quizbank-test' id=id year=x.year %}">
-      {{ x.year }}
-    </a>
-    
+<!-- Exam Setting Form Modal -->
+<div class="modal fade" id="exam_setting_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="#" method="POST", id="exam_setting_form"  data-url="{% url 'quizbank-test' id=id year=year  %}">
+        <div class="modal-body">
+
+            
+          <input type="radio" id="10" value="10" name="number">
+          <label for="10">10</label><br>
+          <input type="radio" id="20" value="20" name="number">
+          <label for="20">20</label><br>
+          <input type="radio" id="30" value="30" name="number">
+          <label for="30">30</label><br>
+          <input type="radio" id="all" value="all" name="number" checked="checked">
+          <label for="all">All</label>
+            
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary", id="quiz_start_button">Start!</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 
 
-{% endfor %}
+
+<div class="containter" id="year_container">
+  {% for x in year %}
+  <div class="subject">
+
+    <a href="{% url 'quizbank-test' id=id year=x.year %}" class="year_href">
+      {{ x.year }}
+    </a>
+    
+  </div>
+  {% endfor %}
+</div>
+
+
+
 {% endblock content %}

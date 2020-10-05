@@ -6,7 +6,15 @@ class Quiz(models.Model):
 
 	subject = models.CharField(max_length=50)
 	year = models.TextField()
-	question = models.TextField()
+	
+	question1 = models.TextField()
+	question2 = models.TextField(null=True, blank=True)
+	question3 = models.TextField(null=True, blank=True)
+
+	image1 = models.TextField(null=True, blank=True)
+	image2 = models.TextField(null=True, blank=True)
+	image3 = models.TextField(null=True, blank=True)
+
 
 	option1 = models.TextField(null=True, blank=True)
 	option2 = models.TextField(null=True, blank=True)
