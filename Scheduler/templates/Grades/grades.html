@@ -6,14 +6,7 @@
     <head>
         
         
-        <style>
-            
-            em {
-                color: rgb(0, 0, 0);
-            }
-            .box{width:70%; float:left;}
-            .zone{width:100%; height:100%;}
-        </style> -->
+
     </head>
 
 <!--form-->
@@ -24,12 +17,14 @@
         var grades = {};
         var scopes = {};
         var linechart;
+        
+        
         {% for s1, g in chart_subject.items %}
-        grades[{{ s1 }}] = {{ g|safe }};
+        grades[{{ s1 }}] = {{ g|safe }}
         {% endfor %}
-        //{% for s2, t in chart_test.items %}
-        //tests[{{ s2}}] = {{ t|safe }}
-        //{% endfor %}
+        {% for s2, t in chart_test.items %}
+        tests[{{ s2}}] = {{ t|safe }}
+        {% endfor %}
         
 //linechart data
         var linesData = {
@@ -58,9 +53,27 @@
 
 //chart functions
         function displayGradesOf(subject) {
-            linechart.data.datasets[0].data = grades[subject];
-            linechart.update();
+            // linechart.data.datasets[0].data = grades[subject];
+            // linechart.update();
+            $.ajax({
+        
+            type: 'POST',
+            url: "{% url 'grades_subject' %}",
+            data: {
+            'subject':subject,
+            'csrfmiddlewaretoken': csrf_token,
+            },
+            success: function(response){
+                // {{ user.grades_test_option }}
+                console.log('success')
+            },
+            error: function(response){
+                console.log("Failed");
+            }
+                
+            });
         }
+        
         //function displayScopesOf(tests){
           //  linechart.data.datasets[0].data = tests[subject];
             //linechart.update();
@@ -77,49 +90,56 @@
             </div>
         </div>
 
-<!--create button-->
-        <a class="btn btn-primary" href="#" role="button" onclick="location.href='/gradeform'">create</a>
 
 
 <!--選科目-->
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="choose-subject" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">subjects</button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(1);">Chinese</a>
-                  <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(2);">Math</a>
-                  <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(3);">English</a>
-                  <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(4);">Physics</a>
-                  <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(5);">Chemistry</a>
-                  <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(6);">Biology</a>
-                  <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(7);">Earth Science</a>
-                  <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(8);">Geogrophy</a>
-                  <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(9);">History</a>
-                  <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(0);">Civics</a>
+        <div class="container">
+            <div class="row">
+                
+                
+                <div class="dropdown col-3">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="choose-subject" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">subjects</button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(1);">Chinese</a>
+                    <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(2);">Math</a>
+                    <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(3);">English</a>
+                    <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(4);">Physics</a>
+                    <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(5);">Chemistry</a>
+                    <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(6);">Biology</a>
+                    <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(7);">Earth Science</a>
+                    <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(8);">Geogrophy</a>
+                    <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(9);">History</a>
+                    <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(0);">Civics</a>
+                    </div>
                 </div>
-              </div>
+                <div class="col-5"></div>
+                <a class="btn btn-primary col-3" href="#" role="button" onclick="location.href='/gradesform'">create</a>
+            </div>
         </div>
             
 <!--test(範圍)-->
-    <div class="row">
-        <nav class="nav flex-column">
-            <a class="nav-link active" href="#">{{ </a>
-            <a class="nav-link" href="#">Link</a>
-            <a class="nav-link" href="#">Link</a>
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </nav>
+    <div class="container">
+        <div class="row">
+            <div class="subject">
+                <p>{{ choices }}</p>
+                <a href="{% url 'url_test' test=choices %}">{{ choices }}</a>
+            </div>
+                
+            
+    
+            
 
-<!--chart-->     
-        <div class="row justify-content-center">
-            <div class="box col-9.5">
-                <canvas id="chart-area" class="zone"></canvas>
+    <!--chart-->     
+            <div class="row justify-content-center">
+                <div class="box col-9.5">
+                    <canvas id="chart-area" class="zone"></canvas>
+                </div>
             </div>
         </div>
     </div>
 
 <!--表格-->
-        <table class="table">
+        <table class="table container">
             <thead class="thead-light">
                 <div class="row">
                     <tr>

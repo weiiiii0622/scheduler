@@ -13,7 +13,7 @@ class UserAdmin(BaseUserAdmin):
     form = UserChangeForm
     add_form = UserRegistrationForm
 
-    list_display = ('account', 'email', 'is_admin', 'is_active')
+    list_display = ('account', 'email', 'is_admin', 'is_active','grades_test_option')
     list_filter = ('is_admin', 'is_active')
     
     
