@@ -26,19 +26,19 @@ $('#tomato_clock_button').on('click', function(){
     }
 
     if(percent == 20){
-      document.getElementById("tomato_clock_image").src = "/static/image/20%.png";
+      document.getElementById("tomato_clock_image").src = "/static/image/today/20%.png";
     }
     else if(percent == 40){
-      document.getElementById("tomato_clock_image").src = "/static/image/40%.png";
+      document.getElementById("tomato_clock_image").src = "/static/image/today/40%.png";
     }
     else if(percent == 60){
-      document.getElementById("tomato_clock_image").src = "/static/image/60%.png";
+      document.getElementById("tomato_clock_image").src = "/static/image/today/60%.png";
     }
     else if(percent == 80){
-      document.getElementById("tomato_clock_image").src = "/static/image/80%.png";
+      document.getElementById("tomato_clock_image").src = "/static/image/today/80%.png";
     }
     else if(percent == 100){
-      document.getElementById("tomato_clock_image").src = "/static/image/100%.png";
+      document.getElementById("tomato_clock_image").src = "/static/image/today/100%.png";
     }
     else if (timeleft < 0) {
       clearInterval(tomato_clock);
@@ -118,6 +118,7 @@ $("form#event_create_form").submit(function(e){
     let month = $(this).text().split('/')[0];
     let date = $(this).text().split('/')[1];
     
+    console.log(year, month, date);
 
     $.ajax({
       type: 'GET',
@@ -174,13 +175,14 @@ $("form#event_create_form").submit(function(e){
   let today = new Date();
 
   var current_sunday = new Date(today.setDate(today.getDate() - today.getDay()));
-  today = new Date();
 
-  var prev_sunday = new Date(today.setDate(current_sunday.getDate() - 7));
-  today = new Date();
 
-  var next_sunday = new Date(today.setDate(current_sunday.getDate() + 7));
-  today = new Date();
+  var prev_sunday = new Date(current_sunday.addDays(-7));
+  current_sunday = new Date(today.setDate(today.getDate() - today.getDay()));
+
+  var next_sunday = new Date(current_sunday.addDays(+7));
+  current_sunday = new Date(today.setDate(today.getDate() - today.getDay()));
+  console.log(next_sunday, current_sunday, prev_sunday);
 
   var WeekScheduleswiper = new Swiper('#weekschedule-swiper', {
     initialSlide: 1,
@@ -208,7 +210,7 @@ $("form#event_create_form").submit(function(e){
           <div class="round-button 6">${sat.getMonth()+1}/${sat.getDate()}</div>
         </div>
   </div>`);
-    next_sunday.setDate(next_sunday.getDate() + 1);
+    // next_sunday.setDate(next_sunday.getDate() + 1);
   });
 
   WeekScheduleswiper.on('reachBeginning', function(){

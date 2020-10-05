@@ -1,0 +1,19 @@
+{% extends "mainsite/home.html" %}
+{% block content %}
+
+
+{% for x in subject %}
+<div class="containter">
+  <div class="subject">
+
+    <a href="{% url 'quizbank-subject'  id=x.subject %}">
+      {{ x.subject }}
+    </a>
+    
+  </div>
+</div>
+
+
+{% endfor %}
+
+{% endblock content %}

@@ -22,5 +22,6 @@ urlpatterns = [
     path('',include('Grades.urls')),
     path('', include('mainsite.urls')),
     path('', include('WeekSchedule.urls')),
+    path('', include('QuizBank.urls')),
     
 ]
