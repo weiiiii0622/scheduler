@@ -1,35 +1,51 @@
 {% extends "mainsite/home.html" %}
+<!-- {% load event_tags  %} -->
 {% block content %}
 
+<!-- Exam Table -->
 
+<div class="swiper-container">
+  <div class="swiper-wrapper">
+    {% for id in id %}
+    <div class="swiper-slide container">
+      
+      <div class="row", id="question">
+        {{ forloop.counter }}.
+        {% for question in question|get_item:id %}
+          {{ question }}
+        {% endfor %}
+      </div>
 
-<!-- Exam Setting Form Modal -->
-<div class="modal fade" id="exam_setting_form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+      <div class="row" id="image">
+        {% for image in image|get_item:id %}
+        <img src="/static/image/{{subject}}/{{image}}.jpg" alt="">
+        {% endfor %}
       </div>
-      <div class="modal-body">
-        ...
+
+      <div class="row", id="answer">
+        <form>
+          {% for option in option|get_item:id %}
+            <input type="radio" id="{{ id }}-{{ forloop.counter }}" name="option" action="">
+            <label for="{{ forloop.counter }}">{{option}}</label><br>            
+          {% endfor %}
+          {% if forloop.last is True %}
+            <input type="submit" id="answer_submit_button">
+          {% endif %}
+        </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
+      
+    </div> 
+    {% endfor %}
   </div>
+  
+  <!-- Add Pagination -->
+  <div class="swiper-pagination"></div>
+  
+  <!-- Add Arrows -->
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+
 </div>
-
-<div class="exam-container">
-  <div id="exam_question">
-
-  </div>
-</div>
-
-
 
 
 {% endblock content %}

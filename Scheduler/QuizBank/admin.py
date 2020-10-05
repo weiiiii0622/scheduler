@@ -6,10 +6,10 @@ from .models import Quiz
 
 @admin.register(Quiz)
 class QuixAdmin(ImportExportModelAdmin):
-    list_display = ('subject', 'year', 'question', 'answer')
+    list_display = ('id', 'subject', 'year', 'question1', 'question2', 'question3', 'answer')
     list_filter = ('subject', 'year')
 
     
-    search_fields = ('subject', 'year', 'question')
+    search_fields = ('subject', 'year', 'question1')
     ordering = ('subject', 'year')
     filter_horizontal = ()
