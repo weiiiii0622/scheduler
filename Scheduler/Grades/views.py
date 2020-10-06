@@ -21,7 +21,7 @@ def form_choices(request):
     context['form'] = GradesChoicesForm([(v, v) for v in options])
     print(context['form'])
     
-    choice_form = GradesChoicesForm(())
+    # choice_form = GradesChoicesForm(())
     
     return render(request,'Grades/grades_form.html',context)
 
