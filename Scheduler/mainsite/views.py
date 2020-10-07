@@ -37,6 +37,8 @@ def User_login(request):
                 return redirect("/")
         else:
             print('error')
+            err = 'Password is wrong'
+            return render(request, "mainsite/login.html", {'form':form, 'err': err})
 
     return render(request, "mainsite/login.html", {'form':form})
 

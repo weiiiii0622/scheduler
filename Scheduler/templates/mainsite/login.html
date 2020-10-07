@@ -25,4 +25,10 @@
     </h5>
   </div>
 </div>
+
+{% if err %}
+<script>
+  alert({{ err }})
+</script>
+{% endif %}
 {% endblock content %}

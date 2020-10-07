@@ -26,19 +26,19 @@ $('#tomato_clock_button').on('click', function(){
     }
 
     if(percent == 20){
-      document.getElementById("tomato_clock_image").src = "/static/image/20%.png";
+      document.getElementById("tomato_clock_image").src = "/static/image/today/20%.png";
     }
     else if(percent == 40){
-      document.getElementById("tomato_clock_image").src = "/static/image/40%.png";
+      document.getElementById("tomato_clock_image").src = "/static/image/today/40%.png";
     }
     else if(percent == 60){
-      document.getElementById("tomato_clock_image").src = "/static/image/60%.png";
+      document.getElementById("tomato_clock_image").src = "/static/image/today/60%.png";
     }
     else if(percent == 80){
-      document.getElementById("tomato_clock_image").src = "/static/image/80%.png";
+      document.getElementById("tomato_clock_image").src = "/static/image/today/80%.png";
     }
     else if(percent == 100){
-      document.getElementById("tomato_clock_image").src = "/static/image/100%.png";
+      document.getElementById("tomato_clock_image").src = "/static/image/today/100%.png";
     }
     else if (timeleft < 0) {
       clearInterval(tomato_clock);
@@ -100,13 +100,22 @@ $("form#event_create_form").submit(function(e){
     success: function(response){
       console.log("Success");
       $("form#event_create_form")[0].reset();
+      $(".error").empty();
       $('#create_event_modal').modal('hide')
     },
     error: function(response){
+      $('#create_event_modal').modal('show');
+
+      let error_array = Object.keys(response.responseJSON.errors);
+
+      error_array.forEach(error => {
+        $(`#${error}_error`).text(response.responseJSON.errors[`${error}`]);
+      });
+      
       console.log("Failed");
-    }
+      }
+    });
   });
-});
 }
 
 // calendar event AJAX
@@ -130,7 +139,7 @@ $("form#event_create_form").submit(function(e){
       },
       success: function(response){
         console.log("Success");
-        console.log(JSON.parse(response.targets)[0].fields.subject);
+        console.log(JSON.parse(response.targets)[0].fields);
         var events = JSON.parse(response.targets);
         $('#event_table').empty();
         $('#event_table').append(`
@@ -144,7 +153,7 @@ $("form#event_create_form").submit(function(e){
         events.forEach(element => {
           $('#event_table').append(`
           <tr>
-            <th>${element.fields.start_time}<br>~<br>${element.fields.end_time}</th>
+            <th>${element.fields.start_time.slice(11,19)}<br>~<br>${element.fields.end_time.slice(11,19)}</th>
             <th>${element.fields.subject}<br>${element.fields.description}</th> 
             <th>${element.fields.status}</th>
           </tr>

@@ -6,5 +6,4 @@ urlpatterns = [
     path('weekschedule/', EventPage, name='weekschedule-home'),
     path('weekschedule/calendarAJAX', EventAJAX, name='weekschedule-calendarAJAX'),
     path('today/clockAJAX', UpdateClockStatusAJAX, name='today-clockAJAX'),
-
 ]

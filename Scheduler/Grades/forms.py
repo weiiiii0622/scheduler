@@ -27,7 +27,8 @@ class GradesChoicesForm(forms.Form):
         super(GradesChoicesForm, self).__init__(*args, **kwargs)
         self.fields['create_option'].choices = options
 
-    grades_form_choices = (
+
+    grades_subject_choices = (
         ("1","國文"),
         ("2","數學"),
         ("3","英文"),
@@ -42,11 +43,12 @@ class GradesChoicesForm(forms.Form):
     grades_subject = forms.ChoiceField(
         label="科目",
         widget=forms.Select(attrs={'class': 'form-control','data-toggle': 'select'}),
-        choices=grades_form_choices, required=True
+        choices=grades_subject_choices, required=True
     )
+    #grades_test_choices = (User.grades_test_option)
     create_option = forms.ChoiceField(
         label="類型",
-        widget=forms.Select(attrs={'class': 'form-control','data-toggle': 'select'}),
+        widget=forms.Select(attrs={'class': 'form-control','data-toggle': 'select'}),           
         choices=(), required=True
     )
     新增類型 = forms.CharField(widget=MyWidget())
