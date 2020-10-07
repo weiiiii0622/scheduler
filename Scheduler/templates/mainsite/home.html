@@ -6,8 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+
   <link rel="stylesheet" href="{% static '/css/weekschedule2.css' %}">
   <link rel="stylesheet" href="{% static '/css/login.css' %}">
+  
   <!--font-->
   <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap" rel="stylesheet">
@@ -68,14 +70,23 @@
   {% endblock %}
 
   
-  
+  {% comment %} <script src="js/quizexam.js"></script>
+  <script src="js/scheduler2.js"></script>
+  <script src="js/weekschedule.js"></script> {% endcomment %}
 
 
+{% comment %} <script src="http://localhost/assets/js/script.js"></script>
+<link rel="stylesheet" href="{% static '/js/schedule2.js' %}">
+  <link rel="stylesheet" href="{% static '/js/weekschedule.js' %}"> {% endcomment %}
   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script> 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.bundle.min.js"></script>
+  {% load static %}
+  <script src="{% static 'js/quizexam.js' %}"></script>   
+  <script src="{% static 'js/weekschedule.js' %}"></script>    
+
 
 
   
