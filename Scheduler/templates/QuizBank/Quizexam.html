@@ -26,7 +26,7 @@
         <form id="answer_form">
           {% for option in option|get_item:id %}
             <input type="checkbox" id="{{ id }}-{{ forloop.counter }}" name="option" action="">
-            <label for="{{ forloop.counter }}">{{option}}</label><br>            
+            <label for="{{ id }}-{{ forloop.counter }}">{{option}}</label><br>            
           {% endfor %}
           {% if forloop.last is True %}
           <button type="submit" class="btn btn-primary", id="answer_submit_button" data-url="{% url 'quizbank-check' id='check' year='All' %}">Finish!</button>
