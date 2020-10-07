@@ -1,14 +1,13 @@
 // Popup Modal
 
   $(".year_href").on('click',function (e) {
-    var x = $(this);
+    let x = $(this);
     e.preventDefault();
     $('#exam_setting_modal').modal('show');
     $("form#exam_setting_form").submit(function(e){
       e.preventDefault();
   
       number = $('input[name="number"]:checked').val();
-      console.log(number);
       
       $.ajax({
         type: 'GET',
@@ -19,8 +18,7 @@
         success: function(response){
           console.log("Success");
           $('#exam_setting_modal').modal('hide');
-          console.log(x.attr('href'));
-          window.location.href = x.attr('href');
+          window.location.href = x.attr('href') ;
         },
         error: function(response){
           console.log("Failed");
@@ -50,9 +48,29 @@
 // Check answer AJAX
 {
   $("#answer_submit_button").on('click', function(){
-    $("input[type='radio']").submit(function (e) { 
+    $("form#answer_form").submit(function(e){ 
       e.preventDefault();
-      
+      var id_list = [];
+      $('.answer').each(function(){
+        id_list.push($(this).attr('id'));
+      })
+      console.log(id_list);
+      $.ajax({
+        type: 'GET',
+        url: $("#answer_submit_button").data('url'),
+        traditional: true,
+        data: {
+          'id': id_list,
+        },
+        success: function(response){
+          console.log("Success");
+        },
+        error: function(response){
+          console.log("Failed");
+        },
+      });
+
+
     });
   });
 
