@@ -13,16 +13,22 @@ Including another URLconf
     1. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import include, url
+from django.urls import path
 from django.contrib import admin
 from django.http import HttpResponse
-from .views import learning ,form_choices ,GradesAJAX
+from .views import learning ,form_choices ,GradesAJAX ,subject_ajax ,subject_to_test
 
 #def Learning(request):
     # return HttpResponse("I'm homepage")
 
 
 urlpatterns = [
-    url(r'^grades/$', learning),
-    url(r'^gradeform/$',form_choices),
-    url(r'^grades_ajax/$',GradesAJAX)
+    # url(r'^grades/$', learning),
+    # url(r'^gradeform/$',form_choices),
+    # url(r'^grades_ajax/$',GradesAJAX),
+    path('grades/',learning,name='grades'),
+    path('gradesform/',form_choices),
+    path('grades_ajax/',GradesAJAX),
+    path('grades_subject/',subject_ajax,name='grades_subject'),
+    path('grades/<str:test>/', subject_to_test, name='url_test')
 ]

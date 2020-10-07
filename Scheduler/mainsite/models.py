@@ -56,6 +56,9 @@ class User(AbstractBaseUser):
     def is_staff(self):
         return self.is_admin
     
+    # def get_choices(self,grades_test_option):
+    #     self.grades_test_option = grades_test_option
+
     def set_grades_test_option(self, x):
         self.grades_test_option = json.dumps(x)
 
