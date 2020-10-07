@@ -26,7 +26,7 @@ urlpatterns = [
     # url(r'^grades/$', learning),
     # url(r'^gradeform/$',form_choices),
     # url(r'^grades_ajax/$',GradesAJAX),
-    path('grades/',learning,name='grades'),
+    path('grades/',learning),
     path('gradesform/',form_choices),
     path('grades_ajax/',GradesAJAX),
     path('grades_subject/',subject_ajax,name='grades_subject'),
