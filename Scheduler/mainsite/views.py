@@ -34,7 +34,7 @@ def User_login(request):
             if next_:
                 return redirect(next_)
             else:
-                return redirect("/")
+                return redirect('/today/')
         else:
             print('error')
             err = 'Password is wrong'
