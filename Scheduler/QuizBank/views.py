@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponseRedirect
+from django.core import serializers
 
 from .models import Quiz
 
@@ -72,11 +73,15 @@ def TestPage(request, id, year):
 
 def CheckAnswerAJAX(request, id, year):
 	if request.is_ajax():
+		answers = []
 		id_list = request.GET.getlist('id')
 		print(id_list)
 		quiz = Quiz.objects.filter(id__in = id_list)
-		print(quiz)
-
-
 		
-		return JsonResponse({}, status = 200)
+		for quiz in quiz:
+			for answer in quiz.answer.split(","):
+				answers.append("{id}-{answer}".format(id=quiz.id, answer=answer))
+
+		print(answers)
+
+		return JsonResponse({'answer': answers}, status = 200)
