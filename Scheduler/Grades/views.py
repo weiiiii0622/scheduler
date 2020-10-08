@@ -3,7 +3,7 @@ from datetime import datetime
 from django.shortcuts import render ,redirect
 from .models import Link
 
-
+from django.contrib.auth.decorators import login_required
 
 from .forms import LinkModelForm ,GradesChoicesForm
 from mainsite.models import User
@@ -11,6 +11,7 @@ from django.http import JsonResponse
 import json
 
 
+@login_required
 def form_choices(request):
     context = {}
     current_user = request.user
@@ -20,6 +21,7 @@ def form_choices(request):
     
     return render(request,'Grades/grades.html',context)
 
+@login_required
 def GradesAJAX(request):
 
     if request.is_ajax() and request.method == 'POST':
@@ -35,6 +37,7 @@ def GradesAJAX(request):
     return render(request,'Grades/grades.html')
 
 
+@login_required
 def learning(request):
     roll = Link.objects.all()
     chart_subject = defaultdict(list)
@@ -59,6 +62,7 @@ def learning(request):
         'str_Labels': str_Labels,
     })
 
+@login_required
 def subject_ajax(request):
     if request.is_ajax() and request.method == 'POST':
 	    #test_object = User.get_grades_test_option().values.distinct()
@@ -67,6 +71,6 @@ def subject_ajax(request):
     return render(request,'Grades/grades.html')
 
 
-    
+@login_required 
 def subject_to_test(request):
     return render(request,'Grades/grades.html')
