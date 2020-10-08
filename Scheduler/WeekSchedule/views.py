@@ -67,7 +67,7 @@ def EventAJAX(request):
 		target_user = get_user(request)
 		target_date = datetime.datetime(year, month, date)
 		print(target_date, target_user)
-		targets = Event.objects.filter(user = target_user, start_time__contains = target_date.date())
+		targets = Event.objects.filter(user = target_user, start_time__contains = target_date.date()).order_by('start_time')
 		print(targets[0].start_time)
 		data = {
 			'targets': serializers.serialize("json", targets),
@@ -97,3 +97,10 @@ def UpdateClockStatusAJAX(request):
 		target_event.update(status = status)
 
 		return JsonResponse({}, status = 200)
+
+def EventDeleteAJAX(request):
+	if request.is_ajax():
+		id = request.GET.get('id')
+		target_event = Event.objects.filter(id = id)
+		target_event.delete()
+	return JsonResponse({}, status=200)

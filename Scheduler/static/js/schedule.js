@@ -75,45 +75,45 @@ $('#tomato_clock_button').on('click', function(){
 
 // add event AJAX
 {
-$("form#event_create_form").submit(function(e){
-  e.preventDefault();
+  $("form#event_create_form").submit(function(e){
+    e.preventDefault();
 
-  var subject = $(this)[0][1].value
-  var description = $(this)[0][2].value
-  var start_time = $(this)[0][3].value
-  var clock = Number($(this)[0][4].value)
-  
-  var csrf_token = $('input[name="csrfmiddlewaretoken"]').val()
-  
-  console.log("Start");
+    var subject = $(this)[0][1].value
+    var description = $(this)[0][2].value
+    var start_time = $(this)[0][3].value
+    var clock = Number($(this)[0][4].value)
+    
+    var csrf_token = $('input[name="csrfmiddlewaretoken"]').val()
+    
+    console.log("Start");
 
-  $.ajax({
-    type: 'POST',
-    url: $("form#event_create_form").data('url'),
-    data: {
-      'subject': subject,
-      'description': description,
-      'start_time': start_time,
-      'clock': clock,
-      'csrfmiddlewaretoken': csrf_token,
-    },
-    success: function(response){
-      console.log("Success");
-      $("form#event_create_form")[0].reset();
-      $(".error").empty();
-      $('#create_event_modal').modal('hide')
-    },
-    error: function(response){
-      $('#create_event_modal').modal('show');
+    $.ajax({
+      type: 'POST',
+      url: $("form#event_create_form").data('url'),
+      data: {
+        'subject': subject,
+        'description': description,
+        'start_time': start_time,
+        'clock': clock,
+        'csrfmiddlewaretoken': csrf_token,
+      },
+      success: function(response){
+        console.log("Success");
+        $("form#event_create_form")[0].reset();
+        $(".error").empty();
+        $('#create_event_modal').modal('hide')
+      },
+      error: function(response){
+        $('#create_event_modal').modal('show');
 
-      let error_array = Object.keys(response.responseJSON.errors);
+        let error_array = Object.keys(response.responseJSON.errors);
 
-      error_array.forEach(error => {
-        $(`#${error}_error`).text(response.responseJSON.errors[`${error}`]);
-      });
-      
-      console.log("Failed");
-      }
+        error_array.forEach(error => {
+          $(`#${error}_error`).text(response.responseJSON.errors[`${error}`]);
+        });
+        
+        console.log("Failed");
+      },
     });
   });
 }
@@ -152,26 +152,59 @@ $("form#event_create_form").submit(function(e){
           
         events.forEach(element => {
           $('#event_table').append(`
-          <tr>
+          <tr id="${element.pk}">
             <th>${element.fields.start_time.slice(11,19)}<br>~<br>${element.fields.end_time.slice(11,19)}</th>
             <th>${element.fields.subject}<br>${element.fields.description}</th> 
-            <th>${element.fields.status}</th>
+            <th>
+              ${element.fields.status} 
+              <button id="${element.pk}" type="button" class="close event-delete-button" >
+              <span aria-hidden="true">&times;</span>
+              </button> 
+            </th>
           </tr>
         `);
         });
 
+        // Event Delete
+        $('.close').on('click',function(){
+          var ondeleteEvent = $(this).attr('id');
+          $('#event-delete-modal').modal('show');
+          $("#confirm-delete-button").on('click', function(){
+        
+            $.ajax({
+              type: 'GET',
+              url: $("div#event-delete-modal").data('url'),
+              data: {
+                'id': ondeleteEvent,
+              },
+              success: function(response){
+                console.log("Success");
+                $('tr#'+ondeleteEvent).remove();
+                if($('#event_table').children().length == 1){
+                  $('#event_table').children().remove();
+                };
+                $('#event-delete-modal').modal('hide');
+              },
+              error: function(response){
+                console.log("Failed");
+                }
+            });
+          });
+        });
       },
+
       error: function(response){
         $('#event_table').empty();
         console.log("Failed");
       }
 
     });
-
-
-
   });
 }
+
+
+
+
 
 
 // calendar slider
