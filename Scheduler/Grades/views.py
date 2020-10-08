@@ -61,13 +61,8 @@ def learning(request):
 
 def subject_ajax(request):
     if request.is_ajax() and request.method == 'POST':
-<<<<<<< HEAD
 	    #test_object = User.get_grades_test_option().values.distinct()
         return render(request,'Grades/grades.html')
-=======
-	    # test_object = User.get_grades_test_option().values.distinct()
-         return render(request,'Grades/grades.html')
->>>>>>> 56dc6a573e8d36a5803f08b372e155d07926a452
 
     return render(request,'Grades/grades.html')
 
