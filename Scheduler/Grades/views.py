@@ -7,11 +7,6 @@ from mainsite.models import User
 from django.http import JsonResponse
 import json
 
-class Choice():
-    def __init__(self, username):
-        self.name = username
-        self.choice = {}
-user_choice = []
 
 def form_choices(request):
     context = {}
@@ -19,11 +14,8 @@ def form_choices(request):
     
     options = current_user.get_grades_test_option()
     context['form'] = GradesChoicesForm([(v, v) for v in options])
-    print(context['form'])
     
-    # choice_form = GradesChoicesForm(())
-    
-    return render(request,'Grades/grades_form.html',context)
+    return render(request,'Grades/grades.html',context)
 
 def GradesAJAX(request):
 
@@ -35,21 +27,10 @@ def GradesAJAX(request):
         options.append(test_type)
         current_user.set_grades_test_option(options)
         current_user.save()
-        # username = current_user.account
-
-        # if username not in [user.name for user in user_choice]:
-
-        #     a = Choice(username)
-        #     user_choice.append(a)
-
-        # current_user_name = [user for user in user_choice if user.name == current_user.account]
-        # user_choice[user_choice.index(current_user_name[0])].choice['{}'.format(test_type)] = test_type
-        # user = User.objects.filter(account=current_user)
-        # user.update(grades_test_option=user_choice[user_choice.index(current_user_name[0])].choice)
-        # choice_value = user_choice[user_choice.index(current_user_name[0])].choice[test_type]
-        # print(choice_value)
+        
         return JsonResponse({})
-    return render(request,'Grades/grades_form.html')
+    return render(request,'Grades/grades.html')
+
 
 def learning(request):
     roll = Link.objects.all()
@@ -77,10 +58,10 @@ def learning(request):
 
 def subject_ajax(request):
     if request.is_ajax() and request.method == 'POST':
-	    test_object = User.get_grades_test_option().values.distinct()
-        #return render(request,'Grades/grades.html',test_object)
+	    #test_object = User.get_grades_test_option().values.distinct()
+        return render(request,'Grades/grades.html')
 
-    #return render(request,'Grades/grades.html')
+    return render(request,'Grades/grades.html')
 
 def subject_to_test(request):
     return render(request,'Grades/grades.html')
