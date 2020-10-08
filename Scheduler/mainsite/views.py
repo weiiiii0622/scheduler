@@ -4,18 +4,19 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from django.utils.http import is_safe_url
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
 def homepage(request):
-    return render(request, 'mainsite/home.html')
+    return redirect('weekschedule-today')
 
 def User_register(request):
 	if request.method == 'POST':
 		form = UserRegistrationForm(request.POST)
 		if form.is_valid():
 			form.save()
-			return redirect('mainsite-home')
+			return redirect('mainsite-login')
 
 	else:
 		form = UserRegistrationForm()
@@ -46,6 +47,7 @@ def User_logout(request):
     logout(request)
     return redirect("/login/")
 
+@login_required
 def Grades(request):
     return render(request,"Grades/grades.html")
 

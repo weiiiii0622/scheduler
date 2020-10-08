@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponseRedirect
 from django.core import serializers
+from django.contrib.auth.decorators import login_required
 
 from .models import Quiz
 
@@ -12,16 +13,19 @@ image = ['image1', 'image2', 'image3']
 answer = ['option1', 'option2', 'option3', 'option4', 'option5', 'option6', 'option7', 'option8', 'option9', 'option10', 'option11', 'option12', 'option13' , 'option14', 'option15']
 number = []
 
+@login_required
 def Home(request):
 	subject = Quiz.objects.values('subject').distinct()
 
 	return render(request, 'QuizBank/Quizhome.html', {'subject': subject})
 
+@login_required
 def Subject(request, id):
 	year = Quiz.objects.filter(subject = id).values('year').distinct()
 
 	return render(request, 'QuizBank/Quizsubject.html', {'year': year, 'id': id})
 
+@login_required
 def TestPage(request, id, year):
 
 	if request.is_ajax():
@@ -70,7 +74,7 @@ def TestPage(request, id, year):
 	
 	return render(request, 'QuizBank/Quizexam.html', data)
 
-
+@login_required
 def CheckAnswerAJAX(request, id, year):
 	if request.is_ajax():
 		answers = []
