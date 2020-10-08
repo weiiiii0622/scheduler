@@ -1,0 +1,20 @@
+.subject-container{
+    display:flex;
+    width: max-content;
+    height:max-content;
+    align-items: center;
+    background:none;
+}
+.subject{
+    color:white;
+    text-align: center;
+    margin-top:20px;
+}
+.row-answer{
+    text-align:center ;
+}
+#question{
+    display:flex;
+    margin: 15px;
+    background: none;
+}
