@@ -1,27 +1,33 @@
 {% extends "mainsite/home.html" %}
 {% block content %}
+
+
 <div>
-  <h1>Login</h1>
+  <br>
+  <h2>Studigram</h2>
+  <br>
   <form method="POST" ml-10>
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Log In">
+    <div class="login_infor">{{ form.as_p }}</div>
+    <div style="text-align:center;">
+      <input type="submit" value="Log In">
   </form>
-  <div class="border-top pt-3">
-    <small class="text-muted">
+  <hr>
+  <div style="text-align:center;">
+    <h5 class="text-muted">
       Need an account? <a class="ml-2" href="{% url 'mainsite-register' %}">Sign Up</a>
-    </small>
+    </h5>
   </div>
-  <div>
-    <small class="text-muted">
+  <div style="text-align:center;">
+    <h5 class="text-muted">
       Forget your password? <a class="ml-2" href="{% url 'password_reset' %}">Reset Password</a>
-    </small>
+    </h5>
   </div>
 </div>
 
 {% if err %}
 <script>
-  alert({{ err }})
+  alert("{{ err }}")
 </script>
 {% endif %}
 {% endblock content %}

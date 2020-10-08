@@ -2,6 +2,9 @@ from collections import defaultdict
 from datetime import datetime
 from django.shortcuts import render ,redirect
 from .models import Link
+
+
+
 from .forms import LinkModelForm ,GradesChoicesForm
 from mainsite.models import User
 from django.http import JsonResponse
@@ -58,10 +61,17 @@ def learning(request):
 
 def subject_ajax(request):
     if request.is_ajax() and request.method == 'POST':
+<<<<<<< HEAD
 	    #test_object = User.get_grades_test_option().values.distinct()
         return render(request,'Grades/grades.html')
+=======
+	    # test_object = User.get_grades_test_option().values.distinct()
+         return render(request,'Grades/grades.html')
+>>>>>>> 56dc6a573e8d36a5803f08b372e155d07926a452
 
     return render(request,'Grades/grades.html')
 
+
+    
 def subject_to_test(request):
     return render(request,'Grades/grades.html')

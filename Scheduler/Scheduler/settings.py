@@ -25,7 +25,7 @@ SECRET_KEY = '8(2fj%$-1ixykw4s&h8qhvfwt)dne3cfma=y8u#%44-@synl@a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['172.20.10.3', '127.0.0.1']
+ALLOWED_HOSTS = ['172.20.10.3', '127.0.0.1', 'localhost']
 
 AUTH_USER_MODEL = 'mainsite.User'
 
@@ -117,7 +117,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)

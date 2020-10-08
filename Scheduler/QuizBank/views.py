@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
+from django.core import serializers
 
 from .models import Quiz
 
@@ -17,7 +18,6 @@ def Home(request):
 	return render(request, 'QuizBank/Quizhome.html', {'subject': subject})
 
 def Subject(request, id):
-	print(id)
 	year = Quiz.objects.filter(subject = id).values('year').distinct()
 
 	return render(request, 'QuizBank/Quizsubject.html', {'year': year, 'id': id})
@@ -25,29 +25,24 @@ def Subject(request, id):
 def TestPage(request, id, year):
 
 	if request.is_ajax():
-		number.clear()
 		number.append(request.GET.get('number'))
-		print('Hi',request.GET.get('number'))
-
-		
 		return JsonResponse({}, status = 200)	
-	print(id, year)
-	print(number)
 	
 	random_box = Quiz.objects.filter(subject= id, year= year).values_list('id', flat=True)
-	print(random_box)
 
-	if number[0] == 'all' or int(number[0]) > len(random_box):
-		pass
-	elif number[0] == '10':
-		random_box = random.sample(list(random_box), 10)
-	elif number[0] == '20':
-		random_box = random.sample(list(random_box), 20)
-	elif number[0] == '30':
-		random_box = random.sample(list(random_box), 30)
+	try:
+		if number[0] == 'all' or int(number[0]) > len(random_box):
+			pass
+		elif number[0] == '10':
+			random_box = random.sample(list(random_box), 10)
+		elif number[0] == '20':
+			random_box = random.sample(list(random_box), 20)
+		elif number[0] == '30':
+			random_box = random.sample(list(random_box), 30)
+	except:
+		return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 	quiz = Quiz.objects.filter(id__in = random_box)
-	print(quiz)
 	
 	id_data = []
 	question_data = {}
@@ -55,7 +50,6 @@ def TestPage(request, id, year):
 	option_data = {}
 	
 	for x in quiz:
-		print(x.id)
 
 		id_data.append(x.id)
 		question_fields = [getattr(x, field) for field in question if getattr(x, field) is not None and getattr(x, field) is not '']
@@ -64,10 +58,6 @@ def TestPage(request, id, year):
 		question_data[x.id] = question_fields
 		image_data[x.id] = image_fields
 		option_data[x.id]= option_fields
-	
-	print(question_data)
-	print("______________")
-	print(image_data)
 
 	data = {
 		'id': id_data,
@@ -76,5 +66,22 @@ def TestPage(request, id, year):
 		'option': option_data,
 		'subject': id,
 	}
+	number.clear()
 	
 	return render(request, 'QuizBank/Quizexam.html', data)
+
+
+def CheckAnswerAJAX(request, id, year):
+	if request.is_ajax():
+		answers = []
+		id_list = request.GET.getlist('id')
+		print(id_list)
+		quiz = Quiz.objects.filter(id__in = id_list)
+		
+		for quiz in quiz:
+			for answer in quiz.answer.split(","):
+				answers.append("{id}-{answer}".format(id=quiz.id, answer=answer))
+
+		print(answers)
+
+		return JsonResponse({'answer': answers}, status = 200)

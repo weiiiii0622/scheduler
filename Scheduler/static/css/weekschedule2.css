@@ -1,4 +1,12 @@
 
+body{
+  font-family: "Peddana", serif;
+  font-size: 35px;
+}
+.modal-body{
+  font-size: 20px;
+  margin-right: 2px;
+}
 /* weekschedule */
 #button_div{
   position: absolute;
@@ -12,36 +20,43 @@
   position: relative;
   margin-left: auto;
   margin-right: auto;
+  background: none;
+  border:none;
+  text-decoration: underline;
   /* bottom: 10%; */
 }
+
+#event_submit_button{
+  font-size: 35px;
+  color: rgb(154,161,143);
+  border:none;
+  background: none;
+  text-decoration: underline;
+  }
 
 .flex-container {
   display: flex;
   text-align: center;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  padding: 10px;
+  padding: 20px;
+  margin: 10px;
 }
-
+.swiper-container{
+  background: none;
+}
 .round-button {
   display:block;
   width:50px;
-  height:50px;
   line-height:50px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0);
-  color:#f5f5f5;
+  color:white;
   text-align:center;
   text-decoration:none;
-  box-shadow: 0 0 3px rgb(97, 97, 97);
-  font-size: 15px;
-  font-weight:bold;
+  font-size: 25px;
   margin: 2px;
 }
-.round-button:hover {
-  background: #777555;
-}
+
 
 #weekschedule-swiper {
   width: 100%;
@@ -51,7 +66,9 @@
 #weekschedule-slide {
   text-align: center;
   font-size: 18px;
+  background: none;
   /* background: #fff; */
+
 
   /* Center slide text vertically */
   display: -webkit-box;
@@ -70,38 +87,58 @@
 
 
 
+.overflow-auto{
+  border:2px;
+  margin:20px;
+  display:flex;
+  justify-content: center;
+}
+
 #event_table, th, td {
-  border: 1px solid white;
-  border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
+  font-size: 25px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+#event_table{
+  text-align: center;
 }
 
 th, td {
-  padding: 5px;
+  padding: 15px;
 }
+
 th {
-  text-align: left;
   color: snow;
 }
 
 /* today */
+#tomato_clock_container{
+  display: flex;
+  justify-content: center;
+}
 #tomato_clock_image{
-  width: 100%;
+  width: 80%;
   height: auto;
 }
 #tomato_clock_button_container{
   display: flex;
   justify-content: center;
 }
-#tomato_clock_button:hover {
-  background: #777555;
+#tomato_clock_button {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  background: none;
+  border:none;
+  text-decoration: underline;
+  color:white;
 }
 
 #time {
   color: white;
-  margin-left: 40%;
-  margin-top: 25%;
+  margin-left: 20%;
+  margin-top: 15%;
   position: absolute;
 }
 

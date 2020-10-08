@@ -84,13 +84,9 @@
 <!--body-->
     <body>
 
-<!--jumbotron-->
-        <div class="jumbotron bg-faded">
-            <div class="container">
-                <h1 class="text-center">GRADES</h1>
-            </div>
-        </div>
-
+<!--title-grade
+    <div id="title-grade">GRADES</div>
+-->
 
 
 <!--選科目-->
@@ -98,7 +94,7 @@
             <div class="row">
                 
                 
-                <div class="dropdown col-3">
+                <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="choose-subject" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">subjects</button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(1);">Chinese</a>
@@ -156,7 +152,7 @@
             
     <!--chart-->     
             <div class="row justify-content-center">
-                <div class="box col-9">
+                <div class="chart-container">
                     <canvas id="chart-area" class="zone"></canvas>
                 </div>
             </div>
@@ -164,6 +160,7 @@
     </div>
 
 <!--表格-->
+<<<<<<< HEAD
         <table class="table container">
             <thead>
                 <div class="row">
@@ -186,6 +183,32 @@
                 {%endfor%}
             </tbody>
         </table>
+=======
+        <div class="table-container">
+            <table class="grade-table"border="1"rules="rows" frame="box">
+                <thead class="thead-light">
+                    <div class="row">
+                        <tr>
+                            <th ></th>
+                            <th >Date</th>
+                            <th >Range</th>
+                            <th >Score</th>
+                        </tr>
+                    </div>
+                </thead>
+                <tbody>
+                    {%for l in roll %}
+                        <tr>
+                            <td scope = "row" >{{ forloop.counter0 }}</td>
+                            <td>{{ l.date }}</td>
+                            <td>{{ l.test }}</td>
+                            <td>{{ l.grade }}</td>   
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+>>>>>>> 56dc6a573e8d36a5803f08b372e155d07926a452
     </body>
 
 {% endblock content %}

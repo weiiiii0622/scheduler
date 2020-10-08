@@ -22,14 +22,14 @@
         {% endfor %}
       </div>
 
-      <div class="row", id="answer">
-        <form>
+      <div class="row-answer", id="{{ id }}">
+        <form id="answer_form">
           {% for option in option|get_item:id %}
-            <input type="radio" id="{{ id }}-{{ forloop.counter }}" name="option" action="">
-            <label for="{{ forloop.counter }}">{{option}}</label><br>            
+            <input type="checkbox" id="{{ id }}-{{ forloop.counter }}" name="option" action="">
+            <label for="{{ id }}-{{ forloop.counter }}">{{option}}</label><br>            
           {% endfor %}
           {% if forloop.last is True %}
-            <input type="submit" id="answer_submit_button">
+          <button type="submit" class="btn btn-primary", id="answer_submit_button" data-url="{% url 'quizbank-check' id='check' year='All' %}">Finish!</button>
           {% endif %}
         </form>
       </div>
@@ -41,10 +41,9 @@
   <!-- Add Pagination -->
   <div class="swiper-pagination"></div>
   
-  <!-- Add Arrows -->
+  {% comment %} <!-- Add Arrows -->
   <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-
+  <div class="swiper-button-prev"></div> {% endcomment %}
 </div>
 
 
