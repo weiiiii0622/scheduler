@@ -68,19 +68,25 @@
           $('input[name="option"]:checked').each(function(){
             if (response.answer.includes($(this).attr('id'))){
               console.log("Right!");
-              $('label[for="'+$(this).attr('id')+'"]').css('color','green',);
+              $('label[for="'+$(this).attr('id')+'"]').css('color','lime',);
               response.answer.splice(response.answer.indexOf($(this).attr('id')), 1);
             }
             else{
               console.log("Wrong!");
-              $('label[for="'+$(this).attr('id')+'"]').css('color','red',);
+              $('label[for="'+$(this).attr('id')+'"]').css('color','#F40009',);
             }
           });
           response.answer.forEach(element => {
-            $('label[for="'+element+'"]').css('color','red',);
+            $('label[for="'+element+'"]').css('color','#F40009',);
           });
           
           swiper.slideTo(0);
+          $("#answer_submit_button").off('click');
+          $('#answer_submit_button').text('Quit')
+          $('#answer_submit_button').on('click', function(){
+            window.location.href = '/QuizBank/';
+            return false;
+          });
         },
         error: function(response){
           console.log("Failed");

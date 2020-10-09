@@ -52,9 +52,9 @@ class GradesChoicesForm(forms.Form):
         choices=(), required=True
     )
     新增類型 = forms.CharField(widget=MyWidget())
-    date = forms.CharField(max_length=20,label='日期',initial='2020/05/14')
-    scope = forms.CharField(max_length=20,label='範圍',initial='1~3冊')
-    grade = forms.CharField(max_length=20,label='成績',initial='95')
+    date = forms.CharField(max_length=20,label='日期',widget=forms.TextInput(attrs={'placeholder': 'yyyy/mm/dd'}))
+    scope = forms.CharField(max_length=20,label='範圍',widget=forms.TextInput(attrs={'placeholder': 'Ch.1'}))
+    grade = forms.CharField(max_length=20,label='成績',widget=forms.TextInput(attrs={'placeholder': '100'}))
     widget = {
         'date' : forms.TextInput(attrs={'class': 'form-control', 'style': 'width:50%;'}),
         'scope' : forms.TextInput(attrs={'class': 'form-control', 'style': 'width:50%;'}),

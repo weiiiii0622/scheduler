@@ -74,24 +74,23 @@ function displayGradesOf(subject) {
 <div class="container">
 	<div class="row">
 		
-		
 		<div class="dropdown">
 			<button class="btn btn-secondary dropdown-toggle" type="button" id="choose-subject" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">subjects</button>
 			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-			<a class="dropdown-item" href="{% url 'url_subject' subject=1 %}" onclick="displayGradesOf(1);">Chinese</a>
-			<a class="dropdown-item" href="{% url 'url_subject' subject=2 %}" onclick="displayGradesOf(2);">Math</a>
-			<a class="dropdown-item" href="{% url 'url_subject' subject=3 %}" onclick="displayGradesOf(3);">English</a>
-			<a class="dropdown-item" href="{% url 'url_subject' subject=4 %}" onclick="displayGradesOf(4);">Physics</a>
-			<a class="dropdown-item" href="{% url 'url_subject' subject=5 %}" onclick="displayGradesOf(5);">Chemistry</a>
-			<a class="dropdown-item" href="{% url 'url_subject' subject=6 %}" onclick="displayGradesOf(6);">Biology</a>
-			<a class="dropdown-item" href="{% url 'url_subject' subject=7 %}" onclick="displayGradesOf(7);">Earth Science</a>
-			<a class="dropdown-item" href="{% url 'url_subject' subject=8 %}" onclick="displayGradesOf(8);">Geogrophy</a>
-			<a class="dropdown-item" href="{% url 'url_subject' subject=9 %}" onclick="displayGradesOf(9);">History</a>
-			<a class="dropdown-item" href="{% url 'url_subject' subject=0 %}" onclick="displayGradesOf(0);">Civics</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=1 %}" onclick="displayGradesOf(1);">Chinese</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=2 %}" onclick="displayGradesOf(2);">Math</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=3 %}" onclick="displayGradesOf(3);">English</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=4 %}" onclick="displayGradesOf(4);">Physics</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=5 %}" onclick="displayGradesOf(5);">Chemistry</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=6 %}" onclick="displayGradesOf(6);">Biology</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=7 %}" onclick="displayGradesOf(7);">Earth Science</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=8 %}" onclick="displayGradesOf(8);">Geogrophy</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=9 %}" onclick="displayGradesOf(9);">History</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=0 %}" onclick="displayGradesOf(0);">Civics</a>
 			</div>
 		</div>
 		<div class="col-5"></div>
-		<input type="button" value="Create" data-toggle="modal" data-target="#grades_modal" id="create-button" style="float: right">
+		<input type="button" value="Create" data-toggle="modal" data-target="#grades_modal">
 		<!-- <input type="button" id="" class="btn btn-primary" data-toggle="modal" data-target="#grades_modal">Create</input> -->
 
 		<div class="modal fade" id="grades_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -121,10 +120,12 @@ function displayGradesOf(subject) {
 </div>
 	
 <!--test(範圍)-->
+
+
 <div class="container">
 {% for c in choices %}
 	<div class="subject"> 
-		<a href="{% url 'url_test' subject=subject test=c %}">
+		<a href="{% url 'url_test' sub=sub test=c %}">
 			{{ c }}
 		</a>
 	</div>

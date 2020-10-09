@@ -26,43 +26,38 @@ def GradesAJAX(request):
 
     if request.is_ajax() and request.method == 'POST':
         test_type = request.POST.get('test_type')
-
+        print("Normal")
         current_user = request.user
         options = current_user.get_grades_test_option()
         options.append(test_type)
         current_user.set_grades_test_option(options)
         current_user.save()
         
-        return JsonResponse({})
-    return render(request,'Grades/grades.html')
+        return JsonResponse({},status=200)
+    
+    return JsonResponse({},status=400)
 
 
 @login_required
 def learning(request):
     roll = Link.objects.all()
     chart_subject = defaultdict(list)
-    chart_scope = defaultdict(list)
     Labels = []
     str_Labels = []
     for l in roll:
         chart_subject[l.subject].append(l.grade)
-        chart_scope[l.subject].append(l.scope)
         Labels.append(l.scope)
 
     context = {}
     current_user = request.user
     options = current_user.get_grades_test_option()
-
-    user = User.objects.filter(account=request.user)
     str_Labels = str(Labels)
     current_user = request.user
     choices = current_user.get_grades_test_option()
     return render(request, 'Grades/grades.html',{
         'roll': roll,
         'chart_subject': dict(chart_subject),
-        'user':user,
         'choices':choices,
-        'chart_scope':dict(chart_scope),
         'str_Labels': str_Labels,
         'context':context,
         'form':GradesChoicesForm([(v, v) for v in options]),
@@ -76,28 +71,41 @@ def learning(request):
 
 #     return render(request,'Grades/grades.html')
 
-def grades_to_subject(request,subject):
-    data_subject = Link.objects.filter(subject=subject)
+def grades_to_subject(request,sub):
+    data_subject = Link.objects.filter(subject=sub).values('test').distinct()
+    current_user = request.user
+    choices = current_user.get_grades_test_option()
+    chart_subject = defaultdict(list)
+    roll = Link.objects.all()
+    Labels = []
+    str_Labels = []
+    for l in roll:
+        chart_subject[l.subject].append(l.grade)
+        #chart_scope[l.subject].append(l.scope)
+        Labels.append(l.scope)
+    str_Labels = str(Labels)
+    print(sub)
+
+    return render(request,'Grades/grades_subject.html',{
+        'data_subject':data_subject,
+        'choices':choices,
+        'str_Labels':str_Labels,
+        'sub':sub,
+        'chart_subject':dict(chart_subject),
+        })
+
+@login_required 
+def subject_to_test(request,sub,test):
+    data_test = Link.objects.filter(subject=sub,test=test)
     roll = Link.objects.all()
     chart_subject = defaultdict(list)
     Labels = []
     str_Labels = []
     for l in roll:
         chart_subject[l.subject].append(l.grade)
+        #chart_scope[l.subject].append(l.scope)
         Labels.append(l.scope)
-        
-
-    return render(request,'Grades/grades_subject.html',{
-        'data_subject':data_subject,
-        'roll':roll,
-        'chart_subject':dict(chart_subject),
-        'str_Labels':str_Labels,
-        })
-
-@login_required 
-def subject_to_test(request,subject,test):
-    data_test = Link.objects.filter(subject=subject,test=test)
-    
+    str_Labels = str(Labels)
 
         # for sub in roll:
         #     s = sub.subject
@@ -106,4 +114,31 @@ def subject_to_test(request,subject,test):
         #     bord_dict.setdefault(s, '').append(word)
     return render(request,'Grades/grades_test.html',{
         'data_test':data_test,
+        'str_Labels':str_Labels,
+        'chart_subject':chart_subject,
+        'test':test,
     })
+
+def CreateGradeAJAX(request):
+    if request.is_ajax():
+        print("IminHEre")
+        user = request.user
+        subject = int(request.POST.get('subject'))
+        test = request.POST.get('test')
+        date = request.POST.get('date')
+        scope = request.POST.get('scope')
+        grade = request.POST.get('grade')
+
+        print(user)
+
+        Link.objects.get_or_create(
+            user = user,
+            subject = subject,
+            test = test,
+            scope = scope,
+            grade = grade,
+            date = date
+        )
+
+        return JsonResponse({}, status=200)
+    return JsonResponse({}, status=400)

@@ -19,18 +19,18 @@ class EventForm(ModelForm):
         self.fields['start_time'].input_formats = ('%Y-%m-%dT%H:%M',)
 
     def clean_start_time(self, *args, **kwargs):
-        print('hi')
+        print(self)
         start_time = self.cleaned_data["start_time"]
         clock = int(self.data["clock"])
         minute = clock * 30
         end_time = start_time + datetime.timedelta(minutes = minute)
 
         check_event = Event.objects.filter(start_time__contains = start_time.date())
-
+        print(check_event)
         for event in check_event:
-            event_start_time = event.start_time + datetime.timedelta(hours = 8)
-            event_end_time = event.end_time + datetime.timedelta(hours = 8)
-
+            print('hi')
+            event_start_time = event.start_time
+            event_end_time = event.end_time
             if start_time.time() < event_start_time.time():
                 if end_time.time() > event_start_time.time():
                     print(start_time, event_start_time, event_end_time)
