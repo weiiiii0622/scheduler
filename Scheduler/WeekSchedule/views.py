@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.core import serializers
 from django.contrib.auth import get_user
+from django.contrib.auth.decorators import login_required
 
 from .forms import EventForm
 from .models import Event
@@ -9,7 +10,7 @@ from .models import Event
 import datetime
 
 # Create your views here.
-
+@login_required
 def EventPage(request):
 	form = EventForm()
 
@@ -56,7 +57,8 @@ def EventPage(request):
 			return JsonResponse(data, status = 400)
 
 	return render(request, 'WeekSchedule/weekschedule.html', {'form': form,})
-	
+
+@login_required
 def EventAJAX(request):
 
 	if request.is_ajax() and request.method == 'GET':
@@ -79,6 +81,7 @@ def EventAJAX(request):
 			return JsonResponse(data, status = 200)
 
 
+@login_required
 def TodayPage(request):
 	today = datetime.datetime.now()
 	target_user = get_user(request)
@@ -88,6 +91,7 @@ def TodayPage(request):
 	return render(request, 'WeekSchedule/today.html', {'events': events, })
 
 
+@login_required
 def UpdateClockStatusAJAX(request):
 	if request.is_ajax() and request.method == 'GET':
 		target_event_id = int(request.GET.get('target_event_id'))
@@ -98,6 +102,7 @@ def UpdateClockStatusAJAX(request):
 
 		return JsonResponse({}, status = 200)
 
+@login_required
 def EventDeleteAJAX(request):
 	if request.is_ajax():
 		id = request.GET.get('id')
