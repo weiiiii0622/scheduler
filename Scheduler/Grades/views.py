@@ -26,15 +26,16 @@ def GradesAJAX(request):
 
     if request.is_ajax() and request.method == 'POST':
         test_type = request.POST.get('test_type')
-
+        print("Normal")
         current_user = request.user
         options = current_user.get_grades_test_option()
         options.append(test_type)
         current_user.set_grades_test_option(options)
         current_user.save()
         
-        return JsonResponse({})
-    return render(request,'Grades/grades.html')
+        return JsonResponse({},status=200)
+    
+    return JsonResponse({},status=400)
 
 
 @login_required
@@ -120,15 +121,18 @@ def subject_to_test(request,sub,test):
 
 def CreateGradeAJAX(request):
     if request.is_ajax():
+        print("IminHEre")
+        user = request.user
         subject = int(request.POST.get('subject'))
         test = request.POST.get('test')
         date = request.POST.get('date')
         scope = request.POST.get('scope')
         grade = request.POST.get('grade')
 
-        print(subject, test, date, scope, grade)
+        print(user)
 
         Link.objects.get_or_create(
+            user = user,
             subject = subject,
             test = test,
             scope = scope,
@@ -137,3 +141,4 @@ def CreateGradeAJAX(request):
         )
 
         return JsonResponse({}, status=200)
+    return JsonResponse({}, status=400)

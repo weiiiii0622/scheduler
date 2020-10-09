@@ -63,5 +63,5 @@ class User(AbstractBaseUser):
         self.grades_test_option = json.dumps(x)
 
     def get_grades_test_option(self):
-        return json.loads(self.grades_test_option)
+        return json.loads(self.grades_test_option )
 

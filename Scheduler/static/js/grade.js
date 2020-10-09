@@ -1,41 +1,42 @@
 $('#grades_modal').on('show.bs.modal', function (event) {
 	// $('#create_button').button('toggle')
 });
-
-// 	function prompt_test() {
-// 		var csrf_token = $('input[name="csrfmiddlewaretoken"]').val()
-// 		var test = prompt("考試類型：");
-	
-// 		$.ajax({
-		  
-// 		  type: 'POST',
-// 		  url: '/grades_ajax/',
-// 		  data: {
-// 			'test_type': test,
-// 			'csrfmiddlewaretoken': csrf_token,
-// 		  },
-// 		  success: function(response){
-// 			console.log("Success");
-// 			var select = document.getElementById('id_create_option');
-// 			var option = document.createElement('option');
-  
-// 			// create text node to add to option element (opt)
-// 			option.appendChild(document.createTextNode(test));
-  
-// 			// set value property of opt
-// 			option.value = (test);
-  
-// 			// add opt to end of select box (sel)
-// 			select.appendChild(option); 
-// 			console.log("success");
-			
-// 		  },
-// 		  error: function(response){
-// 			console.log("Failed");
-// 		  }
-// 		});
-// 	  }
-// }
+{
+	function prompt_test() {
+		var csrf_token = $('input[name="csrfmiddlewaretoken"]').val()
+		let test = prompt("考試類型：");
+		
+		if(test){
+			$.ajax({
+				
+				type: 'POST',
+				url: $("form#grade_form").data('url'),
+				data: {
+				'test_type': test,
+				'csrfmiddlewaretoken': csrf_token,
+				},
+				success: function(response){
+				console.log("Success prompt");
+				var select = document.getElementById('id_create_option');
+				var option = document.createElement('option');
+		
+				// create text node to add to option element (opt)
+				option.appendChild(document.createTextNode(test));
+		
+				// set value property of opt
+				option.value = (test);
+		
+				// add opt to end of select box (sel)
+				select.appendChild(option); 
+				
+				},
+				error: function(response){
+				console.log("Failed prompt");
+				}
+			});
+		}
+	}
+}
 
 
 {
@@ -66,11 +67,11 @@ $('#grades_modal').on('show.bs.modal', function (event) {
 				$('#id_date').val("");
 				$('#id_scope').val("");
 				$('#id_grade').val("");
-        		$('#grades_modal').modal('hide')
-				console.log("Success");
+        $('#grades_modal').modal('hide');
+				console.log("Success submit");
 			},
 			error: function(response){
-				console.log("Failed");
+				console.log("Failed submit");
 			}
 			});
 
