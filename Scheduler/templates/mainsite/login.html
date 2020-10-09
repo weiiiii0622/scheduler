@@ -3,12 +3,14 @@
 
 
 <div>
+<div class="name">
   <br>
   <h2>Studigram</h2>
   <br>
+</div>
   <form method="POST" ml-10>
     {% csrf_token %}
-    <div class="login_infor">{{ form.as_p }}</div>
+    <div class="all-infor">{{ form.as_p }}</div>
     <div style="text-align:center;">
       <input type="submit" value="Log In">
   </form>

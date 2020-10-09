@@ -7,23 +7,33 @@ body{
   font-size: 20px;
   margin-right: 2px;
 }
+
+#studigram{
+  font-family: "Fredericka the Great", cursive;
+}
+
+.navbar-brand{
+  font-family: "Fredericka the Great", cursive;
+  margin-right: 5px;
+}
+
 /* weekschedule */
 #button_div{
   position: absolute;
   width: 100%;
   height: 10%;
   text-align: center;
-  bottom: 10%;
 }
-
+.nav-item{
+  font:rgb(154,161,143);
+}
 #add_event_button{
-  position: relative;
+  position: static;
   margin-left: auto;
   margin-right: auto;
   background: none;
   border:none;
   text-decoration: underline;
-  /* bottom: 10%; */
 }
 
 #event_submit_button{
@@ -55,6 +65,9 @@ body{
   text-decoration:none;
   font-size: 25px;
   margin: 2px;
+}
+.round-button:hover{
+  text-decoration: underline;
 }
 
 
@@ -117,6 +130,11 @@ th {
   display: flex;
   justify-content: center;
 }
+#time{
+  width:20%;
+  height:auto;
+  text-align: center;
+}
 #tomato_clock_image{
   width: 80%;
   height: auto;
@@ -136,7 +154,6 @@ th {
 }
 
 #time {
-  color: white;
   margin-left: 20%;
   margin-top: 15%;
   position: absolute;
@@ -147,7 +164,10 @@ th {
   height: 30%;
   position: absolute;
   margin: 5% 13% 50% 13%;
-  background-color: snow;
+  background: white;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-radius: 25px;
 }
 
 .today-slide {
@@ -167,13 +187,14 @@ th {
   align-items: center;
 }
 
-.time{
-  height: 50px;
+.div-time , .div-subject{
   text-align: center;
   padding: 13px;
   font-size: larger;
+  font-family: "Peddana" , serif;
+  color: rgb(154,161,143)
 }
 
-.subject{
-  margin: 12px;
+.swiper-button-next , .swiper-button-prev{
+  color: rgb(154,161,143);
 }

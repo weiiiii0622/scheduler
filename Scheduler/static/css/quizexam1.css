@@ -6,8 +6,9 @@
 .swiper-slide {
   text-align: center;
   font-size: 18px;
+  color:white;
   margin-top: 10px;
-
+  background: none;
 
   /* Center slide text vertically */
   display: -webkit-box;
@@ -34,20 +35,23 @@ img {
   color:white;
   margin:auto;
 }
-.subject-container{
+/* .subject-container{
   display:flex;
   width: max-content;
   height:max-content;
   align-items: center;
   background:none;
-}
-.your_href{
-  color:white;
+  justify-content: center;
+} */
+.subject{
+  margin-top: 30px;
   text-align: center;
-  margin-top:20px;
+  color: white;
+  text-decoration: underline;
 }
 .row-answer{
   text-align:center ;
+  margin-top:30px;
 }
 #question{
   display:flex;
