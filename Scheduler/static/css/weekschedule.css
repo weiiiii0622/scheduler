@@ -136,8 +136,9 @@ th {
   text-align: center;
 } */
 #tomato_clock_image{
-  width: 80%;
+  width: 60%;
   height: auto;
+  margin: 15%;
 }
 #tomato_clock_button_container{
   display: flex;
