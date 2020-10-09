@@ -19,13 +19,15 @@
 //linechart data
 	var linesData = {
 			labels:{{ str_Labels|safe }},
+			backgroundColor:window.chartColors.red,
 			datasets:[
 				{
+				
 					label:'dfdg',
-					fillColor:"rgba(220,220,220,0.5)",
-					strokeColor:"rgba(220,220,220,0.8)",
-					highlightFill:"rgba(220,220,220,0.75)",
-					highlightStroke:"rgba(220,220,220,1)",
+					fillColor:"rgba(220,212,220,0.5)",
+					strokeColor:"rgba(220,220,0,0.8)",
+					highlightFill:"rgba(215,220,220,0.75)",
+					highlightStroke:"rgba(220,200,220,1)",
 					data:grades[0],
 				}
 			],
@@ -91,7 +93,7 @@ function displayGradesOf(subject) {
 			</div>
 		</div>
 		<div class="col-5"></div>
-		<input type="button" value="Create" data-toggle="modal" data-target="#grades_modal">
+		<input type="button" value="Create" data-toggle="modal" data-target="#grades_modal"id="create-button">
 		<!-- <input type="button" id="" class="btn btn-primary" data-toggle="modal" data-target="#grades_modal">Create</input> -->
 
 		<div class="modal fade" id="grades_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
