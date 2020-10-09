@@ -130,11 +130,11 @@ th {
   display: flex;
   justify-content: center;
 }
-#time{
+/* #time{
   width:20%;
   height:auto;
   text-align: center;
-}
+} */
 #tomato_clock_image{
   width: 80%;
   height: auto;
@@ -154,7 +154,7 @@ th {
 }
 
 #time {
-  margin-left: 20%;
+  color:white;
   margin-top: 15%;
   position: absolute;
 }

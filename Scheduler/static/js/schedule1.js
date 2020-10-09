@@ -15,7 +15,7 @@ $('#tomato_clock_button').on('click', function(){
     let rest_sec = resttime % 60;
 
     if(clocktime >= 0){
-      $('#time').text(percent+'%'+'/'+('0'+min).slice(-2)+':'+('0'+sec).slice(-2));
+      $('#time').text(('0'+min).slice(-2)+':'+('0'+sec).slice(-2));
       clocktime--;
       timeleft--;
     }
