@@ -41,10 +41,31 @@
                     }
                 ]
             };
+            var linesData = {
+                labels: [11,22],
+                datasets:[
+                    {
+                        label:{{ str_Labels|safe }},
+                        fillColor:"rgba(120,0,0,0.4)",
+                        strokeColor:"rgba(120,0,0,0.7)",
+                        highlightFill:"rgba(120,0,0,0.9)",
+                        highlightStroke:"rgba(0,0,256,0.5)",
+                        data: [0,1],
+                    }
+                ]
+            };
 
 //canvas
         window.onload = function(){
             var ctx = document.getElementById("chart-area").getContext("2d");
+            linechart = new Chart(ctx, {
+                type: 'line',
+                data:linesData,
+                //animationEasing : "easeOutQuart", 
+            });
+        };
+         window.onload = function(){
+            var ctx = document.getElementById("chart-area2").getContext("2d");
             linechart = new Chart(ctx, {
                 type: 'line',
                 data:linesData,
@@ -110,10 +131,9 @@
                     <a class="dropdown-item" href="{% url 'url_subject' subject=0 %}" onclick="displayGradesOf(0);">Civics</a>
                     </div>
                 </div>
-                <div class="col-5"></div>
-                <input type="button" value="Create" data-toggle="modal" data-target="#grades_modal">
+                <input type="button" value="Create" data-toggle="modal" data-target="#grades_modal" id="create-button">
                 <!-- <a href="{% url 'gradesform' %}">Create</a> -->
-                <input type="button" id="create_button" class="btn btn-primary" data-toggle="modal" data-target="#grades_modal">Create</input>
+                {% comment %} <input type="button" id="create_button" class="btn btn-primary" data-toggle="modal" data-target="#grades_modal">Create</input> {% endcomment %}
 
                 <div class="modal fade" id="grades_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -156,6 +176,11 @@
             <div class="row justify-content-center">
                 <div class="chart-container">
                     <canvas id="chart-area" class="zone"></canvas>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="chart-container">
+                    <canvas id="chart-area2" class="zone"></canvas>
                 </div>
             </div>
         </div>

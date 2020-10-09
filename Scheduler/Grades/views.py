@@ -44,7 +44,6 @@ def learning(request):
     chart_scope = defaultdict(list)
     Labels = []
     str_Labels = []
-    bord_dict={}
     for l in roll:
         chart_subject[l.subject].append(l.grade)
         chart_scope[l.subject].append(l.scope)
@@ -80,10 +79,21 @@ def learning(request):
 
 def grades_to_subject(request,subject):
     data_subject = Link.objects.filter(subject=subject)
-    
+    roll = Link.objects.all()
+    chart_subject = defaultdict(list)
+    Labels = []
+    str_Labels = []
+    for l in roll:
+        chart_subject[l.subject].append(l.grade)
+        Labels.append(l.scope)
         
 
-    return render(request,'Grades/grades_subject.html',{'data_subject':data_subject,})
+    return render(request,'Grades/grades_subject.html',{
+        'data_subject':data_subject,
+        'roll':roll,
+        'chart_subject':dict(chart_subject),
+        'str_Labels':str_Labels,
+        })
 
 @login_required 
 def subject_to_test(request,subject,test):
