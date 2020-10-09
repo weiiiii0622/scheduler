@@ -6,7 +6,7 @@ from .models import Link
 from django.contrib.auth.decorators import login_required
 
 from .forms import LinkModelForm ,GradesChoicesForm
-from mainsite.models import User
+
 from django.http import JsonResponse
 import json
 
@@ -53,11 +53,10 @@ def learning(request):
     options = current_user.get_grades_test_option()
     str_Labels = str(Labels)
     current_user = request.user
-    choices = current_user.get_grades_test_option()
+    #choices = current_user.get_grades_test_option()
     return render(request, 'Grades/grades.html',{
         'roll': roll,
         'chart_subject': dict(chart_subject),
-        'choices':choices,
         'str_Labels': str_Labels,
         'context':context,
         'form':GradesChoicesForm([(v, v) for v in options]),
@@ -72,11 +71,13 @@ def learning(request):
 #     return render(request,'Grades/grades.html')
 
 def grades_to_subject(request,sub):
-    data_subject = Link.objects.filter(subject=sub).values('test').distinct()
+    data_subject = Link.objects.filter(subject=sub)
+    text_link = Link.objects.filter(subject=sub).values_list('test',flat=True).distinct()
     current_user = request.user
-    choices = current_user.get_grades_test_option()
     chart_subject = defaultdict(list)
     roll = Link.objects.all()
+    
+    options = current_user.get_grades_test_option()
     Labels = []
     str_Labels = []
     for l in roll:
@@ -84,19 +85,20 @@ def grades_to_subject(request,sub):
         #chart_scope[l.subject].append(l.scope)
         Labels.append(l.scope)
     str_Labels = str(Labels)
-    print(sub)
-
+    print(text_link)
     return render(request,'Grades/grades_subject.html',{
         'data_subject':data_subject,
-        'choices':choices,
         'str_Labels':str_Labels,
         'sub':sub,
         'chart_subject':dict(chart_subject),
+        'form':GradesChoicesForm([(v, v) for v in options]),
+        'text_link':text_link,
         })
 
 @login_required 
 def subject_to_test(request,sub,test):
     data_test = Link.objects.filter(subject=sub,test=test)
+    
     roll = Link.objects.all()
     chart_subject = defaultdict(list)
     Labels = []
@@ -107,6 +109,8 @@ def subject_to_test(request,sub,test):
         Labels.append(l.scope)
     str_Labels = str(Labels)
 
+    current_user = request.user 
+    options = current_user.get_grades_test_option()
         # for sub in roll:
         #     s = sub.subject
         #     for word in words:
@@ -117,6 +121,7 @@ def subject_to_test(request,sub,test):
         'str_Labels':str_Labels,
         'chart_subject':chart_subject,
         'test':test,
+        'form':GradesChoicesForm([(v, v) for v in options]),
     })
 
 def CreateGradeAJAX(request):

@@ -78,16 +78,16 @@ function displayGradesOf(subject) {
 		<div class="dropdown">
 			<button class="btn btn-secondary dropdown-toggle" type="button" id="choose-subject" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">subjects</button>
 			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-			<a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(1);">Chinese</a>
-			<a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(2);">Math</a>
-			<a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(3);">English</a>
-			<a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(4);">Physics</a>
-			<a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(5);">Chemistry</a>
-			<a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(6);">Biology</a>
-			<a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(7);">Earth Science</a>
-			<a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(8);">Geogrophy</a>
-			<a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(9);">History</a>
-			<a class="dropdown-item" href="javascript:void(0);" onclick="displayGradesOf(0);">Civics</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=1 %}" onclick="displayGradesOf(1);">Chinese</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=2 %}" onclick="displayGradesOf(2);">Math</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=3 %}" onclick="displayGradesOf(3);">English</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=4 %}" onclick="displayGradesOf(4);">Physics</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=5 %}" onclick="displayGradesOf(5);">Chemistry</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=6 %}" onclick="displayGradesOf(6);">Biology</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=7 %}" onclick="displayGradesOf(7);">Earth Science</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=8 %}" onclick="displayGradesOf(8);">Geogrophy</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=9 %}" onclick="displayGradesOf(9);">History</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=0 %}" onclick="displayGradesOf(0);">Civics</a>
 			</div>
 		</div>
 		<div class="col-5"></div>

@@ -26,7 +26,7 @@
 					strokeColor:"rgba(220,220,220,0.8)",
 					highlightFill:"rgba(220,220,220,0.75)",
 					highlightStroke:"rgba(220,220,220,1)",
-					data: grades[0],
+					data: grades[{{ sub }}],
 				}
 			]
 		};
@@ -123,7 +123,7 @@ function displayGradesOf(subject) {
 
 
 <div class="container">
-{% for c in choices %}
+{% for c in test_link %}
 	<div class="subject"> 
 		<a href="{% url 'url_test' sub=sub test=c %}">
 			{{ c }}
