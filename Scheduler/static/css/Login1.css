@@ -1,31 +1,32 @@
-/*#logo{
-    
-    height:auto;
-    width: 200px;
-    display:block;
-    margin-left: auto;
-    margin-right: auto;
-}*/
-.login_infor{
+.all-infor {
     width:100%;
     display: flex;
     flex-wrap: wrap;
     text-align: center;
     color: white;
-    /* position: absolute;
-    top: auto
-    left: 50%;
-    transform: translate(-50%, 0); */
 } 
 
-.login_infor input{
+.all-infor input {
     text-align: center;
+    margin:auto;
 }
 
-h2{
+.name{
     font-family: "Fredericka the Great", cursive;
     color:white;
     text-align: center;
+}
+.reset-password{
+    color: white;
+    text-align: center;
+    width: 90%;
+    margin: auto;
+    word-wrap: normal;
+}
+.reset-password > p{
+    text-align: middle;
+    line-height: 30px;
+    font-size: x-large;
 }
 input[type="submit"]{
     font-family: "Peddana", serif;
@@ -39,5 +40,6 @@ input[type="submit"]{
     font-family: "Peddana", serif;
     text-align:center;
     color: white;
-    
 }
+
+/* password reset */

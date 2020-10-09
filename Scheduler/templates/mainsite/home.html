@@ -12,13 +12,12 @@
   <link rel="stylesheet" href="{% static '/css/weekschedule2.css' %}">
   <link rel="stylesheet" href="{% static '/css/Login2.css' %}">
   <link rel="stylesheet" href="{% static '/css/grades2.css' %}">
-  <link rel="stylesheet" href="{% static '/css/test.css' %}">
   <!--font-->
   <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Peddana&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{% static '/css/quizexam2.css' %}">
+
   <!--<link rel="stylesheet" href="{% static '/css/register.css' %}">-->
   <style>
     body {
@@ -35,7 +34,7 @@
       display: none;
     }
   </style>
-  <title >Scheduler</title>
+  <title>Studigram</title>
 </head>
 <body>
   <div class="backdrop"></div>
@@ -45,12 +44,12 @@
       <button class="navbar-toggler" id="nav-control-button" type="button" data-toggle="offcanvas" data-target="#navbarTogglerMainPage">
         <span class="navbar-toggler-icon"></span>  
       </button>
-    <a class="navbar-brand" href="/today/">Scheduler</a>
+    <a class="navbar-brand" href="/today/"><h4>Studigram</h4></a>
     </header>
       <div class="navmenu navmenu-default navmenu-fixed-left offcanvas" id="navbarTogglerMainPage">
         <ul class="nav navmenu-nav flex-column">
-          <li class="nav-item">
-            <h2 class="nav-link" href="#">Scheduler</h2>
+          <li class="nav-item" id="studigram">
+            <h2 class="nav-link" href="#">Studigram</h2>
           </li>
           {% if user.is_authenticated %}
           <li class="nav-item">

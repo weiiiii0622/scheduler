@@ -2,12 +2,16 @@
 {% block content %}
 
 <div>
+<div class="name">
   <br><br>
   <h2>Studigram</h2>
   <br><br>
+</div>
   <form method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
+    <div class="all-infor">
+      {{ form.as_p }}
+    </div>
     <div style="text-align:center;">
       <input type="submit" value="Sign Up">
     </div>
@@ -15,7 +19,7 @@
 <hr>
   <div style="text-align:center;">
     <h5 class="text-muted">
-      Already have an account? <a class="ml-2" href="{% url 'mainsite-login' %}">Sign In</a>
+      Already have an account? <a class="ml-2" href="{% url 'mainsite-login' %}">Log In</a>
     </h5>
   </div>
 
