@@ -71,7 +71,7 @@ def learning(request):
 #     return render(request,'Grades/grades.html')
 
 def grades_to_subject(request,sub):
-    data_subject = Link.objects.filter(subject=sub)
+    data_subject = Link.objects.filter(subject=sub).values('test').distinct()
     current_user = request.user
     choices = current_user.get_grades_test_option()
     chart_subject = defaultdict(list)
@@ -96,8 +96,15 @@ def grades_to_subject(request,sub):
 @login_required 
 def subject_to_test(request,sub,test):
     data_test = Link.objects.filter(subject=sub,test=test)
-    print(data_test)
-    
+    roll = Link.objects.all()
+    chart_subject = defaultdict(list)
+    Labels = []
+    str_Labels = []
+    for l in roll:
+        chart_subject[l.subject].append(l.grade)
+        #chart_scope[l.subject].append(l.scope)
+        Labels.append(l.scope)
+    str_Labels = str(Labels)
 
         # for sub in roll:
         #     s = sub.subject
@@ -106,6 +113,9 @@ def subject_to_test(request,sub,test):
         #     bord_dict.setdefault(s, '').append(word)
     return render(request,'Grades/grades_test.html',{
         'data_test':data_test,
+        'str_Labels':str_Labels,
+        'chart_subject':chart_subject,
+        'test':test,
     })
 
 def CreateGradeAJAX(request):

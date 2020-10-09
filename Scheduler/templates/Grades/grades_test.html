@@ -15,22 +15,22 @@
 	{% endfor %}
 	
 
-	{}
+	
 //linechart data
 	var linesData = {
 			labels:{{ str_Labels|safe }},
 			datasets:[
 				{
-					label:{{ str_Labels|safe }},
+					label:'dfdg',
 					fillColor:"rgba(220,220,220,0.5)",
 					strokeColor:"rgba(220,220,220,0.8)",
 					highlightFill:"rgba(220,220,220,0.75)",
 					highlightStroke:"rgba(220,220,220,1)",
-					data: grades[0],
+					data:grades[0],
 				}
-			]
+			],
 		};
-
+	console.log('44444');
 //canvas
 	window.onload = function(){
 		var ctx = document.getElementById("chart-area").getContext("2d");
