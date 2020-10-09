@@ -41,29 +41,22 @@ def GradesAJAX(request):
 def learning(request):
     roll = Link.objects.all()
     chart_subject = defaultdict(list)
-    chart_scope = defaultdict(list)
     Labels = []
     str_Labels = []
-    bord_dict={}
     for l in roll:
         chart_subject[l.subject].append(l.grade)
-        chart_scope[l.subject].append(l.scope)
         Labels.append(l.scope)
 
     context = {}
     current_user = request.user
     options = current_user.get_grades_test_option()
-
-    user = User.objects.filter(account=request.user)
     str_Labels = str(Labels)
     current_user = request.user
     choices = current_user.get_grades_test_option()
     return render(request, 'Grades/grades.html',{
         'roll': roll,
         'chart_subject': dict(chart_subject),
-        'user':user,
         'choices':choices,
-        'chart_scope':dict(chart_scope),
         'str_Labels': str_Labels,
         'context':context,
         'form':GradesChoicesForm([(v, v) for v in options]),
@@ -77,16 +70,33 @@ def learning(request):
 
 #     return render(request,'Grades/grades.html')
 
-def grades_to_subject(request,subject):
-    data_subject = Link.objects.filter(subject=subject)
-    
-        
+def grades_to_subject(request,sub):
+    data_subject = Link.objects.filter(subject=sub)
+    current_user = request.user
+    choices = current_user.get_grades_test_option()
+    chart_subject = defaultdict(list)
+    roll = Link.objects.all()
+    Labels = []
+    str_Labels = []
+    for l in roll:
+        chart_subject[l.subject].append(l.grade)
+        #chart_scope[l.subject].append(l.scope)
+        Labels.append(l.scope)
+    str_Labels = str(Labels)
+    print(sub)
 
-    return render(request,'Grades/grades_subject.html',{'data_subject':data_subject,})
+    return render(request,'Grades/grades_subject.html',{
+        'data_subject':data_subject,
+        'choices':choices,
+        'str_Labels':str_Labels,
+        'sub':sub,
+        'chart_subject':dict(chart_subject),
+        })
 
 @login_required 
-def subject_to_test(request,subject,test):
-    data_test = Link.objects.filter(subject=subject,test=test)
+def subject_to_test(request,sub,test):
+    data_test = Link.objects.filter(subject=sub,test=test)
+    print(data_test)
     
 
         # for sub in roll:
@@ -97,3 +107,23 @@ def subject_to_test(request,subject,test):
     return render(request,'Grades/grades_test.html',{
         'data_test':data_test,
     })
+
+def CreateGradeAJAX(request):
+    if request.is_ajax():
+        subject = int(request.POST.get('subject'))
+        test = request.POST.get('test')
+        date = request.POST.get('date')
+        scope = request.POST.get('scope')
+        grade = request.POST.get('grade')
+
+        print(subject, test, date, scope, grade)
+
+        Link.objects.get_or_create(
+            subject = subject,
+            test = test,
+            scope = scope,
+            grade = grade,
+            date = date
+        )
+
+        return JsonResponse({}, status=200)
