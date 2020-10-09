@@ -53,6 +53,7 @@ def learning(request):
     context = {}
     current_user = request.user
     options = current_user.get_grades_test_option()
+    print(options)
 
     user = User.objects.filter(account=request.user)
     str_Labels = str(Labels)
