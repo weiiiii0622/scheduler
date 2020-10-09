@@ -44,11 +44,16 @@ def learning(request):
     chart_scope = defaultdict(list)
     Labels = []
     str_Labels = []
+    bord_dict={}
     for l in roll:
         chart_subject[l.subject].append(l.grade)
         chart_scope[l.subject].append(l.scope)
         Labels.append(l.scope)
-        
+
+    context = {}
+    current_user = request.user
+    options = current_user.get_grades_test_option()
+
     user = User.objects.filter(account=request.user)
     str_Labels = str(Labels)
     current_user = request.user
@@ -58,19 +63,37 @@ def learning(request):
         'chart_subject': dict(chart_subject),
         'user':user,
         'choices':choices,
-        'cjart_scope':dict(chart_scope),
+        'chart_scope':dict(chart_scope),
         'str_Labels': str_Labels,
+        'context':context,
+        'form':GradesChoicesForm([(v, v) for v in options]),
     })
 
 @login_required
-def subject_ajax(request):
-    if request.is_ajax() and request.method == 'POST':
-	    #test_object = User.get_grades_test_option().values.distinct()
-        return render(request,'Grades/grades.html')
+# def subject_ajax(request):
+#     if request.is_ajax() and request.method == 'POST':
+	    
+#         return render(request,'Grades/grades.html')
 
-    return render(request,'Grades/grades.html')
+#     return render(request,'Grades/grades.html')
 
+def grades_to_subject(request,subject):
+    data_subject = Link.objects.filter(subject=subject)
+    
+        
+
+    return render(request,'Grades/grades_subject.html',{'data_subject':data_subject,})
 
 @login_required 
-def subject_to_test(request):
-    return render(request,'Grades/grades.html')
+def subject_to_test(request,subject,test):
+    data_test = Link.objects.filter(subject=subject,test=test)
+    
+
+        # for sub in roll:
+        #     s = sub.subject
+        #     for word in words:
+        #     letter = word[0]
+        #     bord_dict.setdefault(s, '').append(word)
+    return render(request,'Grades/grades_test.html',{
+        'data_test':data_test,
+    })
