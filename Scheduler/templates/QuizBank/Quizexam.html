@@ -22,7 +22,7 @@
         {% endfor %}
       </div>
 
-      <div class="row-answer", id="{{ id }}">
+      <div class="row-answer answer", id="{{ id }}">
         <form id="answer_form">
           {% for option in option|get_item:id %}
             <input type="checkbox" id="{{ id }}-{{ forloop.counter }}" name="option" action="">
@@ -41,9 +41,9 @@
   <!-- Add Pagination -->
   <div class="swiper-pagination"></div>
   
-  {% comment %} <!-- Add Arrows -->
+   <!-- Add Arrows -->
   <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div> {% endcomment %}
+  <div class="swiper-button-prev"></div> 
 </div>
 
 
