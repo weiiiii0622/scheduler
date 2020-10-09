@@ -35,14 +35,7 @@ img {
   color:white;
   margin:auto;
 }
-/* .subject-container{
-  display:flex;
-  width: max-content;
-  height:max-content;
-  align-items: center;
-  background:none;
-  justify-content: center;
-} */
+
 .subject{
   margin-top: 30px;
   text-align: center;
@@ -59,3 +52,6 @@ img {
   background: none;
 }
 
+#arrow1{
+  
+}

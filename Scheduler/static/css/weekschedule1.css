@@ -7,16 +7,15 @@ body{
   font-size: 20px;
   margin-right: 2px;
 }
-
 #studigram{
   font-family: "Fredericka the Great", cursive;
+  font:rgb(154,161,143);
+  margin-top: 20px;
 }
-
 .navbar-brand{
   font-family: "Fredericka the Great", cursive;
   margin-right: 5px;
 }
-
 /* weekschedule */
 #button_div{
   position: absolute;
@@ -115,6 +114,7 @@ body{
 
 #event_table{
   text-align: center;
+  word-wrap: wrap;
 }
 
 th, td {
@@ -130,11 +130,11 @@ th {
   display: flex;
   justify-content: center;
 }
-#time{
+/* #time{
   width:20%;
   height:auto;
   text-align: center;
-}
+} */
 #tomato_clock_image{
   width: 80%;
   height: auto;
@@ -154,7 +154,7 @@ th {
 }
 
 #time {
-  margin-left: 20%;
+  color:white;
   margin-top: 15%;
   position: absolute;
 }
@@ -173,7 +173,6 @@ th {
 .today-slide {
   text-align: center;
   font-size: 18px;
-  background: rgba(209, 209, 209, 0.4);
 
   /* Center slide text vertically */
   
@@ -197,4 +196,8 @@ th {
 
 .swiper-button-next , .swiper-button-prev{
   color: rgb(154,161,143);
+  height: 5px;
+  width: auto;
+  position: absolute;
+
 }

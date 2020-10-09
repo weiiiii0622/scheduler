@@ -70,16 +70,24 @@ def learning(request):
 
 #     return render(request,'Grades/grades.html')
 
+<<<<<<< HEAD
 def grades_to_subject(request,sub):
     data_subject = Link.objects.filter(subject=sub)
     current_user = request.user
     choices = current_user.get_grades_test_option()
     chart_subject = defaultdict(list)
     roll = Link.objects.all()
+=======
+def grades_to_subject(request,subject):
+    data_subject = Link.objects.filter(subject=subject)
+    roll = Link.objects.all()
+    chart_subject = defaultdict(list)
+>>>>>>> 0d6fb3393893fe518b5f68a3e30b04eca5a1cf10
     Labels = []
     str_Labels = []
     for l in roll:
         chart_subject[l.subject].append(l.grade)
+<<<<<<< HEAD
         #chart_scope[l.subject].append(l.scope)
         Labels.append(l.scope)
     str_Labels = str(Labels)
@@ -91,6 +99,16 @@ def grades_to_subject(request,sub):
         'str_Labels':str_Labels,
         'sub':sub,
         'chart_subject':dict(chart_subject),
+=======
+        Labels.append(l.scope)
+        
+
+    return render(request,'Grades/grades_subject.html',{
+        'data_subject':data_subject,
+        'roll':roll,
+        'chart_subject':dict(chart_subject),
+        'str_Labels':str_Labels,
+>>>>>>> 0d6fb3393893fe518b5f68a3e30b04eca5a1cf10
         })
 
 @login_required 

@@ -18,7 +18,7 @@
   <div class="swiper-container" id="today-swiper">
     <div class="swiper-wrapper">
       {% for event in events %}
-      <div class="swiper-slide today-slide" id="{{ event.id }}">
+      <div class="swiper-slide today-slide" id="{{ event.id }}" >
         <div class="div-time">
           <h2>{{ event.start_time|time:"H:i" }} ~ {{ event.end_time|time:"H:i" }}</h2>
         </div>
