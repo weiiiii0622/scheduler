@@ -145,7 +145,7 @@
                           </button>
                         </div>
                         <div class="modal-body">
-                          <form id="grade_form" data-url="{% url 'choices_ajax'%}">
+                          <form id="grade_form" onsubmit="return false;">
                             {% csrf_token %}
                             {{ form.as_p }}
                           </form>
