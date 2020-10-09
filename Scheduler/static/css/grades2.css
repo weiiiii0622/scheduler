@@ -28,8 +28,8 @@
 }
 #chart-area{
   width:100%;
-  HEIGHT:auto;
-  margin:30%;
+  height:auto;
+  margin-left:30%;
   color:white;
 }
 #create-button{
@@ -38,16 +38,22 @@
   color: rgb(154,161,143);
   background-color:white;
   border:none;
-  text-align: center;
-  margin-left: 20px;
+  border-radius: 7%;
+  position: absolute;
+  right:4.7%;
+  height:6.3%;
+  width:auto;
+  padding-top: 1.5%;
+  margin-top:10px;
 }
 #choose-subject{
-  color: rgb(97, 104, 85);
+  color: rgb(154,161,143);
   font-size:30px;
-  background: white;
+  line-height: 30px;
+  background-color: white;
   border: none;
-  margin-left:10%;
   margin-top: 10px;
+  margin-left: 15%;
 }
 .dropdown-item{
   font-size: 25px;
