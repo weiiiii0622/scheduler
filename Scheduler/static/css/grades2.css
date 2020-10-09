@@ -39,11 +39,10 @@
   background-color:white;
   border:none;
   text-align: center;
-  margin-left: auto;
-  
+  margin-left: 20px;
 }
 #choose-subject{
-  color: rgb(154,161,143);
+  color: rgb(97, 104, 85);
   font-size:30px;
   background: white;
   border: none;

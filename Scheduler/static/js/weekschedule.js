@@ -1,6 +1,7 @@
 // tomato clock
 {
 $('#tomato_clock_button').on('click', function(){
+  $(this).css('visibility', 'hidden');
   TodayEventswiper.slideTo(0);
   let tomato_clock = setInterval(TomatoClock,1000);
   let timeleft = 20+1+1;
@@ -42,6 +43,7 @@ $('#tomato_clock_button').on('click', function(){
     }
     else if (timeleft < 0) {
       clearInterval(tomato_clock);
+      $('#tomato_clock_button').css('visibility', 'visible');
       $('#time').empty();
       // window.confirm("Take A Break!");
 

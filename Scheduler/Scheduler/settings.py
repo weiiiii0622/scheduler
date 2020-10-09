@@ -25,7 +25,7 @@ SECRET_KEY = '8(2fj%$-1ixykw4s&h8qhvfwt)dne3cfma=y8u#%44-@synl@a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['172.20.10.3', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['192.168.43.218', '172.20.10.3', '127.0.0.1', 'localhost']
 
 AUTH_USER_MODEL = 'mainsite.User'
 
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -143,4 +144,6 @@ EMAIL_HOST_USER = 'django.innoserve@gmail.com'
 EMAIL_HOST_PASSWORD = 'admin12345admin'
 
 
-
+SESSION_EXPIRE_SECONDS = 172800
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
+SESSION_TIMEOUT_REDIRECT = 'mainsite-login'
