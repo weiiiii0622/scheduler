@@ -35,12 +35,19 @@ img {
   color:white;
   margin:auto;
 }
-
-.subject{
-  margin-top: 30px;
+.quiz-choose{
+  font-size: 50px;
+  margin-top: 10px;
+  margin-bottom: 40px;
   text-align: center;
   color: white;
   text-decoration: underline;
+}
+.subject{
+  font-size: 30px;
+  margin-top: 10px;
+  text-align: center;
+  color: white;
 }
 .row-answer{
   text-align:center ;
