@@ -82,3 +82,48 @@ $('#grades_modal').on('show.bs.modal', function (event) {
 
 
 }
+{
+	// events.forEach(element => {
+	// 	$('#grades_table').append(`
+	// 	<tr id="${element.pk}">
+	// 	  <th>${element.fields.start_time.slice(11,19)}<br>~<br>${element.fields.end_time.slice(11,19)}</th>
+	// 	  <th>${element.fields.subject}<br>${element.fields.description}</th> 
+	// 	  <th>
+	// 		${element.fields.status} 
+	// 		<button id="${element.pk}" type="button" class="close event-delete-button" >
+	// 		<span aria-hidden="true">&times;</span>
+	// 		</button> 
+	// 	  </th>
+	// 	</tr>
+	//   `);
+	//   });
+
+	  // Event Delete
+	  $('.close').on('click',function(){
+		var id = ${element.pk};
+		var ondeleteEvent = $(this).attr('id');
+		$('#event-delete-modal').modal('show');
+		$("#confirm-delete-button").on('click', function(){
+	  
+		  $.ajax({
+			type: 'POST',
+			url: $("div#event-delete-modal").data('url'),
+			data: {
+			  'id': ondeleteEvent,
+			},
+			success: function(response){
+			  console.log("Success");
+			  $('tr#'+ondeleteEvent).remove();
+			  if($('#grades_table').children().length == 1){
+				$('#grades_table').children().remove();
+			  };
+			  $('#event-delete-modal').modal('hide');
+			},
+			error: function(response){
+			  console.log("Failed");
+			  }
+		  });
+		});
+	  });
+	},
+}
