@@ -77,7 +77,7 @@
             }
           });
           response.answer.forEach(element => {
-            $('label[for="'+element+'"]').css('color','#F40009',);
+            $('label[for="'+element+'"]').css('color','lime',);
           });
           
           swiper.slideTo(0);

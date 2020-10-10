@@ -17,7 +17,7 @@ def is_integer(target):
 @register.filter
 def turn_integer(target):
     try:
-        x = int(target)
+        x = int(float(target))
         return x
     except:
         return False
