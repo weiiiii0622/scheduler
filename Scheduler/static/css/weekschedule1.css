@@ -24,7 +24,7 @@ body{
   text-align: center;
 }
 .nav-item{
-  font:rgb(154,161,143);
+  color:rgb(154,161,143);
 }
 #add_event_button{
   position: static;
@@ -156,7 +156,7 @@ th {
 
 #time {
   color:white;
-  margin-top: 15%;
+  margin-top: 3%;
   position: absolute;
 }
 
