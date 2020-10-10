@@ -13,3 +13,11 @@ def is_integer(target):
         return True
     except:
         return False
+
+@register.filter
+def turn_integer(target):
+    try:
+        x = int(target)
+        return x
+    except:
+        return False
