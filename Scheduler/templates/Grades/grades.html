@@ -105,17 +105,7 @@
             </div>
         </div>
             
-<!--test(範圍)-->
-    <div class="container">
-        <!-- {% for c in choices %}
-            <div class="subject"> 
-                <a href="{#% url 'url_test' test=c %}">
-                    {{ c }}
-                </a>
-            </div>
-            {% endfor %} -->
-        
-    </div>
+
 
 <!--表格-->
         <div class="table-container">
@@ -123,7 +113,6 @@
                 <thead class="thead-light">
                     <div class="row">
                         <tr>
-                            <th ></th>
                             <th >Date</th>
                             <th >Range</th>
                             <th >Score</th>
@@ -133,7 +122,6 @@
                 <tbody>
                     {%for l in roll %}
                         <tr id="link_{{ l.id }}">
-                            <td scope = "row" >{{ forloop.counter0 }}</td>
                             <td>{{ l.date }}</td>
                             <td>{{ l.scope }}</td>
                             <td>{{ l.grade }} <button id="{{ a.id }}" type="button" class="close event-delete-button" ><span aria-hidden="true">&times;</span></button></td></td>   
