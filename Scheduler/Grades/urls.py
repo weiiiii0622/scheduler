@@ -16,8 +16,7 @@ from django.conf.urls import include, url
 from django.urls import path
 from django.contrib import admin
 from django.http import HttpResponse
-from .views import learning ,form_choices ,GradesAJAX ,grades_to_subject ,subject_to_test, CreateGradeAJAX ,EventDeleteAJAX
-
+from .views import learning ,form_choices ,GradesAJAX ,grades_to_subject ,subject_to_test, CreateGradeAJAX ,EventDeleteAJAX 
 #def Learning(request):
     # return HttpResponse("I'm homepage")
 

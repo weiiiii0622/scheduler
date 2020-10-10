@@ -21,6 +21,7 @@ def form_choices(request):
     
     return render(request,'Grades/grades.html',context)
 
+
 @login_required
 def GradesAJAX(request):
 
@@ -41,23 +42,15 @@ def GradesAJAX(request):
 @login_required
 def learning(request):
     roll = Link.objects.all()
-    chart_subject = defaultdict(list)
-    Labels = []
-    str_Labels = []
-    for l in roll:
-        chart_subject[l.subject].append(l.grade)
-        Labels.append(l.scope)
 
     context = {}
     current_user = request.user
     options = current_user.get_grades_test_option()
-    str_Labels = str(Labels)
+
     current_user = request.user
     #choices = current_user.get_grades_test_option()
     return render(request, 'Grades/grades.html',{
         'roll': roll,
-        'chart_subject': dict(chart_subject),
-        'str_Labels': str_Labels,
         'context':context,
         'form':GradesChoicesForm([(v, v) for v in options]),
     })
@@ -74,22 +67,12 @@ def grades_to_subject(request,sub):
     data_subject = Link.objects.filter(subject=sub)
     test_link = Link.objects.filter(subject=sub).values_list('test',flat=True).distinct()
     current_user = request.user
-    chart_subject = defaultdict(list)
-    roll = Link.objects.all()
     
     options = current_user.get_grades_test_option()
-    Labels = []
-    str_Labels = []
-    for l in roll:
-        chart_subject[l.subject].append(l.grade)
-        #chart_scope[l.subject].append(l.scope)
-        Labels.append(l.scope)
-    str_Labels = str(Labels)
+
     return render(request,'Grades/grades_subject.html',{
         'data_subject':data_subject,
-        'str_Labels':str_Labels,
         'sub':sub,
-        'chart_subject':dict(chart_subject),
         'form':GradesChoicesForm([(v, v) for v in options]),
         'test_link':test_link,
         })
@@ -99,15 +82,6 @@ def subject_to_test(request,sub,test):
     data_test = Link.objects.filter(subject=sub,test=test)
     chart_labels = list(Link.objects.filter(subject=sub,test=test).values_list('scope',flat=True))
     chart_datas =list (Link.objects.filter(subject=sub,test=test).values_list('grade',flat=True))
-    roll = Link.objects.all()
-    chart_subject = defaultdict(list)
-    Labels = []
-    str_Labels = []
-    for l in roll:
-        chart_subject[l.subject].append(l.grade)
-        #chart_scope[l.subject].append(l.scope)
-        Labels.append(l.scope)
-    str_Labels = str(Labels)
 
     str_test = str(test)
     print(str_test)
@@ -121,8 +95,6 @@ def subject_to_test(request,sub,test):
         #     bord_dict.setdefault(s, '').append(word)
     return render(request,'Grades/grades_test.html',{
         'data_test':data_test,
-        'str_Labels':str_Labels,
-        'chart_subject':chart_subject,
         'test':test,
         'form':GradesChoicesForm([(v, v) for v in options]),
         'chart_labels':chart_labels,
@@ -157,9 +129,9 @@ def CreateGradeAJAX(request):
 @login_required
 def EventDeleteAJAX(request):
     if request.is_ajax():
-        id = request.GET.get('id')
+        id = request.POST.get('id')
         print(id)
-        target_event = Link.objects.filter(id = id)
+        target_event = Link.objects.get(id = id)
         print(target_event)
         target_event.delete()
     return JsonResponse({}, status=200)
