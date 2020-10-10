@@ -19,11 +19,10 @@
 //linechart data
 	var linesData = {
 			labels:{{ chart_labels|safe }},
-			backgroundColor:window.chartColors.red,
 			datasets:[
 				{
 				
-					label:{{ str_test|safe }},
+					label:'{{ str_test|safe }}',
 					fillColor:"rgba(220,212,220,0.5)",
 					strokeColor:"rgba(220,220,0,0.8)",
 					highlightFill:"rgba(215,220,220,0.75)",
@@ -32,7 +31,6 @@
 				}
 			],
 		};
-	console.log('44444');
 //canvas
 	window.onload = function(){
 		var ctx = document.getElementById("chart-area").getContext("2d");
@@ -122,22 +120,20 @@ function displayGradesOf(subject) {
 </div>
 	
 <!--test(範圍)-->
-<div class="container">
+<!-- <div class="container">
 {% for c in choices %}
 	<div class="subject"> 
 		<div>{{ c }}</div>
 	</div>
-	{% endfor %}
-<div class="row">
+	{% endfor %} -->
+
 	
 <!--chart-->     
-	<div class="row justify-content-center">
-		<div class="chart-container">
-			<canvas id="chart-area" class="zone"></canvas>
-		</div>
+	<div class="chart-container">
+		<canvas id="chart-area" class="zone"></canvas>
 	</div>
-</div>
-</div>
+	
+
 
 <!--表格-->
 <div class="table-container">
@@ -164,6 +160,7 @@ function displayGradesOf(subject) {
 		</tbody>
 	</table>
 </div>
+{% csrf_token %}
 <div class="modal fade" id="event-delete-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true" data-url="{% url 'url_deleteajax' %}">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">

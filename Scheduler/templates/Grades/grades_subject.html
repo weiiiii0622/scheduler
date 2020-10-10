@@ -2,45 +2,9 @@
 {% block content %}
 
 <script>
-	var grades = {};
-	var scopes = {};
-	var linechart;
 	
-	
-	{% for s1, g in chart_subject.items %}
-	grades[{{ s1 }}] = {{ g|safe }}
-	{% endfor %}
-	{% for s2, t in chart_test.items %}
-	tests[{{ s2}}] = {{ t|safe }}
-	{% endfor %}
-	
-
-	{}
 //linechart data
-	var linesData = {
-			labels:{{ str_Labels|safe }},
-			datasets:[
-				{
-					label:{{ str_Labels|safe }},
-					fillColor:"rgba(220,220,220,0.5)",
-					strokeColor:"rgba(220,220,220,0.8)",
-					highlightFill:"rgba(220,220,220,0.75)",
-					highlightStroke:"rgba(220,220,220,1)",
-					data: grades[{{ sub }}],
-				}
-			]
-		};
-
-//canvas
-	window.onload = function(){
-		var ctx = document.getElementById("chart-area").getContext("2d");
-		linechart = new Chart(ctx, {
-			type: 'line',
-			data:linesData,
-			//animationEasing : "easeOutQuart", 
-		});
-	};
-
+	
 //chart functions
 function displayGradesOf(subject) {
             linechart.data.datasets[0].data = grades[subject];
@@ -129,15 +93,7 @@ function displayGradesOf(subject) {
 			</a>
 		</div>
 		{% endfor %}
-		<div class="row">
 		
-	<!--chart-->     
-			<div class="row justify-content-center">
-				<div class="chart-container">
-					<canvas id="chart-area" class="zone"></canvas>
-				</div>
-			</div>
-		</div>
 	
 
 <!--表格-->
