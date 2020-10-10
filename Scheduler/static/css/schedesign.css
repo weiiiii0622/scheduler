@@ -192,10 +192,12 @@ th {
 
 .div-time , .div-subject{
   text-align: center;
-  padding: 13px;
   font-size: larger;
   font-family: "Peddana" , serif;
   color: rgb(154,161,143)
+}
+.div-subject{
+  margin-bottom: 20px;
 }
 
 .swiper-button-next , .swiper-button-prev{
