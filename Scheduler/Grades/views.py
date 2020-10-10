@@ -6,7 +6,7 @@ from .models import Link
 from django.contrib.auth.decorators import login_required
 
 from .forms import LinkModelForm ,GradesChoicesForm
-
+from mainsite.models import User
 from django.http import JsonResponse
 import json
 
@@ -72,7 +72,7 @@ def learning(request):
 
 def grades_to_subject(request,sub):
     data_subject = Link.objects.filter(subject=sub)
-    text_link = Link.objects.filter(subject=sub).values_list('test',flat=True).distinct()
+    test_link = Link.objects.filter(subject=sub).values_list('test',flat=True).distinct()
     current_user = request.user
     chart_subject = defaultdict(list)
     roll = Link.objects.all()
@@ -85,20 +85,20 @@ def grades_to_subject(request,sub):
         #chart_scope[l.subject].append(l.scope)
         Labels.append(l.scope)
     str_Labels = str(Labels)
-    print(text_link)
     return render(request,'Grades/grades_subject.html',{
         'data_subject':data_subject,
         'str_Labels':str_Labels,
         'sub':sub,
         'chart_subject':dict(chart_subject),
         'form':GradesChoicesForm([(v, v) for v in options]),
-        'text_link':text_link,
+        'test_link':test_link,
         })
 
 @login_required 
 def subject_to_test(request,sub,test):
     data_test = Link.objects.filter(subject=sub,test=test)
-    
+    chart_labels = list(Link.objects.filter(subject=sub,test=test).values_list('scope',flat=True))
+    chart_datas =list (Link.objects.filter(subject=sub,test=test).values_list('grade',flat=True))
     roll = Link.objects.all()
     chart_subject = defaultdict(list)
     Labels = []
@@ -108,6 +108,9 @@ def subject_to_test(request,sub,test):
         #chart_scope[l.subject].append(l.scope)
         Labels.append(l.scope)
     str_Labels = str(Labels)
+
+    str_test = str(test)
+    print(str_test)
 
     current_user = request.user 
     options = current_user.get_grades_test_option()
@@ -122,6 +125,9 @@ def subject_to_test(request,sub,test):
         'chart_subject':chart_subject,
         'test':test,
         'form':GradesChoicesForm([(v, v) for v in options]),
+        'chart_labels':chart_labels,
+        'chart_datas':chart_datas,
+        'str_test':str_test,
     })
 
 def CreateGradeAJAX(request):
@@ -147,3 +153,11 @@ def CreateGradeAJAX(request):
 
         return JsonResponse({}, status=200)
     return JsonResponse({}, status=400)
+
+@login_required
+def EventDeleteAJAX(request):
+	if request.is_ajax():
+		id = request.GET.get('id')
+		target_event = Link.objects.filter(id = id)
+		target_event.delete()
+	return JsonResponse({}, status=200)

@@ -73,7 +73,6 @@ function displayGradesOf(subject) {
 
 <div class="container">
 	<div class="row">
-		
 		<div class="dropdown">
 			<button class="btn btn-secondary dropdown-toggle" type="button" id="choose-subject" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">subjects</button>
 			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -122,24 +121,25 @@ function displayGradesOf(subject) {
 <!--test(範圍)-->
 
 
-<div class="container">
-{% for c in test_link %}
-	<div class="subject"> 
-		<a href="{% url 'url_test' sub=sub test=c %}">
-			{{ c }}
+		{% for c in test_link %}
+		
 		</a>
-	</div>
-	{% endfor %}
-<div class="row">
-	
-<!--chart-->     
-	<div class="row justify-content-center">
-		<div class="chart-container">
-			<canvas id="chart-area" class="zone"></canvas>
+		<div class="subject"> 
+			<a href="{% url 'url_test' sub=sub test=c %}">
+				{{ c }}
+			</a>
 		</div>
-	</div>
-</div>
-</div>
+		{% endfor %}
+		<div class="row">
+		
+	<!--chart-->     
+			<div class="row justify-content-center">
+				<div class="chart-container">
+					<canvas id="chart-area" class="zone"></canvas>
+				</div>
+			</div>
+		</div>
+	
 
 <!--表格-->
 <div class="table-container">
