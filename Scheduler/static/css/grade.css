@@ -9,9 +9,11 @@
 
 .grade-table{
   font-size: 25px;
+  width:90%;
   text-align: center;
   border-color: white;
   margin-left: 8%;
+  margin-top:10px;
 }
 .chart-container{
   display:flex;
@@ -45,7 +47,12 @@
   background-color: white;
   border: none;
   margin-top: 10px;
+}
+#choose-subject{
   margin-left: 15%;
+}
+#choose-test{
+  margin-right: 80px;
 }
 .dropdown-item{
   font-size: 25px;
