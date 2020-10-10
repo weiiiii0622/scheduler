@@ -14,65 +14,9 @@
 
 <!--chart-->
     <script>
-        var grades = {};
-        var scopes = {};
-        var linechart;
-        
-        
-        {% for s1, g in chart_subject.items %}
-        grades[{{ s1 }}] = {{ g|safe }}
-        {% endfor %}
-        {% for s2, t in chart_test.items %}
-        tests[{{ s2}}] = {{ t|safe }}
-        {% endfor %}
-        
 
-//linechart data
-        var linesData = {
-                labels:{{ str_Labels|safe }},
-                datasets:[
-                    {
-                        label:{{ str_Labels|safe }},
-                        fillColor:"rgba(256,256,256,0.5)",
-                        strokeColor:"rgba(256,256,256,0.8)",
-                        highlightFill:"rgba(256,256,256,0.75)",
-                        highlightStroke:"rgba(256,256,256,1)",
-                        data: grades[0],
-                    }
-                ]
-            };
-            var linesData = {
-                labels: [11,22],
-                datasets:[
-                    {
-                        label:{{ str_Labels|safe }},
-                        fillColor:"rgba(120,0,0,0.4)",
-                        strokeColor:"rgba(120,0,0,0.7)",
-                        highlightFill:"rgba(120,0,0,0.9)",
-                        highlightStroke:"rgba(0,0,256,0.5)",
-                        data: [0,1],
-                    }
-                ]
-            };
 
-//canvas
-        window.onload = function(){
-            var ctx = document.getElementById("chart-area").getContext("2d");
-            linechart = new Chart(ctx, {
-                type: 'line',
-                data:linesData,
-                //animationEasing : "easeOutQuart", 
-            });
-        };
-         window.onload = function(){
-            var ctx = document.getElementById("chart-area2").getContext("2d");
-            linechart = new Chart(ctx, {
-                type: 'line',
-                data:linesData,
-                //animationEasing : "easeOutQuart", 
-            });
-        };
-
+        
 //chart functions
         function displayGradesOf(subject) {
             linechart.data.datasets[0].data = grades[subject];
@@ -170,20 +114,7 @@
                 </a>
             </div>
             {% endfor %} -->
-        <div class="row">
-            
-    <!--chart-->     
-            <div class="row justify-content-center">
-                <div class="chart-container">
-                    <canvas id="chart-area" class="zone"></canvas>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="chart-container">
-                    <canvas id="chart-area2" class="zone"></canvas>
-                </div>
-            </div>
-        </div>
+        
     </div>
 
 <!--表格-->

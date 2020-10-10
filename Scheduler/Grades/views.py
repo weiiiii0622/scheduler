@@ -156,8 +156,10 @@ def CreateGradeAJAX(request):
 
 @login_required
 def EventDeleteAJAX(request):
-	if request.is_ajax():
-		id = request.GET.get('id')
-		target_event = Link.objects.filter(id = id)
-		target_event.delete()
-	return JsonResponse({}, status=200)
+    if request.is_ajax():
+        id = request.GET.get('id')
+        print(id)
+        target_event = Link.objects.filter(id = id)
+        print(target_event)
+        target_event.delete()
+    return JsonResponse({}, status=200)
