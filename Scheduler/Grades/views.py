@@ -82,7 +82,7 @@ def subject_to_test(request,sub,test):
     data_test = Link.objects.filter(subject=sub,test=test)
     chart_labels = list(Link.objects.filter(subject=sub,test=test).values_list('scope',flat=True))
     chart_datas =list (Link.objects.filter(subject=sub,test=test).values_list('grade',flat=True))
-
+    test_link = Link.objects.filter(subject=sub).values_list('test',flat=True).distinct()
     str_test = str(test)
     print(str_test)
 
@@ -95,11 +95,13 @@ def subject_to_test(request,sub,test):
         #     bord_dict.setdefault(s, '').append(word)
     return render(request,'Grades/grades_test.html',{
         'data_test':data_test,
+        'sub':sub,
         'test':test,
         'form':GradesChoicesForm([(v, v) for v in options]),
         'chart_labels':chart_labels,
         'chart_datas':chart_datas,
         'str_test':str_test,
+        'test_link':test_link,
     })
 
 def CreateGradeAJAX(request):

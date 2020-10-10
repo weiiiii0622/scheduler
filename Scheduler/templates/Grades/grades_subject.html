@@ -55,6 +55,18 @@ function displayGradesOf(subject) {
 		<input type="button" value="Create" data-toggle="modal" data-target="#grades_modal" id="create-button">
 		<!-- <input type="button" id="" class="btn btn-primary" data-toggle="modal" data-target="#grades_modal">Create</input> -->
 
+<!--test button-->
+		<div class="col-2"></div>
+		<div class="dropdown">
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="choose-test" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">type</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownmenubutton">
+				{% for c in test_link %}
+				<a class="dropdown-item" href="{% url 'url_test' sub=sub test=c %}">{{ c }}</a>
+				{% endfor %}
+			</div>
+		</div>
+
+
 		<div class="modal fade" id="grades_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 			  <div class="modal-content">
@@ -84,7 +96,7 @@ function displayGradesOf(subject) {
 <!--test(範圍)-->
 
 
-		{% for c in test_link %}
+		<!-- {% for c in test_link %}
 		
 		</a>
 		<div class="subject" id="choose-test"> 
@@ -92,7 +104,7 @@ function displayGradesOf(subject) {
 				{{ c }}
 			</a>
 		</div>
-		{% endfor %}
+		{% endfor %} -->
 		
 	
 

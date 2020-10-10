@@ -40,14 +40,19 @@
   padding-top: 1.5%;
   margin-top:10px;
 }
-#choose-subject{
+#choose-subject, #choose-test{
   color: rgb(154,161,143);
   font-size:30px;
   line-height: 30px;
   background-color: white;
   border: none;
   margin-top: 10px;
+}
+#choose-subject{
   margin-left: 15%;
+}
+#choose-test{
+  margin-right: 80px;
 }
 .dropdown-item{
   font-size: 25px;
