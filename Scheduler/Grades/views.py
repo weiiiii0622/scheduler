@@ -84,7 +84,6 @@ def subject_to_test(request,sub,test):
     chart_datas =list (Link.objects.filter(subject=sub,test=test).values_list('grade',flat=True))
     test_link = Link.objects.filter(subject=sub).values_list('test',flat=True).distinct()
     str_test = str(test)
-    print(str_test)
 
     current_user = request.user 
     options = current_user.get_grades_test_option()

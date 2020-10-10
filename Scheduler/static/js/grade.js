@@ -43,14 +43,23 @@ $('#grades_modal').on('show.bs.modal', function (event) {
 	$('#create_grade_button').on('click', function(){
 
 		
-		console.log("HIII");
+		// console.log("HIII");
 		let subject = $('#id_grades_subject')[0].value
 		let test = $('#id_create_option')[0].value
 		let date = $('#id_date')[0].value
 		let scope = $('#id_scope')[0].value
 		let grade = $('#id_grade')[0].value
-		var csrf_token = $('input[name="csrfmiddlewaretoken"]').val()
-
+		var csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
+		// var tr = document.createElement('tr');
+		// var td_grid = document.createElement('td');
+		// var td_date = document.createElement('td');
+		// var td_scope = document.createElement('td');
+		// var td_grade = document.createElement('td');
+		// var button = document.createElement('button');
+		// button.setAttribute('')
+		// td_date.setAttribute('date','row');
+		// td_scope.setAttribute('scope','row');
+		// td_grade.setAttribute('grade','row');
 		$.ajax({
 		
 			type: 'POST',
@@ -64,10 +73,32 @@ $('#grades_modal').on('show.bs.modal', function (event) {
 				'csrfmiddlewaretoken': csrf_token,
 			},
 			success: function(response){
+				var new_id = '3';
+				var _html = `<tr id="link_${new_id}">
+				<td>${date}</td>
+				<td>${scope}</td>
+				<td>${grade} <button id="${new_id}" type="button" class="close event-delete-button" ><span aria-hidden="true">&times;</span></button></td></td>   
+			</tr>`.trim();
+				
+			var new_node = $(_html);
+			$('tbody').first().append(new_node);
+				// var grid = $('#table_grid').length+1;
+				// td_grid.appendChild(document.createTextNode(grid));
+				// td_date.appendChild(document.createTextNode(date));
+				// td_scope.appendChild(document.createTextNode(scope));
+				// td_grade.appendChild(document.createTextNode(grade));
+				// td_grade.appendChild(button);
+				// console.log(td_date);
+				// tr.appendChild(td_grid);
+				// tr.appendChild(td_date);
+				// tr.appendChild(td_scope);
+				// tr.appendChild(td_grade);
+				// $('tbody').append(tr);
+
 				$('#id_date').val("");
 				$('#id_scope').val("");
 				$('#id_grade').val("");
-        		$('#grades_modal').modal('hide');
+				$('#grades_modal').modal('hide');
 				console.log("Success submit");
 			},
 			error: function(response){
@@ -83,20 +114,6 @@ $('#grades_modal').on('show.bs.modal', function (event) {
 
 }
 {
-	// events.forEach(element => {
-	// 	$('#grades_table').append(`
-	// 	<tr id="${element.pk}">
-	// 	  <th>${element.fields.start_time.slice(11,19)}<br>~<br>${element.fields.end_time.slice(11,19)}</th>
-	// 	  <th>${element.fields.subject}<br>${element.fields.description}</th> 
-	// 	  <th>
-	// 		${element.fields.status} 
-	// 		<button id="${element.pk}" type="button" class="close event-delete-button" >
-	// 		<span aria-hidden="true">&times;</span>
-	// 		</button> 
-	// 	  </th>
-	// 	</tr>
-	//   `);
-	//   });
 
 	  // Event Delete
 	  $('.close').on('click',function(){

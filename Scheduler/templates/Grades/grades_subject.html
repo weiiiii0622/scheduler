@@ -83,7 +83,7 @@ function displayGradesOf(subject) {
 				  </form>
 				</div>
 				<div class="modal-footer">
-				  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+				  <button type="button" class="btn btn-secondary" data-dismiss="modal"id="grade-cancel">Cancel</button>
 				  <button type="button" id="create_grade_button" class="btn btn-primary">Create</button>
 				</div>
 			  </div>
@@ -114,7 +114,6 @@ function displayGradesOf(subject) {
 		<thead class="thead-light">
 			<div class="row">
 				<tr>
-					<th ></th>
 					<th >Date</th>
 					<th >Range</th>
 					<th >Score</th>
@@ -124,7 +123,6 @@ function displayGradesOf(subject) {
 		<tbody>
 			{%for u in data_subject %}
 				<tr id="link_{{ u.id }}">
-					<td scope = "row" >{{ forloop.counter }}</td>
 					<td>{{ u.date }}</td>
 					<td>{{ u.scope }}</td>
 					<td>{{ u.grade }} <button id="{{ a.id }}" type="button" class="close event-delete-button" ><span aria-hidden="true">&times;</span></button></td></td>   

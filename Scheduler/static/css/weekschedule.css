@@ -156,7 +156,7 @@ th {
 } */
 #tomato_clock_image{
   width: 60%;
-  height: auto;
+  height: 100%;
   margin: 15%;
 }
 #tomato_clock_button_container{

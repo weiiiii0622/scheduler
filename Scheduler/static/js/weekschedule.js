@@ -184,8 +184,9 @@ $('#tomato_clock_button').on('click', function(){
               success: function(response){
                 console.log("Success");
                 $('tr#'+ondeleteEvent).remove();
-                if($('#event_table_body').children().length == 1){
+                if($('#event_table_body').children().length == 0){
                   $('#event_table_header').children().remove();
+                  $('#event_table').css('visibility', "hidden");
                 };
                 $('#event-delete-modal').modal('hide');
               },
