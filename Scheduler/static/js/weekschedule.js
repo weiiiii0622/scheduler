@@ -4,14 +4,14 @@ $('#tomato_clock_button').on('click', function(){
   $(this).css('visibility', 'hidden');
   TodayEventswiper.slideTo(0);
   let tomato_clock = setInterval(TomatoClock,1000);
-  let timeleft = 20+1+1;
-  let clocktime = 10  //sec
-  let resttime = 10;  //sec
+  let timeleft = 1800+1+1;
+  let clocktime = 1500;  //sec
+  let resttime = 300;  //sec
   function TomatoClock() {
   
     let min = Math.floor(clocktime / 60);
     let sec = clocktime % 60;
-    let percent = Math.floor(((10-clocktime)/10)*100);
+    let percent = Math.floor(((1500-clocktime)/1500)*100);
     let rest_min = Math.floor(resttime / 60);
     let rest_sec = resttime % 60;
 
