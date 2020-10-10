@@ -18,7 +18,7 @@
           <form action="#" method="POST" id="event_create_form" data-url="{% url 'weekschedule-home' %}">
             {% csrf_token %}
               <div class="form-group "> 
-                  <label> <h4>Subject</h4> </label> 
+                <label><h4> Subject </h4> </label> 
                   {{ form.subject }} 
                   <div class="error" id="subject_error">
                     
@@ -37,7 +37,7 @@
                   <label><h4> Start Time</h4> </label> 
                   {{ form.start_time }}
                   <div class="error" id="start_time_error">
-                    
+
                   </div>
                    
               </div> 
