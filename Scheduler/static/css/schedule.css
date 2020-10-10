@@ -113,7 +113,7 @@ body{
 }
 
 #event_table, tr{
-  border: 1px groove #8080803d;
+  border: 1px solid white;
 }
 
 #event_table_body, #event_table_header, th, td {

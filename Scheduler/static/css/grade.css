@@ -9,9 +9,11 @@
 
 .grade-table{
   font-size: 25px;
+  width:90%;
   text-align: center;
   border-color: white;
   margin-left: 8%;
+  margin-top:10px;
 }
 .chart-container{
   display:flex;
