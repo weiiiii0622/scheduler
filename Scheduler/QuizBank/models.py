@@ -4,10 +4,10 @@ from django.db import models
 
 class Quiz(models.Model):
 
-	subject = models.CharField(max_length=50)
-	year = models.TextField()
+	subject = models.CharField(max_length=50, null=True, blank=True)
+	year = models.TextField(null=True, blank=True)
 	
-	question1 = models.TextField()
+	question1 = models.TextField(null=True, blank=True)
 	question2 = models.TextField(null=True, blank=True)
 	question3 = models.TextField(null=True, blank=True)
 
@@ -32,7 +32,7 @@ class Quiz(models.Model):
 	option14 = models.TextField(null=True, blank=True)
 	option15 = models.TextField(null=True, blank=True)
 
-	answer = models.TextField()
+	answer = models.TextField(null=True, blank=True)
 	
 	def __str__(self):
 		return self.subject
