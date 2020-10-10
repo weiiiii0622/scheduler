@@ -143,8 +143,10 @@ $('#tomato_clock_button').on('click', function(){
         console.log("Success");
         console.log(JSON.parse(response.targets)[0].fields);
         var events = JSON.parse(response.targets);
-        $('#event_table').empty();
-        $('#event_table').append(`
+        $('#event_table').css('visibility', "visible");
+        $('#event_table_header').empty();
+        $('#event_table_body').children().remove();
+        $('#event_table_header').append(`
           <tr>
             <th>Time</th>
             <th>Subject</th> 
@@ -153,7 +155,7 @@ $('#tomato_clock_button').on('click', function(){
         `);
           
         events.forEach(element => {
-          $('#event_table').append(`
+          $('#event_table_body').append(`
           <tr id="${element.pk}">
             <th>${element.fields.start_time.slice(11,19)}<br>~<br>${element.fields.end_time.slice(11,19)}</th>
             <th>${element.fields.subject}<br>${element.fields.description}</th> 
@@ -182,8 +184,8 @@ $('#tomato_clock_button').on('click', function(){
               success: function(response){
                 console.log("Success");
                 $('tr#'+ondeleteEvent).remove();
-                if($('#event_table').children().length == 1){
-                  $('#event_table').children().remove();
+                if($('#event_table_body').children().length == 1){
+                  $('#event_table_header').children().remove();
                 };
                 $('#event-delete-modal').modal('hide');
               },
@@ -196,7 +198,9 @@ $('#tomato_clock_button').on('click', function(){
       },
 
       error: function(response){
-        $('#event_table').empty();
+        $('#event_table').css('visibility', "hidden");
+        $('#event_table_body').children().remove();
+        
         console.log("Failed");
       }
 
