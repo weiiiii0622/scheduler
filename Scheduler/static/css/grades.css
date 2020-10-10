@@ -32,7 +32,7 @@
   margin-left:30%;
   color:white;
 }
-#create-button{
+#create-button, #create_grade_button{
   font-size: 30px;
   line-height: 30px;
   color: rgb(154,161,143);
@@ -58,6 +58,12 @@
 .dropdown-item{
   font-size: 25px;
   color: rgb(154,161,143);
+}
+#choose-test a{
+  margin-top: 30px;
+  text-align: center;
+  color: white;
+  text-decoration: underline;
 }
 
 

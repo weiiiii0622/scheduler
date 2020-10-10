@@ -71,10 +71,9 @@ def learning(request):
 #     return render(request,'Grades/grades.html')
 
 def grades_to_subject(request,sub):
-  data_subject = Link.objects.filter(user=request.user, subject=sub).values('test').distinct()
+    data_subject = Link.objects.filter(subject=sub)
+    test_link = Link.objects.filter(subject=sub).values_list('test',flat=True).distinct()
     current_user = request.user
-    choices = current_user.get_grades_test_option()
-    print("Hi", data_subject)
     chart_subject = defaultdict(list)
     roll = Link.objects.all()
     
@@ -97,13 +96,9 @@ def grades_to_subject(request,sub):
 
 @login_required 
 def subject_to_test(request,sub,test):
-<<<<<<< HEAD
     data_test = Link.objects.filter(subject=sub,test=test)
     chart_labels = list(Link.objects.filter(subject=sub,test=test).values_list('scope',flat=True))
     chart_datas =list (Link.objects.filter(subject=sub,test=test).values_list('grade',flat=True))
-=======
-    data_test = Link.objects.filter(user=request.user, subject=sub,test=test)
->>>>>>> 5c5caed576ddada0f990ab2eb905b7fcfa0514a4
     roll = Link.objects.all()
     chart_subject = defaultdict(list)
     Labels = []

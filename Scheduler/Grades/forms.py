@@ -3,6 +3,7 @@ from .models import Link
 from django import forms
 from mainsite.models import User
 from .widgets import MyWidget
+import datetime
 
 class LinkModelForm(forms.ModelForm):
     class Meta:
@@ -26,6 +27,8 @@ class GradesChoicesForm(forms.Form):
     def __init__(self, options, *args, **kwargs):
         super(GradesChoicesForm, self).__init__(*args, **kwargs)
         self.fields['create_option'].choices = options
+        now = datetime.datetime.now()
+        self.fields['date'].widget.attrs['placeholder'] = '{}'.format(now.strftime("%Y/%m/%d"))
 
 
     grades_subject_choices = (
@@ -52,9 +55,9 @@ class GradesChoicesForm(forms.Form):
         choices=(), required=True
     )
     新增類型 = forms.CharField(widget=MyWidget())
-    date = forms.CharField(max_length=20,label='日期',widget=forms.TextInput(attrs={'placeholder': 'yyyy/mm/dd'}))
-    scope = forms.CharField(max_length=20,label='範圍',widget=forms.TextInput(attrs={'placeholder': 'Ch.1'}))
-    grade = forms.CharField(max_length=20,label='成績',widget=forms.TextInput(attrs={'placeholder': '100'}))
+    date = forms.CharField(max_length=20,label='日期')
+    scope = forms.CharField(max_length=20,label='範圍')
+    grade = forms.CharField(max_length=20,label='成績')
     widget = {
         'date' : forms.TextInput(attrs={'class': 'form-control', 'style': 'width:50%;'}),
         'scope' : forms.TextInput(attrs={'class': 'form-control', 'style': 'width:50%;'}),
@@ -65,6 +68,6 @@ class GradesChoicesForm(forms.Form):
     #form = ArticleForm(instance=article)
 
     
-
-
-
+# ,widget=forms.TextInput(attrs={'yyyy/mm/dd'})
+# ,widget=forms.TextInput(attrs={'Ch.1'})
+# ,widget=forms.TextInput(attrs={'100'})

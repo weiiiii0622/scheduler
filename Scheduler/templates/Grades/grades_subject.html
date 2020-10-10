@@ -88,8 +88,7 @@ function displayGradesOf(subject) {
 			<a class="dropdown-item" href="{% url 'url_subject' sub=0 %}" onclick="displayGradesOf(0);">Civics</a>
 			</div>
 		</div>
-		<div class="col-5"></div>
-		<input type="button" value="Create" data-toggle="modal" data-target="#grades_modal">
+		<input type="button" value="Create" data-toggle="modal" data-target="#grades_modal" id="create-button">
 		<!-- <input type="button" id="" class="btn btn-primary" data-toggle="modal" data-target="#grades_modal">Create</input> -->
 
 		<div class="modal fade" id="grades_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -109,7 +108,7 @@ function displayGradesOf(subject) {
 				</div>
 				<div class="modal-footer">
 				  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-				  <button type="button" class="btn btn-primary" id="create-button">Create</button>
+				  <button type="button" class="btn btn-primary" id="create-form">Create</button>
 				</div>
 			  </div>
 			</div>
@@ -124,7 +123,7 @@ function displayGradesOf(subject) {
 		{% for c in test_link %}
 		
 		</a>
-		<div class="subject"> 
+		<div class="subject" id="choose-test"> 
 			<a href="{% url 'url_test' sub=sub test=c %}">
 				{{ c }}
 			</a>
