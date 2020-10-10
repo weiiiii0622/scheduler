@@ -108,17 +108,33 @@ body{
   display:flex;
   justify-content: center;
 }
-
-#event_table, th, td {
-  font-size: 25px;
-  margin-left: 20px;
-  margin-right: 20px;
-}
-
 #event_table{
-  text-align: center;
-  word-wrap: wrap;
+  visibility: hidden;
 }
+
+#event_table, tr{
+  border: 1px groove #8080803d;
+}
+
+#event_table_body, #event_table_header, th, td {
+  font-size: 25px;
+  text-align: center;
+}
+
+
+#event_table_body {
+  height: 410px;
+  overflow: auto;
+  display: block;
+}
+#event_table_header {
+  display: block;
+}
+#event_table_header tr{
+  width: 100%;
+  display: inline-table;
+}
+
 
 th, td {
   padding: 15px;
