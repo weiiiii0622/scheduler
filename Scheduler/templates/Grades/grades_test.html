@@ -91,7 +91,7 @@ function displayGradesOf(subject) {
 			</div>
 		</div>
 		<input type="button" value="Create" data-toggle="modal" data-target="#grades_modal"id="create-button">
-		<!-- <input type="button" id="" class="btn btn-primary" data-toggle="modal" data-target="#grades_modal">Create</input> -->
+		<!-- <input type="button" id="create_button" class="btn btn-primary" data-toggle="modal" data-target="#grades_modal">Create</input> -->
 
 		<div class="modal fade" id="grades_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -110,7 +110,7 @@ function displayGradesOf(subject) {
 				</div>
 				<div class="modal-footer">
 				  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-				  <button type="button" class="btn btn-primary" >Create</button>
+				  <button type="button" id="create_grade_button" class="btn btn-primary">Create</button>
 				</div>
 			  </div>
 			</div>
@@ -150,17 +150,17 @@ function displayGradesOf(subject) {
 		</thead>
 		<tbody>
 			{%for a in data_test %}
-				<tr>
+				<tr id="link_{{ a.id }}">
 					<td scope = "row" >{{ forloop.counter0 }}</td>
 					<td>{{ a.date }}</td>
 					<td>{{ a.scope }}</td>
-					<td>{{ a.grade }} <button id="${element.pk}" type="button" class="close event-delete-button" ><span aria-hidden="true">&times;</span></button></td>   
+					<td>{{ a.grade }} <button id="{{ a.id }}" type="button" class="close event-delete-button" ><span aria-hidden="true">&times;</span></button></td>   
 				</tr>
 			{%endfor%}
 		</tbody>
 	</table>
 </div>
-{% csrf_token %}
+
 <div class="modal fade" id="event-delete-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true" data-url="{% url 'url_deleteajax' %}">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">

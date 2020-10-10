@@ -67,7 +67,7 @@ $('#grades_modal').on('show.bs.modal', function (event) {
 				$('#id_date').val("");
 				$('#id_scope').val("");
 				$('#id_grade').val("");
-        $('#grades_modal').modal('hide');
+        		$('#grades_modal').modal('hide');
 				console.log("Success submit");
 			},
 			error: function(response){
@@ -102,6 +102,7 @@ $('#grades_modal').on('show.bs.modal', function (event) {
 	  $('.close').on('click',function(){
 		// var id = ${element.pk};
 		var ondeleteEvent = $(this).attr('id');
+		var csrf_token = $('input[name="csrfmiddlewaretoken"]').val()
 		$('#event-delete-modal').modal('show');
 		$("#confirm-delete-button").on('click', function(){
 	  
@@ -114,7 +115,8 @@ $('#grades_modal').on('show.bs.modal', function (event) {
 			},
 			success: function(response){
 			  console.log("Success");
-			  $('tr#'+ondeleteEvent).remove();
+			  $('#link_' + ondeleteEvent).remove();
+			  console.log('link_'+ondeleteEvent)
 			  if($('#grades_table').children().length == 1){
 				$('#grades_table').children().remove();
 			  };
