@@ -100,7 +100,7 @@ $('#grades_modal').on('show.bs.modal', function (event) {
 
 	  // Event Delete
 	  $('.close').on('click',function(){
-		var id = ${element.pk};
+		// var id = ${element.pk};
 		var ondeleteEvent = $(this).attr('id');
 		$('#event-delete-modal').modal('show');
 		$("#confirm-delete-button").on('click', function(){
@@ -110,6 +110,7 @@ $('#grades_modal').on('show.bs.modal', function (event) {
 			url: $("div#event-delete-modal").data('url'),
 			data: {
 			  'id': ondeleteEvent,
+			  'csrfmiddlewaretoken': csrf_token,
 			},
 			success: function(response){
 			  console.log("Success");
@@ -125,5 +126,4 @@ $('#grades_modal').on('show.bs.modal', function (event) {
 		  });
 		});
 	  });
-	},
 }
