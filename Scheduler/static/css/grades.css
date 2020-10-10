@@ -26,7 +26,7 @@
   height:auto;
   color:white;
 }
-#create-button, #create_grade_button{
+#create-button{
   font-size: 30px;
   line-height: 30px;
   color: rgb(154,161,143);
@@ -63,6 +63,14 @@
   text-align: center;
   color: white;
   text-decoration: underline;
+}
+#create_grade_button,#grade-cancel{
+  font-size: 25px;
+  color:rgb(154,161,143);
+  background: none;
+  text-decoration: underline;
+  border:none;
+
 }
 
 
