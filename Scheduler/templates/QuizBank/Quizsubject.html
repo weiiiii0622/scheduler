@@ -1,4 +1,5 @@
 {% extends "mainsite/home.html" %}
+{% load event_tags  %}
 {% block content %}
 
 
@@ -36,13 +37,13 @@
 </div>
 
 
-
+<h1 class="quiz-choose">Year</h1>
 <div class="containter" id="year_container">
   {% for x in year %}
   <div class="subject">
 
     <a href="{% url 'quizbank-test' id=id year=x.year %}" class="year_href"style="color:white">
-      {{ x.year }}
+      {{ x.year|turn_integer }}
     </a>
     
   </div>
