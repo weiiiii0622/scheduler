@@ -10,7 +10,7 @@ $('#grades_modal').on('show.bs.modal', function (event) {
 			$.ajax({
 				
 				type: 'POST',
-				url: $("form#grade_form").data('url'),
+				url: '/grades/choices_ajax/',
 				data: {
 				'test_type': test,
 				'csrfmiddlewaretoken': csrf_token,
