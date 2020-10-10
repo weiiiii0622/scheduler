@@ -5,8 +5,8 @@ $('#tomato_clock_button').on('click', function(){
   TodayEventswiper.slideTo(0);
   let tomato_clock = setInterval(TomatoClock,1000);
   let timeleft = 20+1+1;
-  let clocktime = 10  //sec
-  let resttime = 10;  //sec
+  let clocktime = 1500  //sec
+  let resttime = 300;  //sec
   function TomatoClock() {
   
     let min = Math.floor(clocktime / 60);
