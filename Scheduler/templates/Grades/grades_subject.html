@@ -114,7 +114,6 @@ function displayGradesOf(subject) {
 		<thead class="thead-light">
 			<div class="row">
 				<tr>
-					<th ></th>
 					<th >Date</th>
 					<th >Range</th>
 					<th >Score</th>
@@ -124,7 +123,6 @@ function displayGradesOf(subject) {
 		<tbody>
 			{%for u in data_subject %}
 				<tr id="link_{{ u.id }}">
-					<td scope = "row" >{{ forloop.counter }}</td>
 					<td>{{ u.date }}</td>
 					<td>{{ u.scope }}</td>
 					<td>{{ u.grade }} <button id="{{ a.id }}" type="button" class="close event-delete-button" ><span aria-hidden="true">&times;</span></button></td></td>   
