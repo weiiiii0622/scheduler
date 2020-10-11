@@ -32,7 +32,6 @@ def User_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             request.session['user.account'] = user.account
-            print(request.session['user.account'])
             login(request, user)
             if next_:
                 return redirect(next_)

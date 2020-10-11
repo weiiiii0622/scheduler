@@ -1,6 +1,7 @@
 // tomato clock
 {
 $('#tomato_clock_button').on('click', function(){
+  alert("開始後請不要離開此頁面\n否則番茄終將會失效！")
   $(this).css('visibility', 'hidden');
   TodayEventswiper.slideTo(0);
   let tomato_clock = setInterval(TomatoClock,1000);
@@ -315,12 +316,10 @@ var TodayEventswiper = new Swiper('#today-swiper', {
 
 // info modal
 {
+
   $("#info_svg").on('click', function(){
     $("#info_modal").modal('show');
   });
-
-
-
 
 }
 
