@@ -1,7 +1,7 @@
 from collections import defaultdict
 from datetime import datetime
 from django.shortcuts import render ,redirect
-from .models import Link
+from .models import Link ,TestType
 
 from django.contrib.auth.decorators import login_required
 
@@ -11,15 +11,15 @@ from django.http import JsonResponse
 import json
 
 
-@login_required
-def form_choices(request):
-    context = {}
-    current_user = request.user
+# @login_required
+# def form_choices(request):
+#     context = {}
+#     current_user = request.user
     
-    options = current_user.get_grades_test_option()
-    context['form'] = GradesChoicesForm([(v, v) for v in options])
+#     options = current_user.get_grades_test_option()
+#     context['form'] = GradesChoicesForm([(v, v) for v in options])
     
-    return render(request,'Grades/grades.html',context)
+#     return render(request,'Grades/grades.html',context)
 
 
 @login_required
@@ -42,10 +42,10 @@ def GradesAJAX(request):
 @login_required
 def learning(request):
     # roll = Link.objects.all()
-
     context = {}
     current_user = request.user
     options = current_user.get_grades_test_option()
+    # options = list(TestType.objects.filter(user=current_user,subject2=sub))
     roll = Link.objects.filter(user=current_user)
     #choices = current_user.get_grades_test_option()
     return render(request, 'Grades/grades.html',{
@@ -68,6 +68,7 @@ def grades_to_subject(request,sub):
     test_link = Link.objects.filter(user=current_user,subject=sub).values_list('test',flat=True).distinct()
     
     options = current_user.get_grades_test_option()
+    # options = list(TestType.objects.filter(user=current_user,subject2=sub))
 
     return render(request,'Grades/grades_subject.html',{
         'data_subject':data_subject,
@@ -84,8 +85,9 @@ def subject_to_test(request,sub,test):
     chart_datas =list (Link.objects.filter(user=current_user,subject=sub,test=test).values_list('grade',flat=True))
     test_link = Link.objects.filter(user=current_user,subject=sub).values_list('test',flat=True).distinct()
     str_test = str(test)
- 
+    
     options = current_user.get_grades_test_option()
+    # options = list(TestType.objects.filter(user=current_user,subject2=sub))
         # for sub in roll:
         #     s = sub.subject
         #     for word in words:
@@ -121,6 +123,12 @@ def CreateGradeAJAX(request):
             scope = scope,
             grade = grade,
             date = date
+        )
+
+        TestType.objects.get_or_create(
+            user = user,
+            subject2 = subject,
+            test2 = test,
         )
 
         return JsonResponse({}, status=200)
