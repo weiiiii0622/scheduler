@@ -16,7 +16,7 @@ from django.conf.urls import include, url
 from django.urls import path
 from django.contrib import admin
 from django.http import HttpResponse
-from .views import learning ,form_choices ,GradesAJAX ,grades_to_subject ,subject_to_test, CreateGradeAJAX ,EventDeleteAJAX 
+from .views import learning ,GradesAJAX ,grades_to_subject ,subject_to_test, CreateGradeAJAX ,EventDeleteAJAX 
 #def Learning(request):
     # return HttpResponse("I'm homepage")
 
@@ -26,7 +26,7 @@ urlpatterns = [
     # url(r'^gradeform/$',form_choices),
     # url(r'^grades_ajax/$',GradesAJAX),
     path('grades/',learning,name='grades'),
-    path('gradesform/',form_choices,name='gradesform'),
+    # path('gradesform/',form_choices,name='gradesform'),
     path('grades/choices_ajax/',GradesAJAX, name="choices_ajax"),
     # path('grades_subject/',subject_ajax,name='grades_subject'),
     path('grades/<str:sub>/',grades_to_subject,name='url_subject'),
