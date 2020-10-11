@@ -313,6 +313,16 @@ var TodayEventswiper = new Swiper('#today-swiper', {
 }
 
 
+// info modal
+{
+  $("#info_svg").on('click', function(){
+    $("#info_modal").modal('show');
+  });
+
+
+
+
+}
 
 
 

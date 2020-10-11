@@ -138,12 +138,13 @@ STATICFILES_DIRS = [
 LOGIN_URL = 'mainsite-login'
 LOGIN_REDIRECT_URL = 'mainsite-today'
 
+DEFAULT_FROM_EMAIL = 'studigram.official@gmail.com'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'studigram.official@gmail.com'
-EMAIL_HOST_PASSWORD = 'studigrammm333'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = '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'
 
 
 SESSION_EXPIRE_SECONDS = 172800
