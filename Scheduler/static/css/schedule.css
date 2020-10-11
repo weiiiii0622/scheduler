@@ -35,6 +35,13 @@ body{
   text-decoration: underline;
 }
 
+#event_cancel_button{
+  font-size: 25px;
+  border:none;
+  background: none;
+  color: rgb(154,161,143);
+}
+
 #event_submit_button{
   font-size: 35px;
   color: rgb(154,161,143);
