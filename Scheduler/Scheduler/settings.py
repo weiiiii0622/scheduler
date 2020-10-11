@@ -142,8 +142,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'django.innoserve@gmail.com'
-EMAIL_HOST_PASSWORD = 'admin12345admin'
+EMAIL_HOST_USER = 'studigram.official@gmail.com'
+EMAIL_HOST_PASSWORD = 'studigrammm333'
 
 
 SESSION_EXPIRE_SECONDS = 172800

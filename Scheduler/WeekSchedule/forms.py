@@ -15,6 +15,7 @@ class EventForm(ModelForm):
         self.fields['subject'].widget.attrs['placeholder'] = 'Math'
         self.fields['description'].widget.attrs['placeholder'] = 'Chapter.1'
         self.fields['start_time'].widget.attrs['placeholder'] = '{}'.format(now.strftime("%Y/%m/%d %H:%M"))
+        self.fields['start_time'].widget.attrs['value'] = '{}'.format(now.strftime("%Y/%m/%d %H:%M"))
         self.fields['start_time'].widget.attrs['class'] = 'form-control'
         self.fields['clock'].widget.attrs['placeholder'] = 'How many clocks?'
 
