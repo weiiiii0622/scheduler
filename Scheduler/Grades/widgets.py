@@ -12,8 +12,3 @@ class MyWidget(forms.Widget):
 		'''
 		return mark_safe(html)
 
-class deletetype(forms.Widget):
-	template_name = 'Grades'
-	def render(self):
-		html = '''
-		<button onclick
