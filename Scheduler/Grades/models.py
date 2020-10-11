@@ -12,3 +12,8 @@ class Link(models.Model):
     grade = models.TextField(blank=True)
     subject = models.IntegerField(default=0)
     user = models.ForeignKey(User,on_delete=models.CASCADE, null=True)
+
+class TestType(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    subject2 = models.IntegerField(default=0)
+    test2 = models.CharField(max_length=100,default=0)

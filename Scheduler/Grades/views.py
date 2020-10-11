@@ -41,13 +41,12 @@ def GradesAJAX(request):
 
 @login_required
 def learning(request):
-    roll = Link.objects.all()
+    # roll = Link.objects.all()
 
     context = {}
     current_user = request.user
     options = current_user.get_grades_test_option()
-
-    current_user = request.user
+    roll = Link.objects.filter(user=current_user)
     #choices = current_user.get_grades_test_option()
     return render(request, 'Grades/grades.html',{
         'roll': roll,
@@ -64,9 +63,9 @@ def learning(request):
 #     return render(request,'Grades/grades.html')
 
 def grades_to_subject(request,sub):
-    data_subject = Link.objects.filter(subject=sub)
-    test_link = Link.objects.filter(subject=sub).values_list('test',flat=True).distinct()
     current_user = request.user
+    data_subject = Link.objects.filter(user=current_user,subject=sub)
+    test_link = Link.objects.filter(user=current_user,subject=sub).values_list('test',flat=True).distinct()
     
     options = current_user.get_grades_test_option()
 
@@ -79,13 +78,13 @@ def grades_to_subject(request,sub):
 
 @login_required 
 def subject_to_test(request,sub,test):
-    data_test = Link.objects.filter(subject=sub,test=test)
-    chart_labels = list(Link.objects.filter(subject=sub,test=test).values_list('scope',flat=True))
-    chart_datas =list (Link.objects.filter(subject=sub,test=test).values_list('grade',flat=True))
-    test_link = Link.objects.filter(subject=sub).values_list('test',flat=True).distinct()
+    current_user = request.user
+    data_test = Link.objects.filter(user=current_user,subject=sub,test=test)
+    chart_labels = list(Link.objects.filter(user=current_user,subject=sub,test=test).values_list('scope',flat=True))
+    chart_datas =list (Link.objects.filter(user=current_user,subject=sub,test=test).values_list('grade',flat=True))
+    test_link = Link.objects.filter(user=current_user,subject=sub).values_list('test',flat=True).distinct()
     str_test = str(test)
-
-    current_user = request.user 
+ 
     options = current_user.get_grades_test_option()
         # for sub in roll:
         #     s = sub.subject

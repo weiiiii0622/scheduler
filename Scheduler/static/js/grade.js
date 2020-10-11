@@ -77,9 +77,8 @@ $('#grades_modal').on('show.bs.modal', function (event) {
 				var _html = `<tr id="link_${new_id}">
 				<td>${date}</td>
 				<td>${scope}</td>
-				<td>${grade} <button id="${new_id}" type="button" class="close event-delete-button" ><span aria-hidden="true">&times;</span></button></td></td>   
+				<td>${grade}</td>
 			</tr>`.trim();
-				
 			var new_node = $(_html);
 			$('tbody').first().append(new_node);
 				// var grid = $('#table_grid').length+1;
@@ -116,7 +115,7 @@ $('#grades_modal').on('show.bs.modal', function (event) {
 {
 
 	  // Event Delete
-	  $('.close').on('click',function(){
+	  $('.event-delete-button').on('click',function(){
 		// var id = ${element.pk};
 		var ondeleteEvent = $(this).attr('id');
 		var csrf_token = $('input[name="csrfmiddlewaretoken"]').val()
@@ -133,10 +132,7 @@ $('#grades_modal').on('show.bs.modal', function (event) {
 			success: function(response){
 			  console.log("Success");
 			  $('#link_' + ondeleteEvent).remove();
-			  console.log('link_'+ondeleteEvent)
-			  if($('#grades_table').children().length == 1){
-				$('#grades_table').children().remove();
-			  };
+			  console.log('link_'+ondeleteEvent);
 			  $('#event-delete-modal').modal('hide');
 			},
 			error: function(response){
