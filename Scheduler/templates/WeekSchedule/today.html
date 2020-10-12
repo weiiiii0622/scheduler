@@ -26,14 +26,14 @@
   </div>
   <!-- Swiper -->
   <div class="swiper-container" id="today-swiper">
-    <div class="swiper-wrapper">
+    <div class="swiper-wrapper" id="today_wrapper">
       {% for event in events %}
       <div class="swiper-slide today-slide" id="{{ event.id }}" >
         <div class="div-time">
           <h2>{{ event.start_time|time:"H:i" }} ~ {{ event.end_time|time:"H:i" }}</h2>
         </div>
         <div class="div-subject">
-          <h2>{{ event.subject }}</h2>
+          <h1>{{ event.subject }}</h1>
           
           <h4>{{ event.description }}</h4>
         </div>

@@ -5,14 +5,14 @@ $('#tomato_clock_button').on('click', function(){
   $(this).css('visibility', 'hidden');
   TodayEventswiper.slideTo(0);
   let tomato_clock = setInterval(TomatoClock,1000);
-  let timeleft = 1800+1+1;
-  let clocktime = 1500;  //sec
-  let resttime = 300;  //sec
+  let timeleft = 12+1+1;
+  let clocktime = 10;  //sec
+  let resttime = 2;  //sec
   function TomatoClock() {
   
     let min = Math.floor(clocktime / 60);
     let sec = clocktime % 60;
-    let percent = Math.floor(((1500-clocktime)/1500)*100);
+    let percent = Math.floor(((10-clocktime)/10)*100);
     let rest_min = Math.floor(resttime / 60);
     let rest_sec = resttime % 60;
 
@@ -59,8 +59,20 @@ $('#tomato_clock_button').on('click', function(){
           'status': 'Done',
         },
         success: function(response){
+          document.getElementById("tomato_clock_image").src = "/static/image/today/0.png";
           TodayEventswiper.slideNext();
           TodayEventswiper.removeSlide(0);
+          if($('#today_wrapper').children().length == 0){
+            $('#tomato_clock_button').css('visibility', "hidden");
+            $('#today_wrapper').append(`
+            <div class="swiper-slide today-slide">
+                <div class="div-subject">
+                  <h3> 今天沒有行程! </h3>
+                  <h5> 去Week Schedule新增一個吧! </h5>
+                </div>
+              </div>`
+            );
+          }
           console.log("Success");
         },
         error: function(response){
@@ -74,6 +86,22 @@ $('#tomato_clock_button').on('click', function(){
   }
 });
 }
+
+// You have no schedule yet !
+{
+  if($('#today_wrapper').children().length == 0){
+    $('#tomato_clock_button').css('visibility', "hidden");
+    $('#today_wrapper').append(`
+    <div class="swiper-slide today-slide">
+        <div class="div-subject">
+          <h3> 今天沒有行程! </h3>
+          <h5> 去Week Schedule新增一個吧! </h5>
+        </div>
+      </div>`
+    );
+  }
+}
+
 
 
 // add event AJAX
@@ -310,6 +338,12 @@ var TodayEventswiper = new Swiper('#today-swiper', {
     prevEl: '.swiper-button-prev',
   },
 });
+}
+
+// Auto show today's schdeule
+{
+  let today_date = new Date()
+  $("#current"+today_date.getDay()).click();
 }
 
 
