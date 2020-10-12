@@ -11,7 +11,6 @@ class EventForm(ModelForm):
     
     def __init__(self, user, *args, **kwargs):
         self.user = user
-        print("AAAAhh", user)
         
         now = datetime.datetime.now()
         super(EventForm, self).__init__(*args, **kwargs)
@@ -32,8 +31,6 @@ class EventForm(ModelForm):
         exclude = ['user', 'status', 'end_time']
 
     def clean_start_time(self, *args, **kwargs):
-        print("Ohh", self.user)
-        print(self.cleaned_data["start_time"])
         start_time_str = self.cleaned_data["start_time"]
         start_time = datetime.datetime.strptime(start_time_str, "%Y/%m/%d %H:%M")
         clock = int(self.data["clock"])
@@ -42,15 +39,12 @@ class EventForm(ModelForm):
 
         check_event = Event.objects.filter(user = self.user, start_time__contains = start_time.date())
         for event in check_event:
-            print('hi')
             event_start_time = event.start_time
             event_end_time = event.end_time
             if start_time.time() < event_start_time.time():
                 if end_time.time() > event_start_time.time():
-                    print(start_time, event_start_time, event_end_time)
                     raise ValidationError("這個時段已經有行程了!!!")
             elif start_time.time() < event_end_time.time():
-                print(start_time, event_start_time, event_end_time)
                 raise ValidationError("這個時段已經有行程了!!!")
 
         return start_time

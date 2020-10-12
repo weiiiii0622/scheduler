@@ -27,7 +27,6 @@ def GradesAJAX(request):
 
     if request.is_ajax() and request.method == 'POST':
         test_type = request.POST.get('test_type')
-        print("Normal")
         current_user = request.user
         options = current_user.get_grades_test_option()
         options.append(test_type)
@@ -106,7 +105,6 @@ def subject_to_test(request,sub,test):
 
 def CreateGradeAJAX(request):
     if request.is_ajax():
-        print("IminHEre")
         user = request.user
         subject = int(request.POST.get('subject'))
         test = request.POST.get('test')
@@ -114,7 +112,6 @@ def CreateGradeAJAX(request):
         scope = request.POST.get('scope')
         grade = request.POST.get('grade')
 
-        print(user)
 
         Link.objects.get_or_create(
             user = user,
@@ -138,8 +135,6 @@ def CreateGradeAJAX(request):
 def EventDeleteAJAX(request):
     if request.is_ajax():
         id = request.POST.get('id')
-        print(id)
         target_event = Link.objects.get(id = id)
-        print(target_event)
         target_event.delete()
     return JsonResponse({}, status=200)

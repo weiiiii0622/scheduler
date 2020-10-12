@@ -12,7 +12,6 @@ import datetime
 # Create your views here.
 @login_required
 def EventPage(request):
-	print(request.user)
 	form = EventForm(request.user, request.POST)
 
 	if request.is_ajax():	
@@ -59,7 +58,6 @@ def EventAJAX(request):
 
 		target_user = get_user(request)
 		target_date = datetime.datetime(year, month, date)
-		print(target_date.date(), target_user)
 		targets = Event.objects.filter(user = target_user, start_time__contains = target_date.date()).order_by('start_time')
 
 		data = {
