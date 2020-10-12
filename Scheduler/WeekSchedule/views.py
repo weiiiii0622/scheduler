@@ -12,10 +12,11 @@ import datetime
 # Create your views here.
 @login_required
 def EventPage(request):
-	form = EventForm()
+	print(request.user)
+	form = EventForm(request.user, request.POST)
 
 	if request.is_ajax():	
-		form = EventForm(request.POST)
+		# form = EventForm(request.POST)
 
 		if form.is_valid():
 
@@ -44,7 +45,6 @@ def EventPage(request):
 			data = {
 				'errors' : form.errors
 			}
-			print(form.errors.keys())
 			return JsonResponse(data, status = 400)
 
 	return render(request, 'WeekSchedule/weekschedule.html', {'form': form,})

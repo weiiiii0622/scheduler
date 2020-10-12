@@ -108,7 +108,6 @@ $('#tomato_clock_button').on('click', function(){
       },
       error: function(response){
         $('#create_event_modal').modal('show');
-
         let error_array = Object.keys(response.responseJSON.errors);
 
         error_array.forEach(error => {
