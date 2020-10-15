@@ -19,6 +19,7 @@
           console.log("Success");
           $('#exam_setting_modal').modal('hide');
           window.location.href = x.attr('href') ;
+          
         },
         error: function(response){
           console.log("Failed");

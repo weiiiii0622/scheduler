@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponseRedirect
 from django.core import serializers
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from .models import Quiz
 
@@ -69,9 +70,10 @@ def TestPage(request, id, year):
 		'image': image_data,
 		'option': option_data,
 		'subject': id,
+		'alert' : "作答時左右滑動來切換題目！",
 	}
 	number.clear()
-	
+	messages.info(request, '作答時左右滑動來切換題目！')
 	return render(request, 'QuizBank/Quizexam.html', data)
 
 @login_required
