@@ -79,13 +79,12 @@ def CheckAnswerAJAX(request, id, year):
 	if request.is_ajax():
 		answers = []
 		id_list = request.GET.getlist('id')
-		print(request.user, id_list)
 		quiz = Quiz.objects.filter(id__in = id_list)
 		
 		for quiz in quiz:
 			for answer in quiz.answer.split(","):
 				answers.append("{id}-{answer}".format(id=quiz.id, answer=answer))
 
-		print(answers)
+		
 
 		return JsonResponse({'answer': answers}, status = 200)

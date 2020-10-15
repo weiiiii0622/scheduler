@@ -76,9 +76,7 @@ body{
   text-decoration: underline;
 }
 
-#start_time_error {
-  color: red;
-}
+
 
 #weekschedule-swiper {
   width: 100%;
@@ -244,6 +242,9 @@ th {
   margin-top: 15px;
 }
 
+.error{
+  color: red;
+}
 
 
 
