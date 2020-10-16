@@ -36,6 +36,7 @@ class User(AbstractBaseUser):
     date = models.DateTimeField(default=timezone.now)
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    quiz_option = models.CharField(max_length=255, default = 50)
     grades_test_option = models.CharField(max_length=100,default=[])
 
     USERNAME_FIELD = 'account'

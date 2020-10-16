@@ -13,13 +13,13 @@ class UserAdmin(BaseUserAdmin):
     form = UserChangeForm
     add_form = UserRegistrationForm
 
-    list_display = ('account', 'email', 'is_admin', 'is_active','grades_test_option')
+    list_display = ('account', 'email', 'is_admin', 'is_active', 'grades_test_option', 'quiz_option')
     list_filter = ('is_admin', 'is_active')
     
     
     fieldsets = (
-        (None, {'fields': ('account', 'email', 'password', 'grades_test_option')}),
-        ('Personal info', {'fields': ('date',)}),
+        (None, {'fields': ('account', 'email', 'password')}),
+        ('Personal info', {'fields': ('date', 'quiz_option', 'grades_test_option')}),
         ('Permissions', {'fields': ('is_admin', 'is_active')}),
     )
 
@@ -27,7 +27,7 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('account', 'email', 'password1', 'password2', 'is_admin', 'is_active'),
+            'fields': ('account', 'email', 'password1', 'password2', 'quiz_option', 'grades_test_option', 'is_admin', 'is_active'),
         }),
     )
     
