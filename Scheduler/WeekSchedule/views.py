@@ -12,10 +12,10 @@ import datetime
 # Create your views here.
 @login_required
 def EventPage(request):
-	form = EventForm()
+	form = EventForm(request.user, request.POST)
 
 	if request.is_ajax():	
-		form = EventForm(request.POST)
+		# form = EventForm(request.POST)
 
 		if form.is_valid():
 
@@ -23,36 +23,27 @@ def EventPage(request):
 			description = form.cleaned_data['description']
 			start_time = form.cleaned_data['start_time']
 			clock = form.cleaned_data['clock']
-			minute = clock * 30
-			end_time = start_time + datetime.timedelta(minutes = minute)
-			NewEvent = Event.objects.get_or_create(
-				user = request.user,
-				subject = subject,
-				description = description,
-				start_time = start_time,
-				clock = clock,
-				end_time = end_time,
-			)
 
-			event = {
-				'subject': NewEvent[0].subject,
-				'description': NewEvent[0].description,
-				'start_time': NewEvent[0].start_time,
-				'clock': NewEvent[0].clock,
-				'end_time': NewEvent[0].end_time,
-			}
-
-			data = {
-				'event': event,
-			}
 			
-			return JsonResponse(data, status = 200)	
+			for i in range(clock):
+				end_time = start_time + datetime.timedelta(minutes = 30)
+				Event.objects.get_or_create(
+					user = request.user,
+					subject = subject,
+					description = description,
+					start_time = start_time,
+					clock = clock,
+					end_time = end_time,
+				)
+				start_time = start_time + datetime.timedelta(minutes = 30)
+
+			
+			return JsonResponse({}, status = 200)	
 		else:
 
 			data = {
 				'errors' : form.errors
 			}
-			print(form.errors.keys())
 			return JsonResponse(data, status = 400)
 
 	return render(request, 'WeekSchedule/weekschedule.html', {'form': form,})
@@ -67,7 +58,6 @@ def EventAJAX(request):
 
 		target_user = get_user(request)
 		target_date = datetime.datetime(year, month, date)
-		print(target_date.date(), target_user)
 		targets = Event.objects.filter(user = target_user, start_time__contains = target_date.date()).order_by('start_time')
 
 		data = {
@@ -85,7 +75,7 @@ def TodayPage(request):
 	today = datetime.datetime.now()
 	target_user = get_user(request)
 	
-	events = Event.objects.filter(user = target_user, start_time__contains = today.date()).exclude(status = "Done")
+	events = Event.objects.filter(user = target_user, start_time__contains = today.date()).exclude(status = "Done").order_by('start_time')
 
 	return render(request, 'WeekSchedule/today.html', {'events': events, })
 

@@ -25,7 +25,7 @@ SECRET_KEY = '8(2fj%$-1ixykw4s&h8qhvfwt)dne3cfma=y8u#%44-@synl@a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.31.192', '172.20.10.3', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['192.168.31.192', '172.20.10.3', '127.0.0.1', 'localhost', '192.168.52.122']
 
 AUTH_USER_MODEL = 'mainsite.User'
 
@@ -138,12 +138,13 @@ STATICFILES_DIRS = [
 LOGIN_URL = 'mainsite-login'
 LOGIN_REDIRECT_URL = 'mainsite-today'
 
+DEFAULT_FROM_EMAIL = 'studigram.official@gmail.com'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'django.innoserve@gmail.com'
-EMAIL_HOST_PASSWORD = 'admin12345admin'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = 'SG.rStUjcdiO2gA4cm3jB4rQ.Weio57e2fnnST3uu-pIn8vo_G_qaDM60inuv12yEimE'
 
 
 SESSION_EXPIRE_SECONDS = 172800

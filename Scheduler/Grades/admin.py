@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Link
+from .models import Link ,TestType
 # Register your models here.
 
 class GradeAdmin(admin.ModelAdmin):
@@ -26,6 +26,7 @@ class GradeAdmin(admin.ModelAdmin):
     filter_horizontal = ()
 
 admin.site.register(Link, GradeAdmin)
+admin.site.register(TestType)
 
 
 # Register your models here.

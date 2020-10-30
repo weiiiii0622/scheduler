@@ -4,3 +4,4 @@
 .DS_Store
 
 Scheduler/db.sqlite3
+scheduler.code-workspace

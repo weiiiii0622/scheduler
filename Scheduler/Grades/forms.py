@@ -29,6 +29,8 @@ class GradesChoicesForm(forms.Form):
         self.fields['create_option'].choices = options
         now = datetime.datetime.now()
         self.fields['date'].widget.attrs['placeholder'] = '{}'.format(now.strftime("%Y/%m/%d"))
+        self.fields['scope'].widget.attrs['placeholder'] = '1~3冊'
+        self.fields['grade'].widget.attrs['placeholder'] = '98'
 
 
     grades_subject_choices = (
@@ -56,8 +58,8 @@ class GradesChoicesForm(forms.Form):
     )
     新增類型 = forms.CharField(widget=MyWidget())
     date = forms.CharField(max_length=20,label='日期')
-    scope = forms.CharField(max_length=20,label='範圍')
-    grade = forms.CharField(max_length=20,label='成績')
+    scope = forms.CharField(max_length=20,label='範圍',required=True)
+    grade = forms.CharField(max_length=20,label='成績',required=True)
     widget = {
         'date' : forms.TextInput(attrs={'class': 'form-control', 'style': 'width:50%;'}),
         'scope' : forms.TextInput(attrs={'class': 'form-control', 'style': 'width:50%;'}),

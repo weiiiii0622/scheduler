@@ -1,17 +1,18 @@
 // tomato clock
 {
 $('#tomato_clock_button').on('click', function(){
+  alert("開始後請不要離開此頁面\n否則番茄鐘將會失效！")
   $(this).css('visibility', 'hidden');
   TodayEventswiper.slideTo(0);
   let tomato_clock = setInterval(TomatoClock,1000);
-  let timeleft = 20+1+1;
-  let clocktime = 10  //sec
-  let resttime = 10;  //sec
+  let timeleft = 2100+1+1;
+  let clocktime = 1800;  //sec
+  let resttime = 300;  //sec
   function TomatoClock() {
   
     let min = Math.floor(clocktime / 60);
     let sec = clocktime % 60;
-    let percent = Math.floor(((10-clocktime)/10)*100);
+    let percent = Math.floor(((1800-clocktime)/1800)*100);
     let rest_min = Math.floor(resttime / 60);
     let rest_sec = resttime % 60;
 
@@ -58,8 +59,20 @@ $('#tomato_clock_button').on('click', function(){
           'status': 'Done',
         },
         success: function(response){
+          document.getElementById("tomato_clock_image").src = "/static/image/today/0.png";
           TodayEventswiper.slideNext();
           TodayEventswiper.removeSlide(0);
+          if($('#today_wrapper').children().length == 0){
+            $('#tomato_clock_button').css('visibility', "hidden");
+            $('#today_wrapper').append(`
+            <div class="swiper-slide today-slide">
+                <div class="div-subject">
+                  <h3> 今天沒有行程! </h3>
+                  <h5> 去Week Schedule新增一個吧! </h5>
+                </div>
+              </div>`
+            );
+          }
           console.log("Success");
         },
         error: function(response){
@@ -73,6 +86,22 @@ $('#tomato_clock_button').on('click', function(){
   }
 });
 }
+
+// You have no schedule yet !
+{
+  if($('#today_wrapper').children().length == 0){
+    $('#tomato_clock_button').css('visibility', "hidden");
+    $('#today_wrapper').append(`
+    <div class="swiper-slide today-slide">
+        <div class="div-subject">
+          <h3> 今天沒有行程! </h3>
+          <h5> 去Week Schedule新增一個吧! </h5>
+        </div>
+      </div>`
+    );
+  }
+}
+
 
 
 // add event AJAX
@@ -107,7 +136,6 @@ $('#tomato_clock_button').on('click', function(){
       },
       error: function(response){
         $('#create_event_modal').modal('show');
-
         let error_array = Object.keys(response.responseJSON.errors);
 
         error_array.forEach(error => {
@@ -312,7 +340,21 @@ var TodayEventswiper = new Swiper('#today-swiper', {
 });
 }
 
+// Auto show today's schdeule
+{
+  let today_date = new Date()
+  $("#current"+today_date.getDay()).click();
+}
 
+
+// info modal
+{
+
+  $("#info_svg").on('click', function(){
+    $("#info_modal").modal('show');
+  });
+
+}
 
 
 

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponseRedirect
 from django.core import serializers
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from .models import Quiz
 
@@ -11,7 +12,6 @@ import random
 question = ['question1', 'question2', 'question3']
 image = ['image1', 'image2', 'image3']
 answer = ['option1', 'option2', 'option3', 'option4', 'option5', 'option6', 'option7', 'option8', 'option9', 'option10', 'option11', 'option12', 'option13' , 'option14', 'option15']
-number = []
 
 @login_required
 def Home(request):
@@ -29,19 +29,21 @@ def Subject(request, id):
 def TestPage(request, id, year):
 
 	if request.is_ajax():
-		number.append(request.GET.get('number'))
+		request.user.quiz_option = request.GET.get('number')
+		request.user.save()
 		return JsonResponse({}, status = 200)	
 	
 	random_box = Quiz.objects.filter(subject= id, year= year).values_list('id', flat=True)
 
 	try:
-		if number[0] == 'all' or int(number[0]) > len(random_box):
+		option = request.user.quiz_option
+		if option == 'all' or int(option) > len(random_box):
 			pass
-		elif number[0] == '10':
+		elif option == '10':
 			random_box = random.sample(list(random_box), 10)
-		elif number[0] == '20':
+		elif option == '20':
 			random_box = random.sample(list(random_box), 20)
-		elif number[0] == '30':
+		elif option == '30':
 			random_box = random.sample(list(random_box), 30)
 	except:
 		return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -69,9 +71,9 @@ def TestPage(request, id, year):
 		'image': image_data,
 		'option': option_data,
 		'subject': id,
+		'alert' : "作答時左右滑動來切換題目！",
 	}
-	number.clear()
-	
+	messages.info(request, '作答時左右滑動來切換題目！')
 	return render(request, 'QuizBank/Quizexam.html', data)
 
 @login_required
@@ -79,13 +81,12 @@ def CheckAnswerAJAX(request, id, year):
 	if request.is_ajax():
 		answers = []
 		id_list = request.GET.getlist('id')
-		print(request.user, id_list)
 		quiz = Quiz.objects.filter(id__in = id_list)
 		
 		for quiz in quiz:
 			for answer in quiz.answer.split(","):
 				answers.append("{id}-{answer}".format(id=quiz.id, answer=answer))
 
-		print(answers)
+		
 
 		return JsonResponse({'answer': answers}, status = 200)
