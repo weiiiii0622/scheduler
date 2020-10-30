@@ -35,20 +35,14 @@ body{
   text-decoration: underline;
 }
 
-#event_cancel_button{
+#event_cancel_button,#event_submit_button{
   font-size: 25px;
-  border:none;
-  background: none;
-  color: rgb(154,161,143);
-}
-
-#event_submit_button{
-  font-size: 35px;
-  color: rgb(154,161,143);
-  border:none;
+  color:rgb(154,161,143);
   background: none;
   text-decoration: underline;
-  }
+  border:none;
+
+}
 
 .flex-container {
   display: flex;
