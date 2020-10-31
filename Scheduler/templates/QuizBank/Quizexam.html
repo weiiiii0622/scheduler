@@ -12,7 +12,7 @@
       <div class="row", id="question">
         {{ forloop.counter }}.
         {% for question in question|get_item:id %}
-          {{ question }}
+          {{ question|insert_br }}
         {% endfor %}
       </div>
 
