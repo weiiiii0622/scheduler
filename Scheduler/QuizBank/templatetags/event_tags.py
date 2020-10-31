@@ -1,5 +1,4 @@
 from django import template
-from django.utils.safestring import mark_safe
 
 register = template.Library()
 
@@ -23,8 +22,3 @@ def turn_integer(target):
     except:
         return False
 
-@register.filter
-def insert_br(content):
-    content = str(content).split('<br>')
-    content = '<br>'.join(content)
-    return mark_safe(content)
