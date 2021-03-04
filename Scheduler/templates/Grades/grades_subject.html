@@ -1,0 +1,150 @@
+{% extends "mainsite/home.html" %}
+{% block content %}
+
+<script>
+	
+//linechart data
+	
+//chart functions
+function displayGradesOf(subject) {
+            linechart.data.datasets[0].data = grades[subject];
+            linechart.update();
+            // $.ajax({
+        
+            // type: 'POST',
+            // url: "{#% url 'grades_subject' %}",
+            // data: {
+            // 'subject':subject,
+            // 'csrfmiddlewaretoken': csrf_token,
+            // },
+            // success: function(response){
+            //     // {{ user.grades_test_option }}
+            //     console.log('success')
+            // },
+            // error: function(response){
+            //     console.log("Failed");
+            // }
+                
+            // });
+        }
+	
+	//function displayScopesOf(tests){
+	  //  linechart.data.datasets[0].data = tests[subject];
+		//linechart.update();
+	//}
+	
+</script>
+
+<div class="container">
+	<div class="row">
+		<div class="dropdown">
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="choose-subject" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">subjects</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+			<a class="dropdown-item" href="{% url 'url_subject' sub=1 %}" onclick="displayGradesOf(1);">Chinese</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=2 %}" onclick="displayGradesOf(2);">Math</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=3 %}" onclick="displayGradesOf(3);">English</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=4 %}" onclick="displayGradesOf(4);">Physics</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=5 %}" onclick="displayGradesOf(5);">Chemistry</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=6 %}" onclick="displayGradesOf(6);">Biology</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=7 %}" onclick="displayGradesOf(7);">Earth Science</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=8 %}" onclick="displayGradesOf(8);">Geogrophy</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=9 %}" onclick="displayGradesOf(9);">History</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=0 %}" onclick="displayGradesOf(0);">Civics</a>
+			</div>
+		</div>
+		<input type="button" value="Create" data-toggle="modal" data-target="#grades_modal" id="create-button">
+		<!-- <input type="button" id="" class="btn btn-primary" data-toggle="modal" data-target="#grades_modal">Create</input> -->
+
+<!--test button-->
+		<div class="col-2"></div>
+		<div class="dropdown">
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="choose-test" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">type</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownmenubutton">
+				{% for c in test_link %}
+				<a class="dropdown-item" href="{% url 'url_test' sub=sub test=c %}">{{ c }}</a>
+				{% endfor %}
+			</div>
+		</div>
+
+
+		<div class="modal fade" id="grades_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h2 class="modal-title" id="exampleModalLabel">Create Test Data</h2>
+				</div>
+				<div class="modal-body">
+				  <form action="" method="POST" id="grades_form" onsubmit="return false;">
+					{% csrf_token %}
+					{{ form.as_p }}
+				  </form>
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-secondary" data-dismiss="modal"id="grade-cancel">Cancel</button>
+				  <button type="button" id="create_grade_button" class="btn btn-primary">Create</button>
+				</div>
+			  </div>
+			</div>
+		  </div>
+
+	</div>
+</div>
+	
+<!--test(範圍)-->
+
+
+		<!-- {% for c in test_link %}
+		
+		</a>
+		<div class="subject" id="choose-test"> 
+			<a href="{% url 'url_test' sub=sub test=c %}">
+				{{ c }}
+			</a>
+		</div>
+		{% endfor %} -->
+		
+	
+
+<!--表格-->
+<div class="table-container">
+	<table class="grade-table"border="1"rules="rows" frame="box">
+		<thead class="thead-light">
+			<div class="row">
+				<tr>
+					<th >Date</th>
+					<th >Range</th>
+					<th >Score</th>
+				</tr>
+			</div>
+		</thead>
+		<tbody>
+			{%for u in data_subject %}
+				<tr id="link_{{ u.id }}">
+					<td>{{ u.date }}</td>
+					<td>{{ u.scope }}</td>
+					<td>{{ u.grade }} <button id="{{ u.id }}" type="button" class="close event-delete-button" ><span aria-hidden="true">&times;</span></button></td></td>   
+				</tr>
+			{%endfor%}
+		</tbody>
+	</table>
+</div>
+<div class="modal fade" id="event-delete-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true" data-url="{% url 'url_deleteajax' %}">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Delete Event?</h5>
+
+        </div>
+        <div class="modal-body">
+          <h3>Are you sure you want to delete this event?</h3>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          <button type="button" id="confirm-delete-button" class="btn btn-primary">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+{% endblock content %}

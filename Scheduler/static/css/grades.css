@@ -1,0 +1,76 @@
+.table-container{
+    border:2px;
+    margin:20px;
+    display:flex;
+    justify-content: center;
+    color:white;
+    text-align: center;
+  }
+
+.grade-table{
+  font-size: 25px;
+  width:90%;
+  text-align: center;
+  border-color: white;
+  margin-left: 8%;
+  margin-top:10px;
+}
+.chart-container{
+  display:flex;
+  justify-content: center;
+  margin:10%;
+  color:white;
+}
+#chart-area{
+  width:100%;
+  height:auto;
+  color:white;
+}
+#create-button{
+  font-size: 30px;
+  line-height: 30px;
+  color: rgb(154,161,143);
+  background-color:white;
+  border:none;
+  border-radius: 7%;
+  position: absolute;
+  right:4.7%;
+  height:42px;
+  width:auto;
+  padding-top: 1.5%;
+  margin-top:10px;
+}
+#choose-subject, #choose-test{
+  color: rgb(154,161,143);
+  font-size:30px;
+  line-height: 30px;
+  background-color: white;
+  border: none;
+  margin-top: 10px;
+}
+#choose-subject{
+  margin-left: 15%;
+}
+#choose-test{
+  margin-right: 80px;
+}
+.dropdown-item{
+  font-size: 25px;
+  color: rgb(154,161,143);
+}
+#choose-test a{
+  margin-top: 30px;
+  text-align: center;
+  color: white;
+  text-decoration: underline;
+}
+#create_grade_button,#grade-cancel{
+  font-size: 25px;
+  color:rgb(154,161,143);
+  background: none;
+  text-decoration: underline;
+  border:none;
+
+}
+
+

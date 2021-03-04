@@ -1,0 +1,110 @@
+{% extends "mainsite/home.html" %}
+{% block content %}
+  <div class="flexbox_info">
+
+      <svg  id="info_svg"viewBox="0 0 16 16" class="bi bi-question-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+        <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+      </svg>
+
+  </div>
+  
+  <div id="tomato_clock" data-url="{% url 'today-clockAJAX' %}">
+    
+    <div class="container" id="tomato_clock_container">
+      
+      <div id='time'></div>
+      <img id="tomato_clock_image" src="/static/image/today/0.png">
+    </div>
+
+    <div class="container" id="tomato_clock_button_container">
+      <button id="tomato_clock_button">
+        Start
+      </button>
+      
+    </div>
+  </div>
+  <!-- Swiper -->
+  <div class="swiper-container" id="today-swiper">
+    <div class="swiper-wrapper" id="today_wrapper">
+      {% for event in events %}
+      <div class="swiper-slide today-slide" id="{{ event.id }}" >
+        <div class="div-time">
+          <h2>{{ event.start_time|time:"H:i" }} ~ {{ event.end_time|time:"H:i" }}</h2>
+        </div>
+        <div class="div-subject">
+          <h1>{{ event.subject }}</h1>
+          
+          <h4>{{ event.description }}</h4>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <!-- Add Arrows -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+
+  <div class="modal fade" id="info_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="exampleModalLabel">Tutorial</h2>
+        </div>
+        <div class="modal-body">
+          <h2>Today</h2>
+          <hr/>
+          <p>番茄鐘是一種時間管理法，<br/>
+          每30分鐘為1個蕃茄鐘，<br/>
+          其中包含25分鐘的讀書時間和5分鐘的休息時間。</p>
+          <p>點擊Start開始你的蕃茄鐘，<br/>
+          開始後請<b>不要離開Today頁面</b>，<br/>
+          否則番茄鐘將會失效！<br/>
+          下方顯示當天您安排的計畫，<br/>
+          點擊箭頭或滑動可查看其他計畫。</p>
+          <br>
+          <h2>Week Schedule</h2>
+          <hr/>
+          你可以在這裡安排你的讀書計畫，<br/>
+          只需要按下Add Event並輸入計畫內容。<br/>
+          左右滑動行事曆可以切換週次，<br/>
+          點擊所選日期來查看該日計畫，<br/>
+          若想刪除該計畫，點擊&nbsp;X&nbsp;即可刪除。</p>
+          <br>
+          <h2>Grades</h2>
+          <hr/>
+          你可以在這裡記錄你的成績，<br/>
+          選擇顯示科目以及類型，<br/>
+          按下Create來添加成績資料，</br>
+          上方將顯示你的成績曲線圖，<br/>
+          若想刪除該成績點擊&nbsp;X&nbsp;即可刪除。</p>
+          <br>
+          <h2>Quiz</h2>
+          <hr/>
+          <p>在這邊你可以自選題目來做練習，<br/>
+          題庫中是來自大考中心的考古題。<br/>
+          選擇你想測驗的科目、年份和題數，<br/>
+          進入作答區後滑動可切換題目，<br/>
+          作答完畢點擊Submit來批改試卷，<br/>
+          <span style="color:red">紅色</span>為回答錯誤，<br/>
+          <span style="color:green">綠色</span>為回答正確，<br/>
+          離開點選Quit即可。</p>
+          <br>
+          <h2>Reset Password</h2>
+          <hr/>
+          <p>輸入註冊時的信箱，<br/>
+          接著到信箱內收取郵件，<br/>
+          點選郵件內網址即可重設密碼。</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <script>
+    window.onbeforeunload = function () {
+      return "Are you sure you want to leave?\n Your Clock Status will be set as failure";
+    };
+  </script> -->
+{% endblock content %}

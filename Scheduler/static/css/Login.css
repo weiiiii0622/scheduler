@@ -1,0 +1,57 @@
+.all-infor {
+    width:100%;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    color: white;
+} 
+
+.all-infor input {
+    text-align: center;
+    margin:auto;
+}
+
+.name{
+    font-family: "Fredericka the Great", cursive;
+    color:white;
+    text-align: center;
+}
+.reset-password , .new-password{
+    color: white;
+    text-align: center;
+    width: 90%;
+    margin: auto;
+    word-wrap: normal;
+}
+.reset-password > p{
+    text-align: middle;
+    line-height: 30px;
+    font-size: x-large;
+    color: white
+}
+.new-password li{
+    text-align: start;
+    line-height: 30px;
+    font-size: x-large;
+    color: white
+}
+.new-password ul{
+    margin-top: 30px;
+}
+.new-password input[type="submit"]{
+    margin-top: 30px;
+}
+input[type="submit"]{
+    font-family: "Peddana", serif;
+    font-size: 30px;
+    background: none;
+    color:white;
+    text-decoration: underline;
+    border:none;
+}
+.ml-2{
+    font-family: "Peddana", serif;
+    text-align:center;
+    color: white;
+}
+

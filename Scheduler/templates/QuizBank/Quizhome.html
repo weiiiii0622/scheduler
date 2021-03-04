@@ -1,0 +1,19 @@
+{% extends "mainsite/home.html" %}
+{% block content %}
+
+<h1 class="quiz-choose">Subject</h1>
+{% for x in subject %}
+<div class="subject-containter">
+  <div class="subject">
+
+    <a href="{% url 'quizbank-subject'  id=x.subject %}" style="color:white">
+      {{ x.subject }}
+    </a>
+    
+  </div>
+</div>
+
+
+{% endfor %}
+
+{% endblock content %}

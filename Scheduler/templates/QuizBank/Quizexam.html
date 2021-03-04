@@ -1,0 +1,64 @@
+{% extends "mainsite/home.html" %}
+{% load event_tags  %}
+{% block content %}
+
+<!-- Exam Table -->
+
+<div class="swiper-container">
+  <div class="swiper-wrapper">
+    {% for id in id %}
+    <div class="swiper-slide container">
+      
+      <div class="row", id="question">
+        {{ forloop.counter }}.
+        {% for question in question|get_item:id %}
+          {{ question|safe }}
+        {% endfor %}
+      </div>
+
+      <div class="row" id="image">
+        {% for image in image|get_item:id %}
+        <img src="/static/image/{{subject}}/{{image}}.png" alt="" id="quiz_img">
+        {% endfor %}
+      </div>
+
+      <div class="row-answer answer", id="{{ id }}">
+        <form id="answer_form">
+          {% for option in option|get_item:id %}
+            <input type="checkbox" id="{{ id }}-{{ forloop.counter }}" name="option" action="">
+            <label for="{{ id }}-{{ forloop.counter }}">{{option}}</label><br>            
+          {% endfor %}
+          {% if forloop.last is True %}
+          <button type="submit" class="btn btn-primary", id="answer_submit_button" data-url="{% url 'quizbank-check' id='check' year='All' %}">Finish!</button>
+          {% endif %}
+        </form>
+      </div>
+      
+    </div> 
+    {% endfor %}
+  </div>
+  
+  <!-- Add Pagination -->
+  <div class="swiper-pagination"></div>
+<!-- Add Arrows -->
+  <div class="swiper-button-next" id="arrow1"></div>
+  <div class="swiper-button-prev" id="arrow2"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+  {% if messages %}
+    {% for message in messages %}
+      {% if message.tags %}
+      <script>
+      $(document).ready(function(){
+        alert("{{ message }}");
+      });
+      </script>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  
+
+
+{% endblock content %}

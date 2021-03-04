@@ -1,0 +1,188 @@
+{% extends "mainsite/home.html" %}
+{% block content %}
+
+<script>
+	var grades = {};
+	var scopes = {};
+	var linechart;
+	
+	
+	{% for s1, g in chart_subject.items %}
+	grades[{{ s1 }}] = {{ g|safe }}
+	{% endfor %}
+	{% for s2, t in chart_test.items %}
+	tests[{{ s2}}] = {{ t|safe }}
+	{% endfor %}
+	
+
+	
+//linechart data
+	var linesData = {
+			labels:{{ chart_labels|safe }},
+			datasets:[
+				{
+				
+					label:'{{ str_test|safe }}',
+					fillColor:"rgba(220,212,220,0.5)",
+					strokeColor:"rgba(220,220,0,0.8)",
+					highlightFill:"rgba(215,220,220,0.75)",
+					highlightStroke:"rgba(220,200,220,1)",
+					data:{{ chart_datas|safe }},
+				}
+			],
+		};
+//canvas
+	window.onload = function(){
+		var ctx = document.getElementById("chart-area").getContext("2d");
+		linechart = new Chart(ctx, {
+			type: 'line',
+			data:linesData,
+			//animationEasing : "easeOutQuart", 
+		});
+	};
+
+//chart functions
+function displayGradesOf(subject) {
+            linechart.data.datasets[0].data = grades[subject];
+            linechart.update();
+            // $.ajax({
+        
+            // type: 'POST',
+            // url: "{#% url 'grades_subject' %}",
+            // data: {
+            // 'subject':subject,
+            // 'csrfmiddlewaretoken': csrf_token,
+            // },
+            // success: function(response){
+            //     // {{ user.grades_test_option }}
+            //     console.log('success')
+            // },
+            // error: function(response){
+            //     console.log("Failed");
+            // }
+                
+            // });
+        }
+	
+	//function displayScopesOf(tests){
+	  //  linechart.data.datasets[0].data = tests[subject];
+		//linechart.update();
+	//}
+	
+</script>
+
+<div class="container">
+	<div class="row">
+		
+		
+		<div class="dropdown">
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="choose-subject" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">subjects</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+			<a class="dropdown-item" href="{% url 'url_subject' sub=1 %}" onclick="displayGradesOf(1);">Chinese</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=2 %}" onclick="displayGradesOf(2);">Math</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=3 %}" onclick="displayGradesOf(3);">English</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=4 %}" onclick="displayGradesOf(4);">Physics</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=5 %}" onclick="displayGradesOf(5);">Chemistry</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=6 %}" onclick="displayGradesOf(6);">Biology</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=7 %}" onclick="displayGradesOf(7);">Earth Science</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=8 %}" onclick="displayGradesOf(8);">Geogrophy</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=9 %}" onclick="displayGradesOf(9);">History</a>
+			<a class="dropdown-item" href="{% url 'url_subject' sub=0 %}" onclick="displayGradesOf(0);">Civics</a>
+			</div>
+		</div>
+		<input type="button" value="Create" data-toggle="modal" data-target="#grades_modal"id="create-button">
+		<!-- <input type="button" id="create_button" class="btn btn-primary" data-toggle="modal" data-target="#grades_modal">Create</input> -->
+
+		<div class="col-2"></div>
+		<div class="dropdown">
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="choose-test" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">type</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownmenubutton">
+				{% for c in test_link %}
+				<a class="dropdown-item" href="{% url 'url_test' sub=sub test=c %}">{{ c }}</a>
+				{% endfor %}
+			</div>
+		</div>
+
+		<div class="modal fade" id="grades_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h2 class="modal-title" id="exampleModalLabel">Create Test Data</h2>
+				</div>
+				<div class="modal-body">
+				  <form action="" method="POST" id="grades_form" onsubmit="return false;">
+					{% csrf_token %}
+					{{ form.as_p }}
+				  </form>
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-secondary" data-dismiss="modal"id="grade-cancel">Cancel</button>
+				  <button type="button" id="create_grade_button" class="btn btn-primary">Create</button>
+				</div>
+			  </div>
+			</div>
+		  </div>
+
+	</div>
+</div>
+	
+<!--test(範圍)-->
+<!-- <div class="container">
+{% for c in choices %}
+	<div class="subject"> 
+		<div>{{ c }}</div>
+	</div>
+	{% endfor %} -->
+
+	
+<!--chart-->     
+	<div class="chart-container">
+		<canvas id="chart-area" class="zone"></canvas>
+	</div>
+	
+
+
+<!--表格-->
+<div class="table-container">
+	<table class="grade-table"border="1"rules="rows" frame="box" id="grades_table">
+		<thead class="thead-light">
+			<div class="row">
+				<tr>
+					<th >Date</th>
+					<th >Range</th>
+					<th >Score</th>
+				</tr>
+			</div>
+		</thead>
+		<tbody>
+			{%for a in data_test %}
+				<tr id="link_{{ a.id }}">
+					<td>{{ a.date }}</td>
+					<td>{{ a.scope }}</td>
+					<td>{{ a.grade }} <button id="{{ a.id }}" type="button" class="close event-delete-button" ><span aria-hidden="true">&times;</span></button></td>   
+				</tr>
+			{%endfor%}
+		</tbody>
+	</table>
+</div>
+
+<div class="modal fade" id="event-delete-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true" data-url="{% url 'url_deleteajax' %}">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Delete Event?</h5>
+
+        </div>
+        <div class="modal-body">
+          <h3>Are you sure you want to delete this event?</h3>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          <button type="button" id="confirm-delete-button" class="btn btn-primary">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+{% endblock content %}
